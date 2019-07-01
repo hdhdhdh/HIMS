@@ -1,4 +1,5 @@
 package com.whut.bean;
 
-public class Patient {
+public class Patient
+{
 }
