@@ -1,4 +1,5 @@
 package com.whut.controller;
 
-public class Controller {
+public class Controller
+{ private String s;
 }
