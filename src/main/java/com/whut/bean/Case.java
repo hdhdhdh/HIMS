@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Case {
-    public int c_id;
-    public char d_id;
-    public char p_id;
-    public Text c_description;
-    public BigDecimal c_fee;
-    public int c_status;
-    public Date c_date;
+    private int c_id;
+    private char d_id;
+    private char p_id;
+    private Text c_description;
+    private BigDecimal c_fee;
+    private int c_status;
+    private Date c_date;
 
     public int getC_id() {
         return c_id;
