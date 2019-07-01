@@ -57,7 +57,7 @@ public class Patient {
                 ", p_name='" + p_name + '\'' +
                 ", p_gender=" + p_gender +
                 ", p_birthday=" + p_birthday +
-                ", p_password='" + p_password + '\'' +
+                ",p_password='" + p_password + '\'' +
                 '}';
     }
 }
