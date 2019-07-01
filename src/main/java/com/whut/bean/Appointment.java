@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Appointment {
     private int a_id;//挂号单编号
-    String dp_id;//预约部门编号
-    Date a_date;//预约日期
-    String p_id;//病人id
-    int a_status;//挂号单状态
+    private String dp_id;//预约部门编号
+    private Date a_date;//预约日期
+    private String p_id;//病人id
+    private int a_status;//挂号单状态
 
     public int getA_id() {
         return a_id;
