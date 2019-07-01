@@ -1,4 +1,4 @@
 package com.whut.dao;
 
-public class Dao {
+public interface ICase {
 }
