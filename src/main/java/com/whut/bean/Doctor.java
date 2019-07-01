@@ -3,14 +3,14 @@ package com.whut.bean;
 import java.util.Date;
 
 public class Doctor {
-    public char d_id;
-    public char t_id;
-    public String d_title;
-    public int d_gender;
-    public Date d_birthday;
-    public char dp_id;
-    public String d_password;
-    public String d_name;
+    private char d_id;
+    private char t_id;
+    private String d_title;
+    private int d_gender;
+    private Date d_birthday;
+    private char dp_id;
+    private String d_password;
+    private String d_name;
 
     public char getD_id() {
         return d_id;
