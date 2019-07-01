@@ -1,4 +1,5 @@
 package com.whut.bean;
-
-public class Type {
+//code by sunfahu
+public class Type
+{
 }
