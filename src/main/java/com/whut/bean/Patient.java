@@ -4,11 +4,11 @@ import java.util.Date;
 
 //wirte by sunfahu
 public class Patient {
-    private char p_id;
-    private String p_name;
-    private int p_gender;
-    private Date p_birthday;
-    private String p_password;
+    private char p_id;//病人编号
+    private String p_name;//病人姓名
+    private int p_gender;//病人性别
+    private Date p_birthday;//病人出生日期
+    private String p_password;//病人密码
 
     public char getP_id() {
         return p_id;

@@ -1,16 +1,18 @@
 package com.whut.bean;
 
+import javax.xml.soap.Text;
 import java.util.Date;
 
 public class Doctor {
-    private char d_id;
-    private char t_id;
-    private String d_title;
-    private int d_gender;
-    private Date d_birthday;
-    private char dp_id;
-    private String d_password;
-    private String d_name;
+    private char d_id;//医生工号
+    private char t_id;//医生类型
+    private String d_title;//医生职称
+    private int d_gender;//医生性别
+    private Date d_birthday;//医生出生日期
+    private char dp_id;//部门编号
+    private String d_password;//医生密码
+    private String d_name;//医生姓名
+    private Text d_description;//医生简介
 
     public char getD_id() {
         return d_id;

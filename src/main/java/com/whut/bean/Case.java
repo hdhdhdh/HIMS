@@ -5,13 +5,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Case {
-    private int c_id;
-    private char d_id;
-    private char p_id;
-    private Text c_description;
-    private BigDecimal c_fee;
-    private int c_status;
-    private Date c_date;
+    private int c_id;//病例编号
+    private char d_id;//医生编号
+    private char p_id;//病人编号
+    private Text c_description;//病例描述
+    private BigDecimal c_fee;//费用
+    private int c_status;//病例状态
+    private Date c_date;//病例生成日期
+    private Text pr_description;//药物清单
 
     public int getC_id() {
         return c_id;
@@ -69,6 +70,14 @@ public class Case {
         this.c_date = c_date;
     }
 
+    public Text getPr_description() {
+        return pr_description;
+    }
+
+    public void setPr_description(Text pr_description) {
+        this.pr_description = pr_description;
+    }
+
     @Override
     public String toString() {
         return "Case{" +
@@ -79,6 +88,7 @@ public class Case {
                 ", c_fee=" + c_fee +
                 ", c_status=" + c_status +
                 ", c_date=" + c_date +
+                ", pr_description=" + pr_description +
                 '}';
     }
 }

@@ -1,21 +1,12 @@
 package com.whut.bean;
 
+import javax.xml.soap.Text;
 import java.util.Date;
 
 public class Department {
-    private int a_id;
-    private String dp_id;
-    private Date a_date;
-    private String p_id;
-    private int a_status;
-
-    public int getA_id() {
-        return a_id;
-    }
-
-    public void setA_id(int a_id) {
-        this.a_id = a_id;
-    }
+    private String dp_id;//部门编号
+    private String dp_name;//部门名称
+    private Text dp_description;//部门简介
 
     public String getDp_id() {
         return dp_id;
@@ -25,38 +16,28 @@ public class Department {
         this.dp_id = dp_id;
     }
 
-    public Date getA_date() {
-        return a_date;
+    public String getDp_name() {
+        return dp_name;
     }
 
-    public void setA_date(Date a_date) {
-        this.a_date = a_date;
+    public void setDp_name(String dp_name) {
+        this.dp_name = dp_name;
     }
 
-    public String getP_id() {
-        return p_id;
+    public Text getDp_description() {
+        return dp_description;
     }
 
-    public void setP_id(String p_id) {
-        this.p_id = p_id;
-    }
-
-    public int getA_status() {
-        return a_status;
-    }
-
-    public void setA_status(int a_status) {
-        this.a_status = a_status;
+    public void setDp_description(Text dp_description) {
+        this.dp_description = dp_description;
     }
 
     @Override
     public String toString() {
         return "Department{" +
-                "a_id=" + a_id +
-                ", dp_id='" + dp_id + '\'' +
-                ", a_date=" + a_date +
-                ", p_id='" + p_id + '\'' +
-                ", a_status=" + a_status +
+                "dp_id='" + dp_id + '\'' +
+                ", dp_name='" + dp_name + '\'' +
+                ", dp_description=" + dp_description +
                 '}';
     }
 }

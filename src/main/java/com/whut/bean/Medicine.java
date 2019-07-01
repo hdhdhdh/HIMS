@@ -4,16 +4,15 @@ import java.math.BigDecimal;
 
 public class Medicine {
 
-    // 药品编号
-    private String m_id;
-    // 药品名
-    private String m_name;
-    // 药品数量
-    private int m_num;
-    // 药品种类，处方药或者非处方药
-    private String m_class;
-    // 药品价格
-    private BigDecimal m_price;
+    private String m_id;// 药品编号
+
+    private String m_name; // 药品名
+
+    private int m_num; // 药品数量
+
+    private String m_class;// 药品种类，处方药或者非处方药
+
+    private BigDecimal m_price;// 药品价格
 
     public String getM_id() {
         return m_id;

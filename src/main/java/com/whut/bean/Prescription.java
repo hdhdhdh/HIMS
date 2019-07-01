@@ -5,14 +5,14 @@ import java.util.Date;
 // 药方类
 
 public class Prescription {
-    // 药方编号
-    private int pr_id;
-    // 病例编号
-    private int c_id;
-    // 药品编码（国药）
-    private String m_id;
-    // 药方的时间
-    private Date pr_date;
+
+    private int pr_id;// 药方编号
+
+    private int c_id;// 病例编号
+
+    private String m_id;// 药品编码（国药）
+
+    private Date pr_date; // 药方的时间
 
 
     public int getPr_id() {

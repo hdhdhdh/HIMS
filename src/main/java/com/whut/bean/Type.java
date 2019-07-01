@@ -1,8 +1,8 @@
 package com.whut.bean;
 //code by sunfahu
 public class Type {
-    private char t_id;
-    private String t_name;
+    private char t_id;//医生类型编号
+    private String t_name;//医生类型名称
 
     public char getT_id() {
         return t_id;
