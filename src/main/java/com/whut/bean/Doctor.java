@@ -78,6 +78,14 @@ public class Doctor {
         this.d_name = d_name;
     }
 
+    public Text getD_description() {
+        return d_description;
+    }
+
+    public void setD_description(Text d_description) {
+        this.d_description = d_description;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -89,6 +97,7 @@ public class Doctor {
                 ", dp_id=" + dp_id +
                 ", d_password='" + d_password + '\'' +
                 ", d_name='" + d_name + '\'' +
+                ", d_description=" + d_description +
                 '}';
     }
 }
