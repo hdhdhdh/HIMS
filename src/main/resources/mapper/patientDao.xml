@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.IPatientDao" >
-    <select id="getPatienById" resultType="com.whut.bean.Patient">
+    <select id="getPatienById" resultType="patient">
         select * from tb_patient where p_id=#{p_id}
     </select>
 </mapper>
