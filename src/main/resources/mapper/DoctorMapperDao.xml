@@ -5,6 +5,9 @@
     <select id="findDoctor" resultType="doctor">
         select * from tb_doctor where d_id=#{d_id}
     </select>
+    <select id="findAllDoctor" resultType="doctor">
+        select * from tb_doctor
+    </select>
     <delete id="deleteDoctor">
         delete from tb_doctor where d_id=#{d_id}
     </delete>
@@ -16,6 +19,11 @@
         update tb_doctor
         set t_id=#{t_id},d_title=#{d_title},d_gender=#{d_gender},d_birthday=#{d_birthday},dp_id=#{dp_id},d_password=#{d_password},d_name=#{d_name}
         where d_id=#{d_id}
+    </update>
+    <update id="Mea_updateDoctor">
+        update tb_doctor
+        set d_id=#{d_id},t_id=#{t_id},d_title=#{d_title},d_gender=#{d_gender},d_birthday=#{d_birthday},dp_id=#{dp_id},d_password=#{d_password},d_name=#{d_name}
+        where d_id=#{1}
     </update>
     <select id="findDoctorById"  resultType="doctor">
         select *

@@ -14,7 +14,7 @@ public class DoctorService implements IDoctorService {
     public IDoctorDao iDoctorDao;
     @Override
     public boolean updateDoctor(Doctor doctor)
-    {
+        {
         try
         {
             iDoctorDao.updateDoctor(doctor);
@@ -25,4 +25,31 @@ public class DoctorService implements IDoctorService {
             return false;
         }
     }
+
+    @Override
+    public Doctor findDoctorById(String d_id) {
+        return iDoctorDao.findDoctorById(d_id);
+    }
+
+    @Override
+    public List<Doctor> findDoctor() {
+        return iDoctorDao.findDoctor();
+    }
+
+    @Override
+    public List<Doctor> findAllDoctor() {
+        return iDoctorDao.findAllDoctor();
+    }
+
+    @Override
+    public boolean addDoctor(Doctor doctor) {
+        try {
+            iDoctorDao.addDoctor(doctor);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
