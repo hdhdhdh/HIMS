@@ -42,24 +42,6 @@ public class PatientService implements IPatientService
         }
 
     }
-    @Override
-    public boolean appointment(String p_id, String dp_id)
-    {
-        try {
-            iAppointmentDao.addAppointment(p_id,dp_id);
-            return true;
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public List<Department> getAllDepartment()
-    {
-        return iDepartmentDao.getAllDepartment();
-    }
-    public Department getDepartmentById(String dp_id)
-    {
-        return getDepartmentById(dp_id);
-    }
+
+
 }

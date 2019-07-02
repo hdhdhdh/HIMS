@@ -1,4 +1,5 @@
 package com.whut.service;
 
-public interface IAdminSrevices {
+public interface IAdminSrevices
+{
 }
