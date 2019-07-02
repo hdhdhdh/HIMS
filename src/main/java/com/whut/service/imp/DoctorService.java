@@ -13,27 +13,16 @@ public class DoctorService implements IDoctorService {
     @Autowired
     public IDoctorDao iDoctorDao;
     @Override
-    public List<Doctor> findDoctor() {
-        return iDoctorDao.findDoctor();
-    }
-
-    @Override
-    public void deleteDoc(int d_id) {
-        iDoctorDao.deleteDoc(d_id);
-    }
-
-    @Override
-    public void addDoc(Doctor doctor) {
-        iDoctorDao.addDoc(doctor);
-    }
-
-    @Override
-    public void updateDoc(Doctor doctor) {
-        iDoctorDao.updateDoc(doctor);
-    }
-
-    @Override
-    public Doctor findId(int d_id) {
-        return iDoctorDao.findId(d_id);
+    public boolean updateDoctor(Doctor doctor)
+    {
+        try
+        {
+            iDoctorDao.updateDoctor(doctor);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

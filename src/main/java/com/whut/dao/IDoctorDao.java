@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IDoctorDao {
     List<Doctor> findDoctor();
-    void deleteDoc(int d_id);
-    void addDoc(Doctor doctor);
-    void updateDoc(Doctor doctor);
-    Doctor findId(int d_id);
+    void deleteDoctor(String d_id);
+    void addDoctor(Doctor doctor);
+    void updateDoctor(Doctor doctor);
+    Doctor findDoctorById(String d_id);
 }

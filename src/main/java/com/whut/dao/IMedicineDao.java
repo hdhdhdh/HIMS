@@ -6,20 +6,18 @@ import java.util.List;
 
 public interface IMedicineDao {
     // 获取所有药品
- public    List<Medicine> findAll();
+ public    List<Medicine> getAllMedicine();
 
     // 删除药品
-    public void deleteMedicine(int id);
+    public void deleteMedicine(String id);
 
     // 添加药品
-   public int addMedicine(Medicine medicine);
+   public void addMedicine(Medicine medicine);
 
    // 药品更新
-    public  int updateMedicine(Medicine medicine);
+    public  void updateMedicine(Medicine medicine);
 
     // 查询药品,根据药品id来查询
-   public Medicine ququeryById(int id);
-
-
+   public Medicine getMedicineById(String id);
 
 }

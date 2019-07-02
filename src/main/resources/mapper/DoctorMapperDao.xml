@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.IDoctorDao" >
-    <!--<select id="findDoctor" resultType="doctor">-->
-        <!--select * from tb_doctor where d_id=#{d_id}-->
-    <!--</select>-->
-    <!--<delete id="deleteDoc" parameterType="int">-->
-        <!--delete from tb_doctor where d_id=#{d_id}-->
-    <!--</delete>-->
-    <!--<insert id="addDoc" parameterType="doctor">-->
-        <!--insert into tb_doctor(d_id,t_id,d_title,d_gender,d_birthday,dp_id,d_password,d_name)-->
-        <!--value (#{d_id},#{t_id},#{d_title},#{d_gender},#{d_birthday},#{dp_id},#{d_password},#{d_name})-->
-    <!--</insert>-->
-    <!--<update id="updateDoc" parameterType="doctor">-->
-        <!--update tb_doctor-->
-        <!--set t_id=#{t_id},d_title=#{d_title},d_gender=#{d_gender},d_birthday=#{d_birthday},dp_id=#{dp_id},d_password=#{d_password},d_name=#{d_name}-->
-        <!--where d_id=#{d_id}-->
-    <!--</update>-->
-    <!--<select id="findId" parameterType="int" resultType="doctor">-->
-        <!--select *-->
-        <!--from tb_doctor-->
-        <!--where d_id=#{d_id}-->
-    <!--</select>-->
+    <select id="findDoctor" resultType="doctor">
+        select * from tb_doctor where d_id=#{d_id}
+    </select>
+    <delete id="deleteDoc" parameterType="int">
+        delete from tb_doctor where d_id=#{d_id}
+    </delete>
+    <insert id="addDoc" parameterType="doctor">
+        insert into tb_doctor(d_id,t_id,d_title,d_gender,d_birthday,dp_id,d_password,d_name)
+        value (#{d_id},#{t_id},#{d_title},#{d_gender},#{d_birthday},#{dp_id},#{d_password},#{d_name})
+    </insert>
+    <update id="updateDoc" parameterType="doctor">
+        update tb_doctor
+        set t_id=#{t_id},d_title=#{d_title},d_gender=#{d_gender},d_birthday=#{d_birthday},dp_id=#{dp_id},d_password=#{d_password},d_name=#{d_name}
+        where d_id=#{d_id}
+    </update>
+    <select id="findId" parameterType="int" resultType="doctor">
+        select *
+        from tb_doctor
+        where d_id=#{d_id}
+    </select>
 </mapper>
