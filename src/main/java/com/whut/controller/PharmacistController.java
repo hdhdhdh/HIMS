@@ -10,16 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
-public class MedicineController {
+@RequestMapping("/pharmacist")
+public class PharmacistController {
 
     @Autowired
     public IPharmacistService medicineService;
 
     //do是请求说明
-    @RequestMapping("/findAll.do")
+    @RequestMapping("/getAllMedicine.do")
     public ModelAndView findAll() {
-        List<Medicine> all = medicineService.findAll();
+        List<Medicine> all = medicineService.getAllMedicine();
         ModelAndView mv = new ModelAndView();
         mv.addObject("AllMedicine", all);
         mv.setViewName("allUser");
