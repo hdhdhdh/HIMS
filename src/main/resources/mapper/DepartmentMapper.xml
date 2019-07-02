@@ -5,7 +5,7 @@
     <select id="findDepartment" resultType="department">
         select * from tb_department where dp_id=#{dp_id}
     </select>
-    <delete id="deleteDepartment">
+    <delete id="deleteDepartment" parameterType="java.lang">
         delete from tb_department where dp_id=#{dp_id}
     </delete>
     <insert id="addDepartment" parameterType="department">

@@ -1,6 +1,7 @@
 package com.whut.service.imp;
 
 import com.whut.bean.Patient;
+import com.whut.dao.IAppointmentDao;
 import com.whut.dao.IPatientDao;
 import com.whut.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ public class PatientService implements IPatientService
 {
     @Autowired
     private IPatientDao iPatientDao;
+    @Autowired
+    private IAppointmentDao iAppointmentDao;
     @Override
     public boolean patientLogin(Patient patient)
     {
@@ -33,5 +36,16 @@ public class PatientService implements IPatientService
         }
 
     }
-
+    @Override
+    public boolean appointment(String p_id, String dp_id)
+    {
+        try {
+            iAppointmentDao.addAppointment(p_id,dp_id);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

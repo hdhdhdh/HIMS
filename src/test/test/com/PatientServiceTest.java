@@ -30,6 +30,10 @@ public class PatientServiceTest extends BaseTest
         patient.setP_password("522");
         System.out.println(iPatientService.addPatient(patient));
     }
+    @Test
+    public void appointment() throws Exception {
+        System.out.println(iPatientService.appointment("432132199911247288","0102"));
+    }
 
 }
 

@@ -6,6 +6,9 @@
         select * from tb_appointment where p_id=#{p_id}
     </select>
     <select id="getUnprocessedAppointmentByUserId" parameterType="java.lang.String" resultType="appointment">
-        select * from tb_appointment where p_id=#{p_id} and
+        select * from tb_appointment where p_id=#{p_id} and a_status = 0
     </select>
+    <insert id="addAppointment">
+        insert into tb_appointment (p_id,dp_id,a_date,a_status) value (#{0},#{1},DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s'),0)
+    </insert>
 </mapper>
