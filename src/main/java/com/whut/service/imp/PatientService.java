@@ -12,8 +12,11 @@ public class PatientService implements IPatientService
     @Autowired
     private IPatientDao iPatientDao;
     @Override
-    public Patient getPatienById(String p_id)
+    public boolean patienLogin(Patient patient)
     {
-        return iPatientDao.getPatienById(p_id);
+        Patient patient1 = iPatientDao.getPatientById(patient.getP_id());
+        if(patient1 == null || !patient1.getP_password().equals(patient.getP_password()))
+            return false;
+        return true;
     }
 }

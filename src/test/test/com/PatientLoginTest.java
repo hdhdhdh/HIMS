@@ -11,7 +11,7 @@ public class PatientLoginTest extends BaseTest
 
     @Test
     public void testAppoint() throws Exception {
-        System.out.println(iPatientService.getPatienById("432132199911247289"));
+        System.out.println(iPatientService.patienLogin("432132199911247289"));
     }
 
 }
