@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IMedicineDao {
     // 获取所有药品
- public    List<Medicine> getAllMedicine();
+    public    List<Medicine> getAllMedicine();
 
     // 删除药品
     public void deleteMedicine(String id);

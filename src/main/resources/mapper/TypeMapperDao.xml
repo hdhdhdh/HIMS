@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
+<mapper namespace="com.whut.dao.ITypeDao" >
+    <select id="findType" resultType="type">
+        select * from tb_type where t_id=#{t_id}
+    </select>
+    <delete id="deleteType">
+        delete from tb_type where t_id=#{t_id}
+    </delete>
+    <insert id="addType" parameterType="type">
+        insert into tb_type(t_id,t_name)
+        value (#{t_id},#{t_name})
+    </insert>
+    <update id="updateType" parameterType="type">
+        update tb_type
+        set t_id=#{t_id},t_name=#{t_name}
+        where t_id=#{t_id}
+    </update>
+    <select id="findTypeById"  resultType="type">
+        select *
+        from tb_type
+        where t_id=#{t_id}
+    </select>
+</mapper>
