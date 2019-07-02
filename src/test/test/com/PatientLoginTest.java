@@ -14,7 +14,7 @@ public class PatientLoginTest extends BaseTest
     public void testAppoint() throws Exception {
         Patient patient = new Patient();
         patient.setP_id("432132199911247289");
-        patient.setP_password("520");
+        patient.setP_password("522");
         System.out.println(iPatientService.patienLogin(patient));
     }
 
