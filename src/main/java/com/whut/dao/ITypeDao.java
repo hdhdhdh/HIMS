@@ -9,5 +9,5 @@ public interface ITypeDao {
     void addType();
     void deleteType();
     void updateType();
-    Type findTypeById(String id);
+    Type findTypeById(String t_id);
 }

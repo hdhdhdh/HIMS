@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IDepartmentDao
 {
-    List<Department> getDepartment();
-    void addDepartment(Department department);
+    List<Department> findDepartment();
+    void addDepartment();
     void deleteDepartment();
-    void updateDepartment(Department department);
-    Department getDepartmentById(String id);
+    void updateDepartment();
+    Department findDepartmentById(String dp_id);
 }
