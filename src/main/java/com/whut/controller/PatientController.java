@@ -72,5 +72,25 @@ public class PatientController
         }
         return mv;
     }
+    @RequestMapping("/login.do")
+    public ModelAndView appointment(String p_id,String dp_id)
+    {
+        ModelAndView mv = new ModelAndView();
+        if (p_id == null)
+        if (patient.getP_id() == null || patient.getP_password() == null)
+        {
+            mv.addObject("err","id or password is empty");
+            mv.setViewName("login.do");
+        }
+        if(iPatientService.patientLogin(patient))
+        {
+            mv.addObject("err","id or password is wrong");
+            mv.setViewName("login.do");
+        }else
+        {
+            mv.setViewName("patient_main");
+        }
+        return mv;
+    }
 
 }
