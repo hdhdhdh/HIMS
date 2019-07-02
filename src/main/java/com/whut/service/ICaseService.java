@@ -1,4 +1,4 @@
-package com.whut.service.imp;
+package com.whut.service;
 
 import com.whut.bean.Case;
 
