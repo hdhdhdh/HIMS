@@ -17,7 +17,7 @@ public class DoctorService implements IDoctorService {
         {
         try
         {
-            iDoctorDao.updateDoctor(doctor);
+            iDoctorDao.updateDoctorWithoutId(doctor);
             return true;
         }catch (Exception e)
         {
@@ -26,19 +26,13 @@ public class DoctorService implements IDoctorService {
         }
     }
 
-    @Override
-    public Doctor findDoctorById(String d_id) {
-        return iDoctorDao.findDoctorById(d_id);
+    public Doctor getDoctorById(String d_id) {
+        return iDoctorDao.getDoctorById(d_id);
     }
 
     @Override
-    public List<Doctor> findDoctor() {
-        return iDoctorDao.findDoctor();
-    }
-
-    @Override
-    public List<Doctor> findAllDoctor() {
-        return iDoctorDao.findAllDoctor();
+    public List<Doctor> getAllDoctor() {
+        return iDoctorDao.getAllDoctor();
     }
 
     @Override
