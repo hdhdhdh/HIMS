@@ -5,9 +5,9 @@ import com.whut.bean.Type;
 import java.util.List;
 
 public interface ITypeDao {
-    List<Type> findType();
-    void addType();
-    void deleteType();
-    void updateType();
-    Type findTypeById(String t_id);
+    List<Type> getType();
+    void addType(Type type);
+    void deleteType(String t_id);
+    void updateType(Type type);
+    Type getTypeById(String t_id);
 }

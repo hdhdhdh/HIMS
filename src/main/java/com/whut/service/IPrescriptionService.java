@@ -8,7 +8,7 @@ public interface IPrescriptionService
 {
     public List<Prescription> getAllPrescription();
     public Prescription getPrescriptionById(String pr_id);
-    public void addPrescription(Prescription type);
-    public void updatePrescription(Prescription type);
-    public void deletePrescription(String pr_id);
+    public boolean addPrescription(Prescription prescription);
+    public boolean updatePrescription(Prescription prescription);
+    public boolean deletePrescription(String pr_id);
 }
