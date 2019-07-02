@@ -37,55 +37,51 @@ public class PatientController
     public ModelAndView register(Patient patient)
     {
         ModelAndView mv = new ModelAndView();
-        if (patient.getP_id() == null)
+        mv.setViewName("register");
+        if (patient.getP_id() == null || patient.getP_id().equals(""))
         {
             mv.addObject("err","id is empty");
-            mv.setViewName("login.do");
         }
-        if (patient.getP_name() == null)
+        if (patient.getP_name() == null || patient.getP_name().equals(""))
         {
             mv.addObject("err","name is empty");
-            mv.setViewName("login.do");
         }
-        if (patient.getP_gender() == null)
+        if (patient.getP_gender() == null || patient.getP_gender().equals(""))
         {
             mv.addObject("err","gender is empty");
-            mv.setViewName("login.do");
         }
-        if (patient.getP_birthday() == null)
+        if (patient.getP_birthday() == null  || patient.getP_birthday().equals(""))
         {
             mv.addObject("err","birthday is empty");
-            mv.setViewName("login.do");
         }
-        if (patient.getP_password() == null)
+        if (patient.getP_password() == null || patient.getP_password().equals(""))
         {
             mv.addObject("err","password is empty");
-            mv.setViewName("login.do");
         }
         if (iPatientService.addPatient(patient) == false)
         {
             mv.addObject("err","has already registered");
-            mv.setViewName("login.do");
         }else
         {
             mv.setViewName("redirect:/patient_main");
         }
         return mv;
     }
-    @RequestMapping("/login.do")
+    @RequestMapping("/appointment.do")
     public ModelAndView appointment(String p_id,String dp_id)
     {
         ModelAndView mv = new ModelAndView();
-        if (p_id == null)
-        if (patient.getP_id() == null || patient.getP_password() == null)
+        if (p_id == null || p_id.equals(""))
         {
-            mv.addObject("err","id or password is empty");
-            mv.setViewName("login.do");
+            mv.addObject("err","patient is empty");
         }
-        if(iPatientService.patientLogin(patient))
+        else if (dp_id == null || dp_id.equals(""))
+        {
+            mv.addObject("err","department is empty");
+        }
+        else if(iPatientService.appointment(p_id,dp_id))
         {
             mv.addObject("err","id or password is wrong");
-            mv.setViewName("login.do");
         }else
         {
             mv.setViewName("patient_main");

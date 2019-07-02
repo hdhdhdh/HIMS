@@ -13,5 +13,4 @@ public interface IPatientService
     public boolean addPatient(Patient patient);
     public boolean appointment(String p_id, String dp_id);
     public List<Department> getAllDepartment();
-    public Department getDepartmentById(String dp_id);
 }
