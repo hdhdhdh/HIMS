@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
+<mapper namespace="com.whut.dao.IDepartmentDao" >
+    <select id="findDepartment" resultType="department">
+        select * from tb_department where dp_id=#{dp_id}
+    </select>
+    <delete id="deleteDepartment">
+        delete from tb_department where dp_id=#{dp_id}
+    </delete>
+    <insert id="addDepartment" parameterType="department">
+        insert into tb_department(dp_id,dp_name,dp_description)
+        value (#{dp_id},#{dp_name},#{dp_description})
+    </insert>
+    <update id="updateDepartment" parameterType="department">
+        update tb_department
+        set dp_id=#{dp_id},dp_name=#{dp_name},#{dp_description}
+        where dp_id=#{dp_id}
+    </update>
+    <select id="findDepartmentById"  resultType="department">
+        select *
+        from tb_department
+        where dp_id=#{dp_id}
+    </select>
+</mapper>
