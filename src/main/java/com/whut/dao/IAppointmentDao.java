@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IAppointmentDao
 {
-    public List<Appointment> getAppointmentByUserId();
+    public List<Appointment> getAppointmentByUserId(String p_id);
+    public Appointment getUnprocessedAppointmentByUserId(String p_id);
 
 }
