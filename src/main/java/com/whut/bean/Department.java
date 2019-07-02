@@ -6,7 +6,7 @@ import java.util.Date;
 public class Department {
     private String dp_id;//部门编号
     private String dp_name;//部门名称
-    private Text dp_description;//部门简介
+    private String dp_description;//部门简介
 
     public String getDp_id() {
         return dp_id;
@@ -24,11 +24,11 @@ public class Department {
         this.dp_name = dp_name;
     }
 
-    public Text getDp_description() {
+    public String getDp_description() {
         return dp_description;
     }
 
-    public void setDp_description(Text dp_description) {
+    public void setDp_description(String dp_description) {
         this.dp_description = dp_description;
     }
 

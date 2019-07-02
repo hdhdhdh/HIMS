@@ -32,7 +32,7 @@ public class PatientServiceTest extends BaseTest
     }
     @Test
     public void appointment() throws Exception {
-        System.out.println(iPatientService.appointment("432132199911247288","0102"));
+        System.out.println(iPatientService.appointment("432132199911247289","0102"));
     }
 
 }
