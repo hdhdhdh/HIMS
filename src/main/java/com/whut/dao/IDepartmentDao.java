@@ -10,5 +10,5 @@ public interface IDepartmentDao
     void addDepartment();
     void deleteDepartment();
     void updateDepartment();
-    Department findDepartmentById(String id);
+    Department findDepartmentById(String dp_id);
 }
