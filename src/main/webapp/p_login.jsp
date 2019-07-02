@@ -11,33 +11,21 @@
     <title>病人登录</title>
 </head>
 <body>
-<form method="post" action="">
-<table>
-    <tr>
-        <td>
-            身份证号
-        </td>
-        <td>
+<form method="post" action="/patient/login.do">
+    <div>
         <input type="text" name="p_id">
-        </td>
-    </tr>
-    <tr>
-        <td>
+        身份证号
+    </div>
+    <div>
+    <input type="password" name="p_password">
             密码
-        </td>
-        <td>
-            <input type="password" name="p_password">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input type="button" value="登录">
-        </td>
-        <td>
-            <input type="button" value="注册">
-        </td>
-    </tr>
-</table>
+    </div>
+    <div>
+        <button type="submit">登录</button>
+    </div>
+<div>
+    <input type="button" onclick="">注册
+</div>
 </form>
 </body>
 </html>

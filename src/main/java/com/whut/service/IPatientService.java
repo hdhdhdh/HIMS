@@ -5,5 +5,5 @@ import com.whut.bean.Patient;
 
 public interface IPatientService
 {
-    public boolean patienLogin(Patient patient);
+    public boolean patientLogin(Patient patient);
 }
