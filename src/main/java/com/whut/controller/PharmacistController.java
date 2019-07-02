@@ -24,7 +24,6 @@ public class PharmacistController {
         mv.addObject("AllMedicine", all);
         mv.setViewName("allUser");
         return mv;
-
     }
 }
 
