@@ -14,22 +14,22 @@ public class PatientController
 {
     @Autowired
     IPatientService iPatientService;
-    @RequestMapping("/login")
-    public ModelAndView patirntLogin(Patient patient)
+    @RequestMapping("/login.do")
+    public ModelAndView patientLogin(Patient patient)
     {
         ModelAndView mv = new ModelAndView();
         if (patient.getP_id() == null || patient.getP_password() == null)
         {
             mv.addObject("err","id or password is empty");
-            mv.setViewName("login");
+            mv.setViewName("login.do");
         }
-        if(iPatientService.patienLogin(patient))
+        if(iPatientService.patientLogin(patient))
         {
             mv.addObject("err","id or password is wrong");
-            mv.setViewName("login");
+            mv.setViewName("login.do");
         }else
             {
-            mv.setViewName("patien_main");
+            mv.setViewName("patient_main");
         }
         return mv;
     }
