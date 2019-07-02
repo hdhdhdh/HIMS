@@ -24,7 +24,7 @@
         <button type="submit">登录</button>
     </div>
 <div>
-    <input type="button" onclick="">注册
+    <input type="button" value="注册" onclick="register.jsp">
 </div>
 </form>
 </body>
