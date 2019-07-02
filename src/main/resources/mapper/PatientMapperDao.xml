@@ -8,4 +8,15 @@
     <insert id="addPaient" parameterType="patient">
         insert into tb_patient (p_id,p_name,p_gender,p_birthday,p_password) value (#{p_id},#{p_name},#{p_gender},#{p_birthday},#{p_password})
     </insert>
+    <select id="getAllPatient" resultType="patient">
+        select * from tb_patient where t_id=#{t_id}
+    </select>
+    <delete id="deletePatient">
+        delete from tb_patient where t_id=#{t_id}
+    </delete>
+    <update id="updatePatient" parameterType="patient">
+        update tb_patient
+        set t_id=#{t_id},t_name=#{t_name}
+        where t_id=#{t_id}
+    </update>
 </mapper>

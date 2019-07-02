@@ -1,4 +1,10 @@
 package com.whut.service;
 
-public interface ITypeService {
+import com.whut.bean.Type;
+
+import java.util.List;
+
+public interface ITypeService
+{
+
 }

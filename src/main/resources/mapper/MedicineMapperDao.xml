@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
+<mapper namespace="com.whut.dao.IMpedicineDao" >
+    <select id="getMpedicineById" parameterType="java.lang.String" resultType="mpedicine">
+        select * from tb_mpedicine where p_id=#{p_id}
+    </select>
+    <insert id="addMedicine" parameterType="mpedicine">
+        insert into tb_mpedicine (p_id,p_name,p_gender,p_birthday,p_password) value (#{p_id},#{p_name},#{p_gender},#{p_birthday},#{p_password})
+    </insert>
+    <select id="getAllMpedicine" resultType="mpedicine">
+        select * from tb_mpedicine where t_id=#{t_id}
+    </select>
+    <delete id="deleteMpedicine">
+        delete from tb_mpedicine where t_id=#{t_id}
+    </delete>
+    <update id="updateMpedicine" parameterType="mpedicine">
+        update tb_mpedicine
+        set t_id=#{t_id},t_name=#{t_name}
+        where t_id=#{t_id}
+    </update>
+</mapper>

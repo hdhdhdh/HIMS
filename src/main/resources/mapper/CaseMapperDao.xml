@@ -9,5 +9,6 @@
         insert into tb_case(c_id,d_id,p_id,c_description,c_fee,c_status,c_date)
                   value (#{c_id},#{d_id},#{p_id},#{c_description},#{c_fee},#{c_status},#{c_date})
     </insert>
+
 </mapper>
         <!--这个是mapper模板 -->

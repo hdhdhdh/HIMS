@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
+<mapper namespace="com.whut.dao.IPrescriptionDao" >
+    <select id="getAllPrescription" resultType="prescription">
+        select * from tb_prescription where t_id=#{t_id}
+    </select>
+    <delete id="deletePrescription">
+        delete from tb_prescription where t_id=#{t_id}
+    </delete>
+    <insert id="addPrescription" parameterType="prescription">
+        insert into tb_prescription(t_id,t_name)
+        value (#{t_id},#{t_name})
+    </insert>
+    <update id="updatePrescription" parameterType="prescription">
+        update tb_prescription
+        set t_id=#{t_id},t_name=#{t_name}
+        where t_id=#{t_id}
+    </update>
+    <select id="getPrescriptionById"  resultType="prescription">
+        select *
+        from tb_prescription
+        where t_id=#{t_id}
+    </select>
+</mapper>
