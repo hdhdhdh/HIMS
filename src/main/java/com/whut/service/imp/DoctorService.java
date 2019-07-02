@@ -14,7 +14,7 @@ public class DoctorService implements IDoctorService {
     public IDoctorDao iDoctorDao;
     @Override
     public boolean updateDoctor(Doctor doctor)
-        {
+    {
         try
         {
             iDoctorDao.updateDoctorWithoutId(doctor);

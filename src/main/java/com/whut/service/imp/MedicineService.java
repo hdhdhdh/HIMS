@@ -3,14 +3,14 @@ package com.whut.service.imp;
 
 import com.whut.bean.Medicine;
 import com.whut.dao.IMedicineDao;
-import com.whut.service.IPharmacistService;
+import com.whut.service.IMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PharmacistService implements IPharmacistService {
+public class MedicineService implements IMedicineService {
    @Autowired
     public IMedicineDao medecineDao;
 

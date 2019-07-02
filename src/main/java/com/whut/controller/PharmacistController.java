@@ -1,7 +1,7 @@
 package com.whut.controller;
 
 import com.whut.bean.Medicine;
-import com.whut.service.IPharmacistService;
+import com.whut.service.IMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import java.util.List;
 public class PharmacistController {
 
     @Autowired
-    public IPharmacistService medicineService;
+    public IMedicineService medicineService;
 
     //do是请求说明
     @RequestMapping("/getAllMedicine.do")
