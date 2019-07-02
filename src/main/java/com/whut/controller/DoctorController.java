@@ -34,7 +34,7 @@ public class DoctorController {
         modelAndView.setViewName("#");//显示在医生信息的界面
         return modelAndView;
     }
-    @RequestMapping("findDoctor.do")
+    @RequestMapping("findAllDoctor.do")
     public ModelAndView findAllDoctor(){
         List<Doctor> all = iDoctorService.findAllDoctor();//从DoctorService中获取数据
         ModelAndView modelAndView = new ModelAndView();
