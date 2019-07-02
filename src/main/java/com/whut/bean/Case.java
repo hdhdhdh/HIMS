@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class Case {
     private int c_id;//病例编号
-    private char d_id;//医生编号
-    private char p_id;//病人编号
+    private String d_id;//医生编号
+    private String p_id;//病人编号
     private Text c_description;//病例描述
     private BigDecimal c_fee;//费用
     private int c_status;//病例状态
@@ -22,19 +22,19 @@ public class Case {
         this.c_id = c_id;
     }
 
-    public char getD_id() {
+    public String getD_id() {
         return d_id;
     }
 
-    public void setD_id(char d_id) {
+    public void setD_id(String d_id) {
         this.d_id = d_id;
     }
 
-    public char getP_id() {
+    public String getP_id() {
         return p_id;
     }
 
-    public void setP_id(char p_id) {
+    public void setP_id(String p_id) {
         this.p_id = p_id;
     }
 
