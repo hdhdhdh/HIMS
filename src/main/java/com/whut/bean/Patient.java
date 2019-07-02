@@ -6,7 +6,7 @@ import java.util.Date;
 public class Patient {
     private String p_id;//病人编号
     private String p_name;//病人姓名
-    private int p_gender;//病人性别
+    private Integer p_gender;//病人性别
     private Date p_birthday;//病人出生日期
     private String p_password;//病人密码
 
@@ -26,11 +26,11 @@ public class Patient {
         this.p_name = p_name;
     }
 
-    public int getP_gender() {
+    public Integer getP_gender() {
         return p_gender;
     }
 
-    public void setP_gender(int p_gender) {
+    public void setP_gender(Integer p_gender) {
         this.p_gender = p_gender;
     }
 

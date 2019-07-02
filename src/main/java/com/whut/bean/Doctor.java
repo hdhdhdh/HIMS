@@ -4,29 +4,29 @@ import javax.xml.soap.Text;
 import java.util.Date;
 
 public class Doctor {
-    private char d_id;//医生工号
-    private char t_id;//医生类型
+    private String d_id;//医生工号
+    private String t_id;//医生类型
     private String d_title;//医生职称
-    private int d_gender;//医生性别
+    private Integer d_gender;//医生性别
     private Date d_birthday;//医生出生日期
-    private char dp_id;//部门编号
+    private String dp_id;//部门编号
     private String d_password;//医生密码
     private String d_name;//医生姓名
     private Text d_description;//医生简介
 
-    public char getD_id() {
+    public String getD_id() {
         return d_id;
     }
 
-    public void setD_id(char d_id) {
+    public void setD_id(String d_id) {
         this.d_id = d_id;
     }
 
-    public char getT_id() {
+    public String getT_id() {
         return t_id;
     }
 
-    public void setT_id(char t_id) {
+    public void setT_id(String t_id) {
         this.t_id = t_id;
     }
 
@@ -54,11 +54,11 @@ public class Doctor {
         this.d_birthday = d_birthday;
     }
 
-    public char getDp_id() {
+    public String getDp_id() {
         return dp_id;
     }
 
-    public void setDp_id(char dp_id) {
+    public void setDp_id(String dp_id) {
         this.dp_id = dp_id;
     }
 
@@ -87,7 +87,8 @@ public class Doctor {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Doctor{" +
                 "d_id=" + d_id +
                 ", t_id=" + t_id +
