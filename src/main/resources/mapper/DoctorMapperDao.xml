@@ -5,19 +5,19 @@
     <select id="findDoctor" resultType="doctor">
         select * from tb_doctor where d_id=#{d_id}
     </select>
-    <delete id="deleteDoc" parameterType="int">
+    <delete id="deleteDoctor">
         delete from tb_doctor where d_id=#{d_id}
     </delete>
-    <insert id="addDoc" parameterType="doctor">
+    <insert id="addDoctor" parameterType="doctor">
         insert into tb_doctor(d_id,t_id,d_title,d_gender,d_birthday,dp_id,d_password,d_name)
         value (#{d_id},#{t_id},#{d_title},#{d_gender},#{d_birthday},#{dp_id},#{d_password},#{d_name})
     </insert>
-    <update id="updateDoc" parameterType="doctor">
+    <update id="updateDoctor" parameterType="doctor">
         update tb_doctor
         set t_id=#{t_id},d_title=#{d_title},d_gender=#{d_gender},d_birthday=#{d_birthday},dp_id=#{dp_id},d_password=#{d_password},d_name=#{d_name}
         where d_id=#{d_id}
     </update>
-    <select id="findId" parameterType="int" resultType="doctor">
+    <select id="findDoctorById"  resultType="doctor">
         select *
         from tb_doctor
         where d_id=#{d_id}
