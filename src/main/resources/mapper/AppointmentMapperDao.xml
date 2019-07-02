@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
+<mapper namespace="com.whut.dao.IPatientDao" >
+    <select id="getPatientById" parameterType="java.lang.String" resultType="patient">
+        select * from tb_patient where p_id=#{p_id}
+    </select>
+    <insert id="addPaient" parameterType="patient">
+        insert into tb_patient (p_id,p_name,p_gender,p_birthday,p_password) value (#{p_id},#{p_name},#{p_gender},#{p_birthday},#{p_password})
+    </insert>
+</mapper>

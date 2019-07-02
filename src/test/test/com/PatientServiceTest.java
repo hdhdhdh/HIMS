@@ -8,13 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
-public class AddPatientServiceTest extends BaseTest
+public class PatientServiceTest extends BaseTest
 {
     @Autowired
     private IPatientService iPatientService;
 
     @Test
-    public void testAppoint() throws Exception {
+    public void patientLoginTest() throws Exception {
+        Patient patient = new Patient();
+        patient.setP_id("432132199911247289");
+        patient.setP_password("522");
+        System.out.println(iPatientService.patientLogin(patient));
+    }
+    @Test
+    public void addPatientTest() throws Exception {
         Patient patient = new Patient();
         patient.setP_id("432132199911247288");
         patient.setP_name("sfh");
@@ -25,3 +32,4 @@ public class AddPatientServiceTest extends BaseTest
     }
 
 }
+
