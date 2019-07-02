@@ -21,7 +21,7 @@ public class AddPatientServiceTest extends BaseTest
         patient.setP_birthday( new Date());
         patient.setP_gender(GenderEnum.MEAL.getGender());
         patient.setP_password("522");
-        System.out.println(iPatientService.addPaient(patient));
+        System.out.println(iPatientService.addPatient(patient));
     }
 
 }

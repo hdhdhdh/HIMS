@@ -15,7 +15,7 @@ public class PatientLoginTest extends BaseTest
         Patient patient = new Patient();
         patient.setP_id("432132199911247289");
         patient.setP_password("522");
-        System.out.println(iPatientService.patienLogin(patient));
+        System.out.println(iPatientService.patientLogin(patient));
     }
 
 }

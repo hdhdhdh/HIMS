@@ -33,5 +33,44 @@ public class PatientController
         }
         return mv;
     }
+    @RequestMapping("/register.do")
+    public ModelAndView register(Patient patient)
+    {
+        ModelAndView mv = new ModelAndView();
+        if (patient.getP_id() == null)
+        {
+            mv.addObject("err","id is empty");
+            mv.setViewName("login.do");
+        }
+        if (patient.getP_name() == null)
+        {
+            mv.addObject("err","name is empty");
+            mv.setViewName("login.do");
+        }
+        if (patient.getP_gender() == null)
+        {
+            mv.addObject("err","gender is empty");
+            mv.setViewName("login.do");
+        }
+        if (patient.getP_birthday() == null)
+        {
+            mv.addObject("err","birthday is empty");
+            mv.setViewName("login.do");
+        }
+        if (patient.getP_password() == null)
+        {
+            mv.addObject("err","password is empty");
+            mv.setViewName("login.do");
+        }
+        if (iPatientService.addPatient(patient) == false)
+        {
+            mv.addObject("err","has already registered");
+            mv.setViewName("login.do");
+        }else
+        {
+            mv.setViewName("redirect:/patient_main");
+        }
+        return mv;
+    }
 
 }
