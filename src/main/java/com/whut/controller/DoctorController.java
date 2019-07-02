@@ -18,7 +18,7 @@ public class DoctorController {
     IDoctorService iDoctorService;
     @RequestMapping("/toUpdateDoctor.do")
     public String toUpdateDoctor(Model model,String d_id){
-        model.addAttribute("doctor",iDoctorService.findDoctorById(d_id));
+        model.addAttribute("doctor",iDoctorService.getDoctorById(d_id));
         return "#";//返回更新医生个人信息界面
     }
     @RequestMapping("/updateDoctor.do")
@@ -26,17 +26,10 @@ public class DoctorController {
         iDoctorService.updateDoctor(doctor);
         return "redirect:/doctor/findDoctor.do";//返回该医生信息界面
     }
-    @RequestMapping("findDoctor.do")
-    public ModelAndView findDoctor(){
-        List<Doctor> one = iDoctorService.findDoctor();//从DoctorService中获取数据
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("onedoctor",one);
-        modelAndView.setViewName("#");//显示在医生信息的界面
-        return modelAndView;
-    }
+
     @RequestMapping("findAllDoctor.do")
     public ModelAndView findAllDoctor(){
-        List<Doctor> all = iDoctorService.findAllDoctor();//从DoctorService中获取数据
+        List<Doctor> all = iDoctorService.getAllDoctor();//从DoctorService中获取数据
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("alldoctor",all);
         modelAndView.setViewName("#");//显示在所有医生信息的界面

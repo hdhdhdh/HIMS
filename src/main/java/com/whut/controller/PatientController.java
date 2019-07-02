@@ -1,6 +1,7 @@
 package com.whut.controller;
 
 import com.whut.bean.Patient;
+import com.whut.service.IAppointmentService;
 import com.whut.service.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ public class PatientController
 {
     @Autowired
     IPatientService iPatientService;
+    @Autowired
+    IAppointmentService iAppointmentService;
     @RequestMapping("/login.do")
     public ModelAndView patientLogin(Patient patient)
     {
@@ -79,7 +82,7 @@ public class PatientController
         {
             mv.addObject("err","department is empty");
         }
-        else if(iPatientService.appointment(p_id,dp_id))
+        else if(iAppointmentService.addAppointment(p_id,dp_id))
         {
             mv.addObject("err","id or password is wrong");
         }else

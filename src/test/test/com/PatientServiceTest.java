@@ -2,6 +2,7 @@ package test.com;
 
 import com.whut.bean.Patient;
 import com.whut.enums.GenderEnum;
+import com.whut.service.IAppointmentService;
 import com.whut.service.IPatientService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,8 @@ public class PatientServiceTest extends BaseTest
 {
     @Autowired
     private IPatientService iPatientService;
-
+    @Autowired
+    private IAppointmentService iAppointmentService;
     @Test
     public void patientLoginTest() throws Exception {
         Patient patient = new Patient();
@@ -32,7 +34,7 @@ public class PatientServiceTest extends BaseTest
     }
     @Test
     public void appointment() throws Exception {
-        System.out.println(iPatientService.appointment("432132199911247289","0102"));
+        System.out.println(iAppointmentService.addAppointment("432132199911247289","0102"));
     }
 
 }
