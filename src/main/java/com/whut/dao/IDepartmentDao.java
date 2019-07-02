@@ -1,4 +1,5 @@
 package com.whut.dao;
 
-public interface IDepartmentDao {
+public interface IDepartmentDao
+{
 }
