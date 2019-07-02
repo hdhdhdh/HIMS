@@ -27,21 +27,5 @@ public class DoctorController {
         return "redirect:/doctor/findDoctor.do";//返回该医生信息界面
     }
 
-    @RequestMapping("findAllDoctor.do")
-    public ModelAndView findAllDoctor(){
-        List<Doctor> all = iDoctorService.getAllDoctor();//从DoctorService中获取数据
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("alldoctor",all);
-        modelAndView.setViewName("#");//显示在所有医生信息的界面
-        return modelAndView;
-    }
-    @RequestMapping("/toaddDoctor.do")
-    public String toaddDoctor(){
-        return "#";
-    }//返回增加医生界面
-    @RequestMapping("/addDoctor.do")
-    public String addDoctor(Doctor doctor){
-        iDoctorService.addDoctor(doctor);
-        return "redirect:/user/findAllDoctor.do";
-    }
+
 }
