@@ -17,7 +17,7 @@ public class AppointmentService implements IAppointmentService
     public boolean addAppointment(String p_id, String dp_id)
     {
         try {
-            iAppointmentDao.addAppointment(p_id,dp_id);
+//            iAppointmentDao.addAppointment(p_id,dp_id);
             return true;
         }catch (Exception e)
         {
