@@ -26,6 +26,11 @@ public class DoctorService implements IDoctorService {
         }
     }
 
+    @Override
+    public boolean deleteDoctor(String d_id) {
+        return false;
+    }
+
     public Doctor getDoctorById(String d_id) {
         return iDoctorDao.getDoctorById(d_id);
     }

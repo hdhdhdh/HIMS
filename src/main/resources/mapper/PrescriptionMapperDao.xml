@@ -3,10 +3,10 @@
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.IPrescriptionDao" >
     <select id="getAllPrescription" resultType="prescription">
-        select * from tb_prescription where t_id=#{t_id}
+        select * from tb_prescription where pr_id=#{pr_id}
     </select>
     <delete id="deletePrescription">
-        delete from tb_prescription where t_id=#{t_id}
+        delete from tb_prescription where pr_id=#{pr_id}
     </delete>
     <insert id="addPrescription" parameterType="prescription">
         insert into tb_prescription(pr_id  , c_id , m_id , pr_date)
@@ -16,9 +16,6 @@
         update tb_prescription
         set pr_id = #{pr_id}, c_id= #{ c_id}, m_id= #{m_id}, pr_date= #{pr_date}
         where t_id=#{t_id}
-
-
-
     </update>
     <select id="getPrescriptionById"  resultType="prescription">
         select *

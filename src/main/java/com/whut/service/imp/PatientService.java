@@ -43,5 +43,25 @@ public class PatientService implements IPatientService
 
     }
 
+    @Override
+    public List<Patient> getAllPatient() {
+        return null;
+    }
+
+    @Override
+    public Patient getPatientById(String p_id) {
+        return null;
+    }
+
+    @Override
+    public boolean updatePatient(Patient patient) {
+        return false;
+    }
+
+    @Override
+    public boolean deletePatient(String p_id) {
+        return false;
+    }
+
 
 }

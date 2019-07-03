@@ -1,9 +1,12 @@
 package com.whut.service.imp;
 
+import com.whut.bean.Appointment;
 import com.whut.dao.IAppointmentDao;
 import com.whut.service.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AppointmentService implements IAppointmentService
@@ -21,5 +24,30 @@ public class AppointmentService implements IAppointmentService
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Appointment> getAllAppointment() {
+        return null;
+    }
+
+    @Override
+    public Appointment getAppointmentById(String a_id) {
+        return null;
+    }
+
+    @Override
+    public boolean addAppointment(Appointment appointment) {
+        return false;
+    }
+
+    @Override
+    public boolean updateAppointment(Appointment appointment) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteAppointment(String a_id) {
+        return false;
     }
 }

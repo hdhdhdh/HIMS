@@ -15,7 +15,7 @@ public class TypeService implements ITypeService
     ITypeDao iTypeDao;
     public List<Type> getAllType()
     {
-        return iTypeDao,getAllType();
+        return iTypeDao.getAllType();
     }
 
     public Type getTypeById(String t_id)
@@ -30,6 +30,7 @@ public class TypeService implements ITypeService
             return true;
         }catch (Exception e)
         {
+            e.printStackTrace();
             return false;
         }
 
@@ -38,10 +39,11 @@ public class TypeService implements ITypeService
     public boolean updateType(Type type)
     {
         try {
-            iTypeDao.updateType(type)
+            iTypeDao.updateType(type);
             return true;
         }catch (Exception e)
         {
+            e.printStackTrace();
             return false;
         }
     }
@@ -54,6 +56,7 @@ public class TypeService implements ITypeService
             return true;
         }catch (Exception e)
         {
+            e.printStackTrace();
             return false;
         }
     }

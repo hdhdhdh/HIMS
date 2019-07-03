@@ -23,19 +23,43 @@ public class PrescriptionService implements IPrescriptionService
         return  iPrescriptionDao.getPrescriptionById(pr_id);
     }
 
-    public void addPrescription(Prescription prescription)
+    public boolean addPrescription(Prescription prescription)
     {
-        iPrescriptionDao.addPrescription(prescription);
+        try {
+            iPrescriptionDao.addPrescription(prescription);
+            return  true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return  false;
+        }
+
     }
 
-    public void updatePrescription(Prescription prescription)
+    public boolean updatePrescription(Prescription prescription)
     {
-        iPrescriptionDao.updatePrescription(prescription);
+
+        try {
+            iPrescriptionDao.updatePrescription(prescription);
+            return  true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return  false;
+        }
     }
 
-    public void deletePrescription(String pr_id)
+    public boolean deletePrescription(String pr_id)
     {
-        iPrescriptionDao.deletePrescription(pr_id);
+
+        try {
+            iPrescriptionDao.deletePrescription(pr_id);
+            return  true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return  false;
+        }
     }
 
 }

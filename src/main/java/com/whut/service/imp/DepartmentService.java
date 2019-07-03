@@ -20,4 +20,19 @@ public class DepartmentService implements IDepartmentService
     {
         return getDepartmentById(dp_id);
     }
+
+    @Override
+    public boolean addDepartment(Department department) {
+        return false;
+    }
+
+    @Override
+    public boolean updateDepartment(Department department) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteDepartment(String dp_id) {
+        return false;
+    }
 }
