@@ -19,8 +19,13 @@ public class CaseService implements ICaseService {
     }
 
     @Override
-    public Case getCaseById(String c_id) {
+    public Case getCaseById(int c_id) {
         return null;
+    }
+
+    @Override
+    public List<Case> getCaseByPatientId(String p_id) {
+        return iCaseDao.getCaseByPatientId(p_id);
     }
 
     @Override
