@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface IDoctorService
 {
-    public List<Doctor> getAllDoctor();
-    public Doctor getDoctorById(String d_id);
-    public boolean addDoctor(Doctor doctor);
-    public boolean updateDoctor(Doctor doctor);
-    public boolean deleteDoctor(String d_id);
+
+    public Doctor getDoctorById(String d_id);//通过id得到医生信息
+    public boolean updateDoctorWithoutId(Doctor doctor);//医生更改自己的个人信息
+
 }

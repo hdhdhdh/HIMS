@@ -13,7 +13,7 @@ public class DoctorService implements IDoctorService {
     @Autowired
     public IDoctorDao iDoctorDao;
     @Override
-    public boolean updateDoctor(Doctor doctor)
+    public boolean updateDoctorWithoutId(Doctor doctor)
     {
         try
         {
@@ -26,24 +26,14 @@ public class DoctorService implements IDoctorService {
         }
     }
 
+
     public Doctor getDoctorById(String d_id) {
         return iDoctorDao.getDoctorById(d_id);
     }
 
-    @Override
-    public List<Doctor> getAllDoctor() {
-        return iDoctorDao.getAllDoctor();
-    }
 
-    @Override
-    public boolean addDoctor(Doctor doctor) {
-        try {
-            iDoctorDao.addDoctor(doctor);
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
+
+
+
 
 }
