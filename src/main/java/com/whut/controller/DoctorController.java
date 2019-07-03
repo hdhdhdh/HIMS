@@ -23,7 +23,7 @@ public class DoctorController {
     }
     @RequestMapping("/updateDoctor.do")
     public String updateDoctor(Doctor doctor){
-        iDoctorService.updateDoctor(doctor);
+        iDoctorService.updateDoctorWithoutId(doctor);
         return "redirect:/doctor/findDoctor.do";//返回该医生信息界面
     }
 

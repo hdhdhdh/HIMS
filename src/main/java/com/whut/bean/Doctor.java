@@ -12,7 +12,7 @@ public class Doctor {
     private String dp_id;//部门编号
     private String d_password;//医生密码
     private String d_name;//医生姓名
-    private Text d_description;//医生简介
+    private String d_description;//医生简介
 
     public String getD_id() {
         return d_id;
@@ -78,11 +78,11 @@ public class Doctor {
         this.d_name = d_name;
     }
 
-    public Text getD_description() {
+    public String getD_description() {
         return d_description;
     }
 
-    public void setD_description(Text d_description) {
+    public void setD_description(String d_description) {
         this.d_description = d_description;
     }
 

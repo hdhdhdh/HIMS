@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.ICaseDao" >
+    <select id="getAllCase" resultType="case">
+        select* from tb_case;
+    </select>
+    <select id="getCaseById" parameterType="int" resultType="case">
+        select* from tb_case where c_id = #{c_id};
+    </select>
+    <update id="updateCase" parameterType="case">
+        update tb_department
+        set d_id=#{d_id},p_id=#{p_id},c_description=#{c_description},c_fee=#{c_fee},c_status=#{c_status},c_date=#{c_date}
+        where c_id=#{c_id}
+    </update>
     <delete id="deleteCase" parameterType="int">
         delete from tb_case where c_id=#{c_id}
     </delete>

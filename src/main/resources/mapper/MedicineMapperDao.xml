@@ -12,11 +12,11 @@
         select * from tb_mpedicine where t_id=#{t_id}
     </select>
     <delete id="deleteMpedicine">
-        delete from tb_mpedicine where t_id=#{t_id}
+        delete from tb_mpedicine where m_id=#{m_id}
     </delete>
     <update id="updateMpedicine" parameterType="mpedicine">
         update tb_mpedicine
-        set t_id=#{t_id},t_name=#{t_name}
-        where t_id=#{t_id}
+        set m_id=#{m_id}, m_name=#{m_name}, m_num=#{m_name}, m_class=#{m_name}, m_price=#{m_name}
+        where m_id=#{m_id}
     </update>
 </mapper>

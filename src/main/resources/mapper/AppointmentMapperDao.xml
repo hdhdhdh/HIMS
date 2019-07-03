@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.IAppointmentDao" >
-    <select id="getAppointmentByUserId" parameterType="java.lang.String" resultType="appointment">
+    <select id="getAppointmentByUserId" parameterType="int" resultType="appointment">
         select * from tb_appointment where p_id=#{p_id}
     </select>
     <select id="getUnprocessedAppointmentByUserId" parameterType="java.lang.String" resultType="appointment">
@@ -11,18 +11,18 @@
     <insert id="addAppointment">
         insert into tb_appointment (p_id,dp_id,a_date,a_status) value (#{0},#{1},DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s'),0)
     </insert>
-    <select id="getAppointmentById" parameterType="java.lang.String" resultType="appointment">
+    <select id="getAppointmentById" parameterType="int" resultType="appointment">
         select * from tb_appointment where p_id=#{p_id}
     </select>
     <select id="getAllAppointment" resultType="appointment">
-        select * from tb_appointment where t_id=#{t_id}
+        select * from tb_appointment where p_id=#{a_id}
     </select>
     <delete id="deleteAppointment">
-        delete from tb_appointment where t_id=#{t_id}
+        delete from tb_appointment where a_id=#{a_id}
     </delete>
     <update id="updateAppointment" parameterType="appointment">
         update tb_appointment
-        set t_id=#{t_id},t_name=#{t_name}
+        set a_id=#{a_id},t_name=#{t_name}
         where t_id=#{t_id}
     </update>
 </mapper>

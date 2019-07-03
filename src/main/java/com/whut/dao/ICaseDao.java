@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ICaseDao {
     public List<Case> getAllCase();
-    public Case getCaseById(String pr_id);
+    public Case getCaseById(int c_id);
     public void addCase(Case type);
     public void updateCase(Case type);
-    public void deleteCase(String pr_id);
+    public void deleteCase(int c_id);
     
 }

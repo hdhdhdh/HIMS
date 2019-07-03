@@ -12,7 +12,6 @@ import java.util.List;
 public class DoctorService implements IDoctorService {
     @Autowired
     public IDoctorDao iDoctorDao;
-    @Override
     public boolean updateDoctor(Doctor doctor)
     {
         try
@@ -25,8 +24,6 @@ public class DoctorService implements IDoctorService {
             return false;
         }
     }
-
-    @Override
     public boolean deleteDoctor(String d_id) {
         return false;
     }
@@ -36,11 +33,16 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
+    public boolean updateDoctorWithoutId(Doctor doctor) {
+        return false;
+    }
+
     public List<Doctor> getAllDoctor() {
         return iDoctorDao.getAllDoctor();
     }
 
-    @Override
+
+
     public boolean addDoctor(Doctor doctor) {
         try {
             iDoctorDao.addDoctor(doctor);
