@@ -9,17 +9,20 @@
         delete from tb_prescription where t_id=#{t_id}
     </delete>
     <insert id="addPrescription" parameterType="prescription">
-        insert into tb_prescription(t_id,t_name)
-        value (#{t_id},#{t_name})
+        insert into tb_prescription(pr_id  , c_id , m_id , pr_date)
+        value (#{pr_id},#{ c_id},#{m_id},#{pr_date})
     </insert>
     <update id="updatePrescription" parameterType="prescription">
         update tb_prescription
-        set t_id=#{t_id},t_name=#{t_name}
+        set pr_id = #{pr_id}, c_id= #{ c_id}, m_id= #{m_id}, pr_date= #{pr_date}
         where t_id=#{t_id}
+
+
+
     </update>
     <select id="getPrescriptionById"  resultType="prescription">
         select *
         from tb_prescription
-        where t_id=#{t_id}
+        where pr_id=#{pr_id}
     </select>
 </mapper>

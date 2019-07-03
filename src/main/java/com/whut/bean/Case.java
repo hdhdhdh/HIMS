@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Case {
-    private int c_id;//病例编号
+    private Integer c_id;//病例编号
     private String d_id;//医生编号
     private String p_id;//病人编号
     private String c_description;//病例描述
