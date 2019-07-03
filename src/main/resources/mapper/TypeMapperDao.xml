@@ -3,7 +3,7 @@
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.ITypeDao" >
     <select id="getAllType" resultType="type">
-        select * from tb_type where t_id=#{t_id}
+        select * from tb_type
     </select>
     <delete id="deleteType">
         delete from tb_type where t_id=#{t_id}

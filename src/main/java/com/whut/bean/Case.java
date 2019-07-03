@@ -10,15 +10,15 @@ public class Case {
     private String p_id;//病人编号
     private String c_description;//病例描述
     private BigDecimal c_fee;//费用
-    private int c_status;//病例状态
+    private Integer c_status;//病例状态
     private Date c_date;//病例生成日期
     private String pr_description;//药物清单
 
-    public int getC_id() {
+    public Integer getC_id() {
         return c_id;
     }
 
-    public void setC_id(int c_id) {
+    public void setC_id(Integer c_id) {
         this.c_id = c_id;
     }
 
@@ -54,11 +54,11 @@ public class Case {
         this.c_fee = c_fee;
     }
 
-    public int getC_status() {
+    public Integer getC_status() {
         return c_status;
     }
 
-    public void setC_status(int c_status) {
+    public void setC_status(Integer c_status) {
         this.c_status = c_status;
     }
 
