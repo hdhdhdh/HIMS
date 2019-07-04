@@ -54,13 +54,13 @@
                     <table id="timetable" >
                             <thead>
                             <tr>
-                                <th>周一</th>
-                                <th>周二</th>
-                                <th>周三</th>
-                                <th>周四</th>
-                                <th>周五</th>
-                                <th>周六</th>
-                                <th>周日</th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
+                                <th><div><p class="week">周一</p><p class="day">2019-5-6</p></div></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -349,16 +349,18 @@
                 <span class="title"></span>
             </div>
             <div class="wrap3">
-               <form action="" method="post">
+               <form id="form" action="#"  method="post" onsubmit="return checkForm()">
                    <div class="input">
-                       <label for="indeportment">所选科室</label>
+                       <label for="indeportment">所选科室：</label>
                        <input type="text" id="indeportment" disabled>
                    </div>
                    <div class="input">
-                       <label for="intime" >所选时间</label>
+                       <label for="intime" >所选时间：</label>
                        <input type="text" id="intime" disabled>
                    </div>
-                   <button type="submit">选好了，提交</button>
+                   <button id="btn-ok">提交</button>
+                   <button id="btn-cancel" type="reset">取消</button>
+                   <p class="message" id="message"></p>
                </form>
             </div>
         <!--</form>-->
@@ -371,6 +373,7 @@
 </footer>
 <script src="../js/jquery-2.2.1.min.js"></script>
 <script>
+
     // 这是按钮切换的选择
     $(".d-item label").click(function() {
         $(this).siblings("span").addClass("active");
@@ -387,11 +390,105 @@
         $("#intime")[0].value = datetimeFormat($(this).find("input")[0].value);
     });
 
+    //提交按钮，
+    function checkForm(){
+        var message = $("#message");
+        var dp =  $("#indeportment")[0].value;
+        var time = $("#intime")[0].value;
+        if(dp==null || dp=="") {
+            console.log("空的");
+            $("#message").text( "*请选择预约科室");
+            return false;
+        } else if( time==null || time == "") {
+            $("#message").text( "*请选择预约时间");
+            return false;
+        }else {
+            $("#message").text("");
+           return true;
+        }
+    }
+    //取消按钮
+    $("#btn-cancel").click(function () {
+        $("#timetable span").removeClass("active");
+        $(".d-item span").removeClass("active");
+    });
+
+
+
+
+    $(document).ready(function () {
+        var nowtime = new Date();
+        // var nexttime = new Date(nowtime);
+        // nexttime.setDate(nowtime.getDate()+1);
+        //设置th中的标题
+        var weektds = $("#timetable .week");
+        var daytds = $("#timetable .day");
+        for(var i=0;i<weektds.length;i++){
+            var t_time = new Date(nowtime);
+            t_time.setDate(nowtime.getDate() + i);  //设置星期
+            weektds.eq(i).text(t_time.getDay());
+        }
+        for(var i=0;i<daytds.length;i++){
+            var t_time = new Date(nowtime);
+            t_time.setDate(nowtime.getDate() + i);  //设置星期
+            var year = t_time.getFullYear() ;
+
+            var month = t_time.getMonth() + 1;
+            var day = t_time.getDate();
+            daytds.eq(i).text(year+"-"+month+"-"+day);
+        }
+
+        var trs =  $("#timetable tbody tr"); //tbody的行
+        var time1 = new Date(nowtime);
+        //第一行
+        time1.setHours(9,0,0,0); //参数分别是 时 分 秒 毫秒
+        setRowTime(time1,0);
+        // var labels1 = trs.eq(0).find("label");    // 第一行 label数组
+        // for(var i=0;i<labels1.length;i++){
+        //     var temp_time = new Date(time1);
+        //     temp_time.setDate(nowtime.getDate() + i);
+        //     //...这里设置lable中inpupt的value
+        //     labels1.eq(i).find("input")[0].value = temp_time;
+        // }
+        //第二行
+        time1.setHours(10,0,0,0);
+        setRowTime(time1,1);
+        //第三行
+        time1.setHours(11,0,0,0);
+        setRowTime(time1,2);
+        //第四行
+        time1.setHours(14,0,0,0);
+        setRowTime(time1,3);
+        //第五行
+        time1.setHours(15,0,0,0);
+        setRowTime(time1,4);
+        //第六行
+        time1.setHours(16,0,0,0);
+        setRowTime(time1,5);
+        //第七行
+        time1.setHours(17,0,0,0);
+        setRowTime(time1,6);
+        /**
+         *  设置行的时间
+         *  time 是设置的时间 row 是行号
+         */
+        function setRowTime(paratime,row){
+            var labels = trs.eq(row).find("label");
+            for(var i=0;i<labels.length;i++){
+                var temp_time = new Date(paratime);
+                temp_time.setDate(nowtime.getDate() + i);
+                //...这里设置lable中inpupt的value
+                labels.eq(i).find("input")[0].value = temp_time.getTime();
+            }
+        }
+    });
+
+
     /*
 * 时间格式化工具
 * 把Long类型的1527672756454日期还原yyyy-MM-dd 00:00:00格式日期
 */
-    function datetimeFormat(longTypeDate){
+    function datetimeFormat(longTypeDate ){
         var dateTypeDate = "";
         var date = new Date();
         date.setTime(longTypeDate);
@@ -462,62 +559,6 @@
         return second;
     }
 
-    $(document).ready(function () {
-        var nowtime = new Date();
-        // var nexttime = new Date(nowtime);
-        // nexttime.setDate(nowtime.getDate()+1);
-        //设置th中的标题
-        var ths = $("#timetable th");
-        for(var i=0;i<ths.length;i++){
-            var time2 = new Date(nowtime);
-            time2.setDate(nowtime.getDate() + i);
-            ths.eq(i).text(time2.getDay());
-        }
-
-        var trs =  $("#timetable tbody tr"); //tbody的行
-        var time1 = new Date(nowtime);
-        //第一行
-        time1.setHours(9,0,0,0); //参数分别是 时 分 秒 毫秒
-        setRowTime(time1,0);
-        // var labels1 = trs.eq(0).find("label");    // 第一行 label数组
-        // for(var i=0;i<labels1.length;i++){
-        //     var temp_time = new Date(time1);
-        //     temp_time.setDate(nowtime.getDate() + i);
-        //     //...这里设置lable中inpupt的value
-        //     labels1.eq(i).find("input")[0].value = temp_time;
-        // }
-        //第二行
-        time1.setHours(10,0,0,0);
-        setRowTime(time1,1);
-        //第三行
-        time1.setHours(11,0,0,0);
-        setRowTime(time1,2);
-        //第四行
-        time1.setHours(14,0,0,0);
-        setRowTime(time1,3);
-        //第五行
-        time1.setHours(15,0,0,0);
-        setRowTime(time1,4);
-        //第六行
-        time1.setHours(16,0,0,0);
-        setRowTime(time1,5);
-        //第七行
-        time1.setHours(17,0,0,0);
-        setRowTime(time1,6);
-        /**
-         *  设置行的时间
-         *  time 是设置的时间 row 是行号
-         */
-        function setRowTime(paratime,row){
-            var labels = trs.eq(row).find("label");
-            for(var i=0;i<labels.length;i++){
-                var temp_time = new Date(paratime);
-                temp_time.setDate(nowtime.getDate() + i);
-                //...这里设置lable中inpupt的value
-                labels.eq(i).find("input")[0].value = temp_time.getTime();
-            }
-        }
-    });
 </script>
 </body>
 </html>

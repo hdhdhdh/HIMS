@@ -46,7 +46,52 @@
   width: 100%;
   padding: 0 100px;
   margin-top: -50px;
+  margin-bottom: 50px;
   box-sizing: border-box;
+}
+.user-body .wrap .wrap3 form {
+  overflow: hidden;
+}
+.user-body .wrap .wrap3 .input {
+  width: 40%;
+  height: 44px;
+  line-height: 44px;
+  font-size: 18px;
+  float: left;
+}
+.user-body .wrap .wrap3 .input input[type='text'] {
+  height: 30px;
+  line-height: 30px;
+  font-size: 18px;
+  border: none;
+  background: rgba(255, 255, 255, 0);
+}
+.user-body .wrap .wrap3 #btn-cancel {
+  margin-left: 10px;
+}
+.user-body .wrap .wrap3 #btn-ok,
+.user-body .wrap .wrap3 #btn-cancel {
+  float: left;
+  height: 44px;
+  font-size: 18px;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border: 1px  solid #339fd9;
+  border-radius: 5px;
+  width: 80px;
+}
+.user-body .wrap .wrap3 #btn-ok:hover,
+.user-body .wrap .wrap3 #btn-cancel:hover {
+  background: #339fd9;
+  color: #ffffff;
+}
+.user-body .wrap .wrap3 .message {
+  width: 100%;
+  height: 30px;
+  float: left;
+  color: red;
 }
 .d-box {
   width: 100%;
@@ -122,6 +167,28 @@
   height: 60px;
   z-index: 10;
   cursor: pointer;
+}
+#timetable thead th td {
+  border-top: 1px solid rgba(0, 0, 0, 0);
+}
+#timetable th div {
+  width: 140px;
+  height: 60px;
+}
+#timetable th div .week {
+  display: block;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  text-align: center;
+}
+#timetable th div .day {
+  display: block;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  color: #aaaaaa;
+  font-size: 14px;
 }
 #timetable td div {
   width: 140px;

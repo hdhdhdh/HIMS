@@ -55,7 +55,50 @@
       width: 100%;
       padding: 0 100px;
       margin-top: -50px;
+      margin-bottom: 50px;
       box-sizing: border-box;
+      form {
+        overflow: hidden;
+      }
+      .input {
+        width: 40%;
+        height: 44px;
+        line-height: 44px;
+        font-size: 18px;
+        float: left;
+        input[type='text'] {
+          height: 30px;
+          line-height: 30px;
+          font-size: 18px;
+          border: none;
+          background: rgba(255,255,255,0);
+        }
+      }
+      #btn-cancel {
+        margin-left: 10px;
+      }
+      #btn-ok,#btn-cancel {
+        float: left;
+        height: 44px;
+        font-size: 18px;
+        background: #ffffff;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        border: 1px  solid #339fd9;
+        border-radius: 5px;
+        width: 80px;
+        &:hover {
+          background: #339fd9;
+          color: #ffffff;
+        }
+      }
+      .message {
+        width: 100%;
+        height: 30px;
+        float: left;
+        color: red;
+      }
     }
   }
 }
@@ -121,7 +164,6 @@
 }
 
 //时间表格样式
-
 #timebox {
     width: 100%;
     overflow: hidden;
@@ -140,6 +182,28 @@
     height: 60px;
     z-index: 10;
     cursor: pointer;
+  }
+  thead th td {
+    border-top: 1px solid rgba(0,0,0,0);
+  }
+  th div {
+    width: 140px;
+    height: 60px;
+    .week {
+      display: block;
+      height: 40px;
+      width: 100%;
+      line-height: 40px;
+      text-align: center;
+    }
+    .day {
+      display: block;
+      width: 100%;
+      height: 20px;
+      line-height: 20px;
+      color: #aaaaaa;
+      font-size: 14px;
+    }
   }
   td div {
     width: 140px;
