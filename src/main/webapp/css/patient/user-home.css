@@ -1,0 +1,322 @@
+.user-body {
+  background: #ffffff;
+  background: url("../../images/bg3.jpg");
+  width: 100%;
+  clear: both;
+}
+.user-body .wrap {
+  position: relative;
+  width: 1330px;
+  margin: 0 auto;
+  height: 3000px;
+  overflow: hidden;
+}
+.user-body .wrap .wrap1 {
+  width: 100%;
+  height: 640px;
+  position: relative;
+  margin-top: 60px;
+}
+.user-body .wrap .wrap1 .department-menu {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  left: 0;
+  background: #ffffff;
+}
+.user-body .wrap .wrap1 .department-menu li {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background: #eeeeee;
+}
+.user-body .wrap .wrap1 .department-menu li:hover {
+  background: #444b52;
+}
+.user-body .wrap .wrap1 .slideshow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+.user-body .wrap .wrap1 .slideshow .pre {
+  left: 0;
+}
+.user-body .wrap .wrap1 .slideshow .next {
+  right: 0;
+}
+.user-body .wrap .wrap1 .slideshow .arrow {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 80px;
+  width: 80px;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  opacity: 0;
+}
+.user-body .wrap .wrap1 .slideshow .arrow:hover {
+  opacity: 1;
+}
+.user-body .wrap .wrap1 .slideshow .arrow i {
+  display: inline-block;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+}
+.user-body .wrap .wrap1 .slideshow .pics {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.user-body .wrap .wrap1 .slideshow .pics li {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.user-body .wrap .wrap1 .slideshow .pics li img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.user-body .wrap .wrap1 .slideshow .pics .active {
+  opacity: 1;
+}
+.user-body .wrap .wrap1 .slideshow .points {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.user-body .wrap .wrap1 .slideshow .points li {
+  float: left;
+  width: 10px;
+  height: 10px;
+  margin: 3px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
+.user-body .wrap .wrap1 .slideshow .points .active {
+  background: #666;
+}
+.user-body .wrap .wrap2 {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  margin-top: 200px;
+}
+.user-body .wrap .wrap2 .wrap2-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 100%;
+  background: #5cb85c;
+  background: url("../../images/img3.png");
+  background-size: 100% 100%;
+}
+.user-body .wrap .wrap2 .wrap2-des {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 700px;
+}
+.user-body .wrap .wrap2 .wrap2-des .h1 {
+  display: block;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  font-size: 40px;
+  color: #ffffff  ;
+}
+.user-body .wrap .wrap2 .wrap2-des .item {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+.user-body .wrap .wrap2 .wrap2-des .item .icon-pic {
+  width: 100px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+}
+.user-body .wrap .wrap2 .wrap2-des .item .item-content {
+  position: absolute;
+  width: 600px;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+.user-body .wrap .wrap2 .wrap2-des .item .item-content .h2 {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 40px;
+  color: #ffffff;
+}
+.user-body .wrap .wrap2 .wrap2-des .item .item-content p {
+  font-size: 18px;
+  line-height: 30px;
+  color: #ffffff;
+}
+.user-body .wrap .wrap3 {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  margin-top: 200px;
+}
+.user-body .wrap .wrap3 div .line {
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  margin: 0 auto;
+}
+.user-body .wrap .wrap3 div .title {
+  font-size: 24px;
+  padding: 5px 20px;
+  font-weight: 500;
+}
+.user-body .wrap .wrap3 div .content {
+  padding: 20px 50px;
+}
+.user-body .wrap .wrap3 .introduce {
+  width: 48%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #eeeeee;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  box-sizing: border-box;
+}
+.user-body .wrap .wrap3 .achievement {
+  width: 48%;
+  height: 48%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #eeeeee;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  box-sizing: border-box;
+}
+.user-body .wrap .wrap3 .reaserch {
+  width: 48%;
+  height: 48%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #eeeeee;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  box-sizing: border-box;
+}
+#wrap4 {
+  width: 100%;
+  height: 600px;
+  margin-top: 100px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+#wrap4 .left-menu {
+  position: absolute;
+  width: 200px;
+  height: 400px;
+  top: 100px;
+  left: 100px;
+  background: #dddddd;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+#wrap4 .left-menu li {
+  display: block;
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+#wrap4 .left-menu .active {
+  background: #ffffff;
+}
+#wrap4 .right-box {
+  position: absolute;
+  width: 930px;
+  height: 400px;
+  top: 100px;
+  right: 100px;
+  padding: 50px;
+  box-sizing: border-box;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+#wrap4 .content-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+#wrap4 .content-box h3 {
+  margin: 20px 0;
+  font-weight: 500;
+}
+#wrap4 .content-box .info-item {
+  margin: 20px 0;
+}
+#wrap4 .content-box .info-item h1,
+#wrap4 .content-box .info-item h2,
+#wrap4 .content-box .info-item h3,
+#wrap4 .content-box .info-item h4,
+#wrap4 .content-box .info-item h5,
+#wrap4 .content-box .info-item h6 {
+  font-weight: 600;
+}
+#wrap4 .content-box::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 10px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+#wrap4 .content-box::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #535353;
+}
+#wrap4 .content-box::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #EDEDED;
+}
+.clearfix:after {
+  content: ".";
+  /*加一段内容*/
+  display: block;
+  /*让生成的元素以块级元素显示，占满剩余空间*/
+  height: 0;
+  /*避免生成的内容破坏原有布局高度*/
+  clear: both;
+  /*清除浮动*/
+  visibility: hidden;
+  /*让生成的内容不可见*/
+}
+.clearfix {
+  zoom: 1;
+  /*为IE6，7的兼容性设置*/
+}

@@ -1,0 +1,93 @@
+.user-body {
+  width: 100%;
+  clear: both;
+  min-height: 600px;
+  background: #eeeeee;
+}
+.user-body .wrap {
+  width: 1330px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.user-body .wrap .wrap1 {
+  width: 100%;
+  margin-top: 50px;
+}
+.user-body .wrap .wrap1 .title {
+  display: block;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+}
+.user-body .wrap .wrap1 .line {
+  width: 100%;
+  height: 3px;
+  background: #cccccc;
+  margin: 30px 0 ;
+}
+.user-body .wrap .wrap1 .departments {
+  padding: 0 100px;
+  margin: 0 auto;
+  clear: both;
+  overflow: hidden;
+}
+.user-body .wrap .wrap1 .departments li {
+  display: block;
+  list-style: none;
+  width: 25%;
+  height: 50px;
+  margin: 30px;
+  border-radius: 5px;
+  float: left;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  transition: background-color 0.5s ease;
+}
+.user-body .wrap .wrap1 .departments li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  font-weight: 500;
+  color: #000000;
+}
+.user-body .wrap .wrap1 .departments li a span {
+  display: inline-block;
+  text-align: center;
+  height: 100%;
+  line-height: 50px;
+}
+.user-body .wrap .wrap1 .departments li a .li-name {
+  width: 80%;
+  box-sizing: border-box;
+  transition: width 0.5s ease;
+  border-right: 1px solid #ccc;
+}
+.user-body .wrap .wrap1 .departments li a .tag {
+  width: 20%;
+  transition: width 0.5s ease;
+}
+.user-body .wrap .wrap1 .departments li a:hover {
+  background: #cccccc;
+}
+.user-body .wrap .wrap1 .departments li a:hover .li-name {
+  width: 90%;
+}
+.user-body .wrap .wrap1 .departments li a:hover .tag {
+  width: 10%;
+}
+.user-body .wrap .wrap2 {
+  width: 100%;
+  min-height: 400px;
+  padding: 50px;
+}
+.user-body .wrap .wrap2 h2 {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-body .wrap .wrap2 p {
+  margin: 10px;
+  line-height: 28px;
+  text-indent: 2em;
+}

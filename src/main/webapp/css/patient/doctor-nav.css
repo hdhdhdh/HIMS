@@ -1,0 +1,73 @@
+.user-body {
+  width: 100%;
+  clear: both;
+  min-height: 600px;
+  background: #eeeeee;
+}
+.user-body .wrap {
+  width: 1330px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.user-body .wrap .wrap1 {
+  width: 100%;
+  margin-top: 50px;
+}
+.user-body .wrap .wrap1 .title {
+  display: block;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+}
+.user-body .wrap .wrap1 .line {
+  width: 100%;
+  height: 3px;
+  background: #cccccc;
+  margin: 30px 0 ;
+}
+.user-body .wrap .wrap1 .d-wrap {
+  padding: 0 100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item {
+  list-style: none;
+  display: block;
+  width: 27%;
+  float: left;
+  margin: 30px;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item:hover {
+  background: #2f95b7;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item:hover .department-name {
+  color: #eeeeee;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item:hover .doctors li a {
+  color: #ffffff;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item .department-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #2f95b7;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item .line {
+  margin: 10px 0;
+  height: 1px;
+  width: 100%;
+  background-color: #cccccc;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item .doctors {
+  width: 100%;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item .doctors li {
+  float: left;
+  width: 30%;
+}
+.user-body .wrap .wrap1 .d-wrap .d-wrap-item .doctors li a:hover {
+  color: #cccccc;
+}

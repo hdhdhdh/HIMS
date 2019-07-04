@@ -1,0 +1,14 @@
+.user-footer {
+  width: 100%;
+  height: 333px;
+  overflow: hidden;
+  background: #444b52;
+  background-size: 100% 100%;
+}
+.user-footer .wrap {
+  width: 1330px;
+  height: 333px;
+  margin: 0 auto;
+  background: url("../../images/footer_pic.png");
+  background-size: 100% 100%;
+}

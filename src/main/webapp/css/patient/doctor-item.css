@@ -1,0 +1,59 @@
+.user-body {
+  width: 100%;
+  clear: both;
+  min-height: 600px;
+  background: #eeeeee;
+}
+.user-body .wrap {
+  width: 1330px;
+  margin: 0 auto;
+}
+.user-body .wrap .wrap1 {
+  width: 100%;
+  padding-top: 50px;
+  position: relative;
+  height: 700px;
+}
+.user-body .wrap .wrap1 .title {
+  display: block;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+}
+.user-body .wrap .wrap1 .line {
+  width: 100%;
+  height: 3px;
+  background: #cccccc;
+  margin: 30px 0;
+}
+.user-body .wrap .wrap1 .pic {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 60px;
+  top: 200px;
+}
+.user-body .wrap .wrap1 .pic img {
+  width: 100%;
+  height: 100%;
+}
+.user-body .wrap .wrap1 .info {
+  width: 800px;
+  height: 400px;
+  position: absolute;
+  right: 60px;
+  top: 200px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.user-body .wrap .wrap1 .info h2 {
+  font-weight: 400;
+}
+.user-body .wrap .wrap1 .info div {
+  margin-top: 20px;
+}
+.user-body .wrap .wrap1 .info div p {
+  margin-top: 10px;
+  text-indent: 2em;
+  line-height: 28px;
+}

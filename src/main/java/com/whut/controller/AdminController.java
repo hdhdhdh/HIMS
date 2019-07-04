@@ -10,6 +10,9 @@ import java.util.List;
 
 public class AdminController
 {
+
+/*
+
     @Autowired
     IDoctorService iDoctorService;
     @RequestMapping("findAllDoctor.do")
@@ -29,4 +32,6 @@ public class AdminController
         iDoctorService.addDoctor(doctor);
         return "redirect:/user/findAllDoctor.do";
     }
+
+    */
 }

@@ -1,0 +1,182 @@
+@wrap-width:1330px;
+.user-body {
+  width: 100%;
+  clear: both;
+  min-height: 600px;
+  background: #ffffff;
+
+  .wrap {
+    width: @wrap-width;
+    margin: 0 auto;
+    //height: 2300px;
+    //background: pink;
+    overflow: hidden;
+
+    .wrap1 {
+      width: 100%;
+      padding: 50px;
+      box-sizing: border-box;
+      //padding: 0 50px;
+      .d-box {
+        width: 100%;
+        //background: red;
+        overflow: hidden;
+        padding: 0px 50px;
+        box-sizing: border-box;
+
+      }
+    }
+    .wrap2 {
+      width: 100%;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+    div {
+      .title {
+        //background: #ec971f;
+        padding: 50px 50px 0px 50px;
+        box-sizing: border-box;
+        display: block;
+        font-size: 20px;
+        font-weight: 400;
+        width: 100%;
+        height: 100px;
+        &:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          background-color: #cccccc;
+          margin: 10px 0;
+        }
+      }
+    }
+    .wrap3 {
+      width: 100%;
+      padding: 0 100px;
+      margin-top: -50px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+//科室的表单样式
+.d-box{
+  width: 100%;
+  height: 100%;
+  .d-item {
+    margin: 10px 30px;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 200px;
+    height: 60px;
+    //background: #5cb85c;
+    position: relative;
+    label {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      opacity: 0;
+      margin: auto;
+      display: inline-block;
+      line-height: 60px;
+      cursor: pointer;
+      input {
+        display: inline-block;
+        vertical-align: middle;/*让默认的单选样式的圆圈和“男”“女”的文本没有高差，看起来在同一水平线*/
+        height: 2.8rem;
+        line-height: 2.8rem;
+        margin: 0; /*清除浏览器默认的外边距*/
+      }
+    }
+
+    span {
+      display: none;
+    }
+    span.btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 2;
+      margin: auto;
+      display: inline-block;
+      line-height: 60px;
+      text-align: center;
+      border: .1rem solid #339fd9;
+      color: #339fd9;
+      border-radius: .2rem;
+    }
+    span.active {
+      background-color: #339fd9;
+      color: #fff;
+    }
+  }
+}
+
+//时间表格样式
+
+#timebox {
+    width: 100%;
+    overflow: hidden;
+    padding: 0px 50px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#timetable {
+  margin: 0 auto;
+  //height: 400px;
+  cellspacing: 0;
+    //background: red;
+  input[type=radio] {
+    display: block;
+    width: 140px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
+  }
+  td div {
+    width: 140px;
+    height: 60px;
+    text-align: center;
+    position: relative;
+    label {
+      width: 140px;
+      height: 60px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      cursor: pointer;
+      //background: #5cb85c;
+      opacity: 0;
+
+    }
+    span.btn-time {
+      //border: .1rem solid #339fd9;
+      background: #ededed;
+      box-sizing: border-box;
+      position: absolute;
+      width: 140px;
+      height: 60px;
+      top: 0;
+      left: 0;
+      //background: black;
+      line-height: 60px;
+      cursor: pointer;
+      z-index: 2;
+      //display: none;
+    }
+    span.active {
+      background: #339fd9;
+      color: #ffffff;
+    }
+  }
+
+}

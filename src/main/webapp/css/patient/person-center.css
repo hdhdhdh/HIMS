@@ -1,0 +1,39 @@
+.user-body {
+  width: 100%;
+  clear: both;
+  min-height: 600px;
+  background: #ffffff;
+  padding-top: 10px;
+}
+.user-body .wrap {
+  width: 1330px;
+  margin: 0 auto;
+}
+.wrap-x {
+  width: 100%;
+  margin: 10px 0;
+  padding: 50px;
+  box-sizing: border-box;
+}
+.wrap-x .title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.wrap-x hr {
+  display: block;
+  background: #dddddd;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.wrap-x .table-wrap {
+  padding: 20px 50px;
+}
+#wrap2 {
+  width: 100%;
+}
+#wrap3 {
+  width: 100%;
+}
+#wrap4 {
+  width: 100%;
+}

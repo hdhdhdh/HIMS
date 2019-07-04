@@ -1,0 +1,47 @@
+/*
+ * home 中的link-box的动画
+ */
+@keyframes link-box1-animation {
+    from {
+        top: 250px;
+        opacity: 0;
+    }
+    to {
+        top: 50px;
+        opacity: 1;
+    }
+}
+@keyframes link-box2-animation {
+    from {
+        top: 0px;
+        opacity: 0;
+    }
+    to {
+        top: 200px;
+        opacity: 1;
+    }
+}
+@keyframes title-animation {
+    from {
+        left:-200px ;
+    }
+    to {
+        left: 0;
+    }
+}
+@keyframes text1-animation {
+    from {
+        left:-270px ;
+    }
+    to {
+        left: 0;
+    }
+}
+@keyframes text2-animation {
+    from {
+        left:-340px ;
+    }
+    to {
+        left: 0;
+    }
+}

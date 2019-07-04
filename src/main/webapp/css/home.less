@@ -1,0 +1,230 @@
+@import "home-animation.css";
+.home-header {
+  //background: #5cb85c;
+  position: relative;
+  height: 160px;
+  padding-right: 50px;
+  img {
+    position: absolute;
+    display: block;
+    height: 100px;
+    width: 100px;
+    top: 40px;
+    left: 200px;
+  }
+  .title {
+    position: absolute;
+    left: 320px;
+    top: 40px;
+    font-size: 28px;
+    height: 100px;
+    color: #ffffff;
+    line-height: 100px;
+    //color:  #ffffff;
+  }
+  .btn-appointment {
+    text-decoration: none;
+    float: right;
+    display: block;
+    margin-right: 100px;
+    margin-top: 30px;
+    padding: 0px 20px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    color: #dedede;
+    border: 3px solid #dedede;
+    border-radius: 10px;
+    box-sizing: border-box;
+    &:hover{
+      color: #ffffff;
+      border-color: #ffffff ;
+    }
+  }
+
+}
+
+.home-body {
+  .wrap {
+    width: 1260px;
+    margin: 20px auto;
+    //background: pink;
+    position: relative;
+    padding: 40px 50px;
+    box-sizing: border-box;
+  }
+  .wrap1 {
+    min-height: 600px;
+    margin-top: 120px;
+    color: #ffffff;
+    .title {
+      position: absolute;
+      display: block;
+      height: 120px;
+      width: 50%;
+      line-height: 120px;
+      font-size: 50px;
+      left: 0;
+      animation: title-animation 1s ease;
+    }
+    .content {
+      position: absolute;
+      top: 140px;
+      display: block;
+      margin-top: 10px;
+      font-size: 24px;
+      display: block;
+      height: 120px;
+      width: 50%;
+    }
+
+
+    .link-box {
+      position: absolute;
+      width: 240px;
+      height: 260px;
+      border-radius: 10px;
+
+      text-align: center;
+      padding-top: 50px;
+      box-sizing: border-box;
+      box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+      .link-title {
+        font-size: 30px;
+        color: #FFFFFF;
+        margin-bottom: 20px;
+      }
+      .link-btn {
+        display: block;
+        width: 80%;
+        height: 30px;
+        color: #FFFFFF;
+        border-radius: 0px/50%;
+        margin: 0 auto;
+        line-height: 30px;
+        height: 30px;
+        &:hover {
+          background: rgba(0,0,0,0.2);
+        }
+      }
+    }
+    .link-box1 {
+      top: 50px;
+      right: 280px;
+      background-color: rgba(9,199,247,0.7);/* #09C7F7 */
+      animation: link-box1-animation 1s ease-in-out ;
+      .link-btn {
+        background: #09C7F7;
+      }
+    }
+    .link-box2 {
+      top: 200px;
+      right: 70px;
+      background-color: rgba(249,151,9,0.7);
+      animation: link-box2-animation 1s ease-in-out ;
+      .link-btn {
+        background: #F79709;
+      }
+    }
+
+
+  }
+
+
+  .wrap2 {
+    height: 600px;
+    //overflow: hidden;
+
+    .slideshow {
+      width: 1200px;
+      height: 600px;
+      //background: red;
+      margin: 30px auto;
+      position: relative;
+      //overflow: hidden;
+      .pre {
+        left: 0;
+      }
+      .next {
+        right: 0;
+      }
+      .arrow {
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 80px;
+        width: 80px;
+        z-index: 5;
+        background: rgba(0,0,0,0.4);
+        border: 1px solid #ffffff;
+        box-sizing: border-box;
+        opacity: 0;
+        &:hover {
+          opacity: 1;
+        }
+        i {
+          display: inline-block;
+          width: 100%;
+          height: 80px;
+          line-height: 80px;
+          font-size: 40px;
+          color: #fff;
+          text-align: center;
+        }
+      }
+
+      .pics {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        li {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0;
+          transition: opacity 0.8s ease;
+          img {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .active {
+          opacity: 1;
+        }
+      }
+      .points {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        li {
+          float: left;
+          width: 10px;
+          height: 10px;
+          margin: 3px;
+          border-radius: 50%;
+          background: #ffffff;
+          cursor: pointer;
+        }
+        .active {
+          background: #666;
+        }
+      }
+    }
+  }
+}
+
+#text1 {
+  top: 140px;
+  left: 0;
+  animation: text1-animation 1.4s ease;
+}
+#text2 {
+  top: 260px;
+  left: 0;
+  animation: text2-animation 1.8s ease;
+}
