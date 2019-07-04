@@ -106,6 +106,7 @@ public class PatientController
         }
         return mv;
     }
+    @RequestMapping("/getAllPersonalInfo.do")
     public ModelAndView getAllPersonalInfo(HttpSession httpSession)
     {
         String p_id = (String)httpSession.getAttribute("currentPatient");
@@ -123,6 +124,17 @@ public class PatientController
             mv.addObject("patientInfo",patient);
             mv.addObject("allCase",allMyCase);
             mv.setViewName("personalCenter");
+        }
+        return mv;
+    }
+    public ModelAndView payPrescription (HttpSession httpSession)
+    {
+        String p_id = (String)httpSession.getAttribute("currentPatient");
+        ModelAndView mv = new ModelAndView();
+        if (p_id == null || p_id.equals(""))
+        {
+            mv.addObject("err","patient is empty");//病人没有登录
+            mv.setViewName("patientlogin");
         }
         return mv;
     }

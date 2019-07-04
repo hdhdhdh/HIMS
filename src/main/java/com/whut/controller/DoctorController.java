@@ -35,16 +35,19 @@ public class DoctorController {
         return "redirect:/doctor/findAppointment.do";//返回预约信息界面
     }
     @RequestMapping("/toAddCase.do")
-    public String toaddCase(){
+    public String toaddCase()
+    {
         return "#";
     }//返回增加病例的界面
     @RequestMapping("/addCase.do")//医生增加病例
-    public String addCase(Case icase){
+    public String addCase(Case icase)
+    {
         iCaseService.addCase(icase);
         return "redirect:/user/findCase.do";//添加病例后返回所有病例页面
     }
     @RequestMapping("/getCaseByPatientId.do")//医生查找病例
-    public ModelAndView getCaseByPatientId(String p_id){
+    public ModelAndView getCaseByPatientId(String p_id)
+    {
         List<Case> all = iCaseService.getCaseByPatientId(p_id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("patientcases",all);
