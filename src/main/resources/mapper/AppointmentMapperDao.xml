@@ -25,4 +25,9 @@
         set dp_id=#{dp_id},a_date=#{a_date},a_status=#{a_status}
         where p_id=#{p_id}
     </update>
+    <update id="updateAppointmentStatus" parameterType="appointment">
+        update tb_appointment
+        set a_status=1
+        where a_id=#{a_id}
+    </update>
 </mapper>

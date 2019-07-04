@@ -9,7 +9,7 @@
         select* from tb_case where p_id = #{p_id};
     </select>
     <update id="updateCase" parameterType="case">
-        update tb_department
+        update tb_case
         set d_id=#{d_id},p_id=#{p_id},c_description=#{c_description},c_fee=#{c_fee},c_status=#{c_status},c_date=#{c_date}
         where c_id=#{c_id}
     </update>

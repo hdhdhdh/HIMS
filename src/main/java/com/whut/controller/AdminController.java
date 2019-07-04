@@ -29,7 +29,7 @@ public class AdminController
     }//返回增加医生界面
     @RequestMapping("/addDoctor.do")
     public String addDoctor(Doctor doctor){
-        iDoctorService.addDoctor(doctor);
+        //iDoctorService.addDoctor(doctor);
         return "redirect:/user/findAllDoctor.do";
     }
 

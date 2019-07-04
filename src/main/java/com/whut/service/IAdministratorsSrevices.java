@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IAdministratorsSrevices
 {
-    public List<Administrators> getAllAdministrators();
+    public List<Administrators> getAllAdministrators();//得到所有预约信息
     public Administrators getAdministratorsById(String pr_id);
     public boolean addAdministrators(Administrators administrators);
     public boolean updateAdministrators(Administrators administrators);

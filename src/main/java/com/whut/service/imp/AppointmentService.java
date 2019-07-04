@@ -28,7 +28,7 @@ public class AppointmentService implements IAppointmentService
 
     @Override
     public List<Appointment> getAllAppointment() {
-        return null;
+        return iAppointmentDao.getAllAppointment();
     }
 
     @Override
@@ -49,5 +49,18 @@ public class AppointmentService implements IAppointmentService
     @Override
     public boolean deleteAppointment(String a_id) {
         return false;
+    }
+
+    @Override
+    public boolean updateAppointmentStatus(Appointment appointment) {
+        try
+        {
+            iAppointmentDao.updateAppointmentStatus(appointment);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

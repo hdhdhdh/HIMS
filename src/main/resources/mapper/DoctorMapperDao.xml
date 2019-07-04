@@ -27,4 +27,7 @@
         from tb_doctor
         where d_id=#{d_id}
     </select>
+    <select id="doctorLogin" resultType="doctor" >
+        select * from tb_doctor where d_id =#{0} and d_password =#{1}
+    </select>
 </mapper>
