@@ -10,7 +10,7 @@ public class Case {
     private String p_id;//病人编号
     private String c_description;//病例描述
     private BigDecimal c_fee;//费用
-    private Integer c_status;//病例状态
+    private Integer c_status;//病例状态 /0/1/2
     private Date c_date;//病例生成日期
     private String pr_description;//药物清单
 

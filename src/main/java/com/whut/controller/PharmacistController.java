@@ -18,7 +18,8 @@ public class PharmacistController {
 
     //do是请求说明
     @RequestMapping("/getAllMedicine.do")
-    public ModelAndView findAll() {
+    public ModelAndView getAllMedicine()
+    {
         List<Medicine> all = medicineService.getAllMedicine();
         ModelAndView mv = new ModelAndView();
         mv.addObject("AllMedicine", all);
