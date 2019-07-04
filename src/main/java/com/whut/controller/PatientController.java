@@ -26,7 +26,7 @@ public class PatientController
             mv.addObject("err","id or password is empty");
             mv.setViewName("login.do");
         }
-        if(iPatientService.patientLogin(patient))
+        if(!iPatientService.patientLogin(patient))
         {
             mv.addObject("err","id or password is wrong");
             mv.setViewName("login.do");

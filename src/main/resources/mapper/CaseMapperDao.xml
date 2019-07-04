@@ -6,7 +6,7 @@
         select* from tb_case;
     </select>
     <select id="getCaseById" parameterType="int" resultType="case">
-        select* from tb_case where c_id = #{c_id};
+        select* from tb_case where p_id = #{p_id};
     </select>
     <update id="updateCase" parameterType="case">
         update tb_department
