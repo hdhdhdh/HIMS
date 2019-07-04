@@ -26,7 +26,7 @@
     </div>
     <div>
         出生日期
-        <input type="text" name="p_birthday">
+        <input type="date" name="p_birthday">
     </div>
     <div>
         密码

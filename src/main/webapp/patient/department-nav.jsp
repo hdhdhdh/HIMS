@@ -31,7 +31,7 @@
                 <li><a href="user_home.html">首页</a></li>
                 <li><a href="#" class="active">科室导航</a></li>
                 <li><a href="doctor-nav.html">医生简介</a></li>
-                <li><a href="appointment.html">预约挂号</a></li>
+                <li><a href="${pageContext.request.contextPath}/patient/toAppointment.do">预约挂号</a></li>
                 <li><a href="#">个人中心</a></li>
                 <li><a href="#">其他栏目</a></li>
             </ul>
@@ -44,16 +44,16 @@
             <span class="title">科室一览</span>
             <div class="line"></div>
             <ul class="departments">
-                <li>
-                    <a href="department-item.html"><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></a>
-                </li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
-                <li><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></li>
+                <%--<li>--%>
+                    <%--<a href="department-item.html"><span class="li-name">肿瘤科</span><span class="tag">&raquo;</span></a>--%>
+                <%--</li>--%>
+                <c:forEach items="${departmentList}" var="department">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/patient/departmentItem.do?dp_id=${department.dp_id}"><span class="li-name">
+                                ${department.dp_name}</span><span class="tag">&raquo;</span>
+                        </a>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
     </div>

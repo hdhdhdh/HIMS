@@ -20,7 +20,7 @@
 <header class="home-header">
     <img src="images/logo.png" alt="">
     <span class="title">PHARMACY</span>
-    <a class="btn-appointment" href="#">
+    <a class="btn-appointment" href="patient/patient_login.jsp">
         <i class="icon icon-clock"></i>
         <span>预约挂号</span>
     </a>
@@ -38,7 +38,7 @@
         <div class="link-box link-box1">
             <img src="images/icon_user.png" alt="">
             <p class="link-title">用户入口</p>
-            <a class="link-btn" href="patient/user_home.html">点击进入</a>
+            <a class="link-btn" href="patient/user_home.jsp">点击进入</a>
         </div>
         <div class="link-box link-box2">
             <img src="images/icon_worker.png" alt="">

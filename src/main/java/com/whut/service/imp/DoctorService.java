@@ -39,6 +39,13 @@ public class DoctorService implements IDoctorService {
     }
 
 
+    /**
+     * 获取所有doctor   ---崔佳豪
+     * @return
+     */
+    public List<Doctor> getAllDoctor(){
+        return iDoctorDao.getAllDoctor();
+    }
 
 
 

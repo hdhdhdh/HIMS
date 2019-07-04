@@ -1,14 +1,17 @@
 package com.whut.controller;
 
 import com.whut.bean.Case;
+import com.whut.bean.Department;
+import com.whut.bean.Doctor;
 import com.whut.bean.Patient;
 import com.whut.service.IAppointmentService;
 import com.whut.service.ICaseService;
 import com.whut.service.IPatientService;
+import com.whut.service.imp.DepartmentService;
+import com.whut.service.imp.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -25,6 +28,17 @@ public class PatientController
     IAppointmentService iAppointmentService;
     @Autowired
     ICaseService iCaseService;
+    @Autowired
+    DepartmentService departmentService;
+    @Autowired
+    DoctorService doctorService;
+
+    /**
+     * 用户登录 ---崔佳豪
+     * @param httpSession   session对象
+     * @param patient   patient对象
+     * @return      登录成功进入主页    |   登录失败返回登录页面
+     */
     @RequestMapping("/login.do")
     public ModelAndView patientLogin(HttpSession httpSession,Patient patient)
     {
@@ -32,27 +46,33 @@ public class PatientController
         if (patient.getP_id() == null || patient.getP_id().equals(""))
         {
             mv.addObject("err","id is empty");
-            mv.setViewName("login.do");
+            //setViewName的时候不要jsp后缀
+            mv.setViewName("../patient/patient_login");
         }else if (patient.getP_password() == null || patient.getP_password().equals(""))
         {
             mv.addObject("err","password is empty");
-            mv.setViewName("login.do");
+            mv.setViewName("../patient/patient_login");
         }else if(!iPatientService.patientLogin(patient))
         {
             mv.addObject("err","id or password is wrong");
-            mv.setViewName("login.do");
+            mv.setViewName("../patient/patient_login");
         }else
         {
             httpSession.setAttribute("currentPatient",patient.getP_id());//登录成功记录病人id并跳转到病人主界面
-            mv.setViewName("patient_main");
+            mv.setViewName("../patient/user_home");
         }
         return mv;
     }
+
+
+
+
+
     @RequestMapping("/register.do")
     public ModelAndView register(Patient patient)
     {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("register");//注册失败留在注册界面
+        mv.setViewName("/patient/register.jsp");//注册失败留在注册界面
         if (patient.getP_id() == null || patient.getP_id().equals(""))
         {
             mv.addObject("err","id is empty");
@@ -82,13 +102,94 @@ public class PatientController
         }
         return mv;
     }
+
+    /**
+     * 进入 科室导航 页面 ---崔佳豪
+     * @return  获取科室列表后的view
+     */
+    @RequestMapping("/toDepartmentNav.do")
+    public ModelAndView departmentNav(){
+        List<Department> departmentList = departmentService.getAllDepartment(); //查询所有科室信息
+//        System.out.println("------------------------------------------------------");
+//        System.out.println(departmentList);
+//        System.out.println("------------------------------------------------------");
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("departmentList",departmentList);
+        mv.setViewName("../patient/department-nav");
+        return mv;
+    }
+
+    /**
+     * 查看科室详情 ---崔佳豪
+     * @param dp_id     科室id
+     * @return
+     */
+    @RequestMapping("/departmentItem.do")
+    public ModelAndView departmentItem(String dp_id){
+        ModelAndView mv = new ModelAndView();
+        Department department = departmentService.getDepartmentById(dp_id); //通过id获取科室信息
+        mv.addObject("deparment",department);
+        mv.setViewName("../patient/department-item");
+        return mv;
+    }
+
+    /**
+     * 进入 医生航行 页面 ---崔佳豪
+     * @return
+     */
+    @RequestMapping("/toDoctorNav.do")
+    public ModelAndView doctorNav(){
+        ModelAndView mv = new ModelAndView();
+        List<Doctor> doctorList = doctorService.getAllDoctor(); //查询所有医生
+        List<Department> departmentList = departmentService.getAllDepartment(); //查询所有科室信息
+        mv.addObject("departmentList",departmentList);
+        mv.addObject("doctorList",doctorList);
+        mv.setViewName("../patient/doctor-nav");
+        return mv;
+    }
+
+    /**
+     *  查看医生详情  ---崔佳豪
+     * @param d_id  医生id
+     * @return
+     */
+    @RequestMapping("/doctorItem.do")
+    public ModelAndView doctorItem(String d_id){
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = doctorService.getDoctorById(d_id);  //通过id查找医生
+        Department department = departmentService.getDepartmentById(doctor.getDp_id()); //通过医生id 查找医生所属的科室
+        mv.addObject("doctor",doctor);
+        mv.addObject("department",department);
+        mv.setViewName("../patient/doctor-item");
+        return mv;
+    }
+
+
+    /**
+     * 跳转到appointment界面 ---崔佳豪
+     * @param session
+     * @return
+     */
+    @RequestMapping("/toAppointment.do")
+    public ModelAndView toAppointment(HttpSession session) {
+        String p_id = (String) session.getAttribute("currentPatient"); //获取当前session中存的id
+        ModelAndView mv = new ModelAndView();
+        if (p_id == null || p_id.equals("")) {
+            mv.setViewName("../patient/patient_login"); //通过id判断，如果没有登录就跳转到登录页面
+        }
+        else {
+            mv.setViewName("../patient/appointment");   //登陆过就可以跳转到预约界面
+        }
+        return mv;
+    }
+
+
     @RequestMapping("/appointment.do")
     public ModelAndView appointment(HttpSession httpSession, String dp_id, String date)
     {
-
         String p_id = (String)httpSession.getAttribute("currentPatient");
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("patientlogin");
+        mv.setViewName("../patient/patient_login"); //如果没有登录过跳转到登录页面
         if (p_id == null || p_id.equals(""))
         {
             mv.addObject("err","patient is empty");
@@ -109,7 +210,7 @@ public class PatientController
     @RequestMapping("/getAllPersonalInfo.do")
     public ModelAndView getAllPersonalInfo(HttpSession httpSession)
     {
-        String p_id = (String)httpSession.getAttribute("currentPatient");
+        String p_id = (String)httpSession.getAttribute(" ");
         ModelAndView mv = new ModelAndView();
         if (p_id == null || p_id.equals(""))
         {

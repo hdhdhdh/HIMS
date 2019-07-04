@@ -18,7 +18,7 @@ public class DepartmentService implements IDepartmentService
     }
     public Department getDepartmentById(String dp_id)
     {
-        return getDepartmentById(dp_id);
+        return iDepartmentDao.getDepartmentById(dp_id);
     }
 
     @Override
