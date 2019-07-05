@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/patient/user-header.css">
     <link rel="stylesheet" href="../css/patient/user-footer.css">
     <link rel="stylesheet" href="../css/patient/user-home.css">
+    <link rel="stylesheet" href="../css/pageIcon.css">
     <title>Title</title>
     <style>
         body {
@@ -54,8 +55,8 @@
             <!--</ul>-->
             <!--轮播图-->
             <div class="slideshow" id="slideshow">
-                <span class="arrow pre"><i class="icon icon-play2"></i></span>
-                <span class="arrow next"><i class="icon icon-play2"></i></span>
+                <span class="arrow pre"><i class="icon icon-chevron_left"></i></span>
+                <span class="arrow next"><i class="icon icon-navigate_next"></i></span>
                 <ul class="pics">
                     <li class="active"><img src="../images/1.jpg" alt=""></li>
                     <li><img src="../images/2.jpg" alt=""></li>
@@ -77,21 +78,21 @@
                 <span class="h1">Hospital doctors examine patients </span>
                 <span class="h1">so that they can diagnose</span>
                 <div class="item">
-                    <div class="icon-pic"></div>
+                    <div class="icon-pic icon icon-atom" style="color: red"></div>
                     <div class="item-content">
                         <span class="h2">Intensive care</span>
                         <p>Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="icon-pic"></div>
+                    <div class="icon-pic icon icon icon-syringe"></div>
                     <div class="item-content">
                         <span class="h2">Specialised Support Service</span>
                         <p>Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="icon-pic"></div>
+                    <div class="icon-pic icon icon-pill" style="color:#22ff55;"></div>
                     <div class="item-content">
                         <span class="h2">Medical & Surgical</span>
                         <p>Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>

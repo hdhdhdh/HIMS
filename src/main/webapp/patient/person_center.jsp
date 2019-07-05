@@ -54,6 +54,17 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${departmentList}" var="department">
+                        <% int num=1; %>
+                        <tr>
+                            <td><%=num++%></td>
+                            <td>${patient.p_name}</td>
+                            <td>${department.dp_name}</td>
+                            <td>${appointment}</td>
+                            <td>12315</td>
+                        </tr>
+                    </c:forEach>
+
                     <tr>
                         <td>1</td>
                         <td>me</td>

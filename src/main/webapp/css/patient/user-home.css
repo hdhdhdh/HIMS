@@ -123,7 +123,7 @@
   top: 0;
   width: 600px;
   height: 100%;
-  background: #5cb85c;
+  /*background: #5cb85c;*/
   background: url("../../images/img3.png");
   background-size: 100% 100%;
 }
@@ -153,7 +153,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: #ffffff;
+  font-size: 36px;
 }
 .user-body .wrap .wrap2 .wrap2-des .item .item-content {
   position: absolute;
