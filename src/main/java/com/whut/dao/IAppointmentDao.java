@@ -15,4 +15,6 @@ public interface IAppointmentDao
     public void updateAppointment(Appointment type);
     public void deleteAppointment(String pr_id);
     public void updateAppointmentStatus(Appointment appointment);//医生更新预约状态
+    public List<Appointment> getUnprocessedAppointment(int a_status);//得到未处理的预约信息
+    public List<Appointment> getProcessedAppointment(int a_status);//得到已处理的预约信息
 }

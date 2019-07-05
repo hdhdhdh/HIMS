@@ -76,4 +76,14 @@ public class AppointmentService implements IAppointmentService
             return false;
         }
     }
+
+    @Override
+    public List<Appointment> getUnprocessedAppointment(int a_status) {
+        return iAppointmentDao.getUnprocessedAppointment(a_status);
+    }
+
+    @Override
+    public List<Appointment> getProcessedAppointment(int a_status) {
+        return iAppointmentDao.getProcessedAppointment(a_status);
+    }
 }

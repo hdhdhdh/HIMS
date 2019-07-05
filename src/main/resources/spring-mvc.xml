@@ -30,4 +30,6 @@
         <!--后面加上jsp后缀-->
         <property name="suffix" value=".jsp" />
     </bean>
+
+    <mvc:annotation-driven  />
 </beans>

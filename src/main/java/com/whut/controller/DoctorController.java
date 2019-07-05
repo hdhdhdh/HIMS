@@ -100,4 +100,18 @@ public class DoctorController {
         iAppointmentService.updateAppointmentStatus(appointment);
         return "#";//返回预约未处理信息界面
     }
+    public ModelAndView getUnprocessedAppointment(int a_status){
+        List<Appointment> unprocessedAppointment = iAppointmentService.getUnprocessedAppointment(a_status);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("unprocessedAppointments",unprocessedAppointment);
+        modelAndView.setViewName("#");//显示在未处理预约界面
+        return modelAndView;
+    }
+    public ModelAndView getProcessedAppointment(int a_status){
+        List<Appointment> processedAppointment = iAppointmentService.getProcessedAppointment(a_status);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("processedAppointments",processedAppointment);
+        modelAndView.setViewName("#");//显示在已处理预约界面
+        return modelAndView;
+    }
 }
