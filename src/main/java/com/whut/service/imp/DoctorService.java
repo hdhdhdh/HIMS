@@ -38,6 +38,10 @@ public class DoctorService implements IDoctorService {
         return false;
     }
 
+    @Override
+    public void deleteDoctor(String id) {
+        iDoctorDao.deleteDoctor(id);
+    }
 
     public Doctor getDoctorById(String d_id)
     {
@@ -54,7 +58,33 @@ public class DoctorService implements IDoctorService {
     }
 
 
+    /*
 
+    @Autowired
+    public IDoctorDao DocService;
+    */
+    /*
+
+    @Override
+    public void deleteDoctor(String id) {
+        DocService.deleteDoctor(id);
+    }
+    */
+
+    @Override
+    public String addDoctor(Doctor doctor) {
+        return iDoctorDao.addDoctor(doctor);
+    }
+
+    @Override
+    public String updateDoctor(Doctor doctor) {
+        return iDoctorDao.updateDoctor(doctor);
+    }
+
+    @Override
+    public Doctor queryDoctorById(String id) {
+        return iDoctorDao.queryDoctorById(id);
+    }
 
 
 
