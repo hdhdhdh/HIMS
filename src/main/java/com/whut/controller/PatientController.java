@@ -77,6 +77,7 @@ public class PatientController
 
 
 
+
     @RequestMapping("/register.do")
     public ModelAndView register(Patient patient)
     {
@@ -181,12 +182,14 @@ public class PatientController
      */
     @RequestMapping("/toAppointment.do")
     public ModelAndView toAppointment(HttpSession session) {
-        String p_id = ((Patient) session.getAttribute("currentPatient")).getP_id(); //获取当前session中存的patient
+        Patient patient = (Patient) session.getAttribute("currentPatient");
         ModelAndView mv = new ModelAndView();
-        if (p_id == null || p_id.equals("")) {
+        if (patient == null ) {
             mv.setViewName("../patient/patient_login"); //通过id判断，如果没有登录就跳转到登录页面
         }
         else {
+            List<Department> departmentList = departmentService.getAllDepartment();
+            mv.addObject("departmentList",departmentList);
             mv.setViewName("../patient/appointment");   //登陆过就可以跳转到预约界面
         }
         return mv;
@@ -203,6 +206,8 @@ public class PatientController
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+
+    //预约的ajax
     @RequestMapping( value = "/appointment.do",produces = "application/json; charset=utf-8")
     public  @ResponseBody String appointment(Appointment appointment,HttpSession session)
     {
@@ -258,6 +263,28 @@ public class PatientController
 //        }
 //        return mv;
 //    }
+
+    public ModelAndView patientCenter(HttpSession session) {
+        Patient patient = (Patient) session.getAttribute("currentPatient");
+        ModelAndView mv = new ModelAndView();
+        if (patient == null ) {
+            mv.setViewName("../patient/patient_login"); //通过id判断，如果没有登录就跳转到登录页面
+        }
+        else {
+            //根据id查找预约信息 未处理的
+            //根据预约信息的id查找科室
+            List<Appointment> appointmentList = iAppointmentService.getUnprocessAppointmentByPId(patient.getP_id());
+            List<Department> departmentList = departmentService.getAllDepartment(); //科室
+
+
+            mv.setViewName("../patient/person_center");   //登陆过就可以跳转到个人中心
+        }
+        return mv;
+    }
+
+
+
+
     @RequestMapping("/getAllPersonalInfo.do")
     public ModelAndView getAllPersonalInfo(HttpSession httpSession)
     {

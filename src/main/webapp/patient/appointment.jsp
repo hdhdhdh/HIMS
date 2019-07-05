@@ -45,18 +45,27 @@
             请选择科室和时间来进行预约
             <span class="title">科室选择：</span>
             <div class="d-box">
-                <div class="d-item">
-                    <label for="key">
-                        <input type="radio" name="deportment-name" id="key" value="科室id1">科室名称
-                    </label>
-                    <span class="btn">科室名称</span>
-                </div>
-                <div class="d-item">
-                    <label for="key2">
-                        <input type="radio" name="deportment-name" id="key2" value="科室id2">科室名称
-                    </label>
-                    <span class="btn">科室名称</span>
-                </div>
+                <%--<div class="d-item">--%>
+                    <%--<label for="key">--%>
+                        <%--<input type="radio" name="deportment-name" id="key" value="0603">科室名称--%>
+                    <%--</label>--%>
+                    <%--<span class="btn">科室名称</span>--%>
+                <%--</div>--%>
+                <%--<div class="d-item">--%>
+                    <%--<label for="key2">--%>
+                        <%--<input type="radio" name="deportment-name" id="key2" value="0603">科室名称--%>
+                    <%--</label>--%>
+                    <%--<span class="btn">科室名称</span>--%>
+                <%--</div>--%>
+
+                <c:forEach items="${departmentList}" var="department">
+                    <div class="d-item">
+                        <label for="${department.dp_id}">
+                            <input type="radio" name="deportment-name" id="${department.dp_id}" value="${department.dp_id}">${department.dp_name}
+                        </label>
+                        <span class="btn">${department.dp_name}</span>
+                    </div>
+                </c:forEach>
             </div>
         </div>
         <div class="wrap2">
@@ -360,16 +369,17 @@
             <span class="title"></span>
         </div>
         <div class="wrap3">
-            <form id="form" action="#"  method="post" onsubmit="return checkForm()">
+            <form id="form" action="javascript:;"  method="post" onsubmit="return checkForm()">
                 <div class="input">
                     <label for="indeportment">所选科室：</label>
-                    <input type="text" id="indeportment" disabled>
+                    <input type="hidden" id="indeportment">
+                    <input type="text" id="indeportment_name" disabled>
                 </div>
                 <div class="input">
                     <label for="intime" >所选时间：</label>
                     <input type="text" id="intime" disabled>
                 </div>
-                <button id="btn-ok">提交</button>
+                <button id="btn-ok" type="button">提交</button>
                 <button id="btn-cancel" type="reset">取消</button>
                 <p class="message" id="message"></p>
             </form>
@@ -383,6 +393,7 @@
     </div>
 </footer>
 <script src="../js/jquery-2.2.1.min.js"></script>
+<script src="../js/timeUtil.js"></script>
 <script>
 
     // 这是按钮切换的选择
@@ -390,7 +401,9 @@
         $(this).siblings("span").addClass("active");
         $(this).parent().siblings("div").find("span").removeClass("active");
         //给input表单的科室负值
-        $("#indeportment")[0].value = $(this).find("input")[0].value;
+        $("#indeportment")[0].value = $(this).find("input").val();
+        console.log($("#indeportment")[0].value);
+        $("#indeportment_name")[0].value = $(this).siblings("span").text();
     });
     //时间按钮切换
     $("#timetable label").click(function () {
@@ -495,81 +508,61 @@
     });
 
 
-    /*
-* 时间格式化工具
-* 把Long类型的1527672756454日期还原yyyy-MM-dd 00:00:00格式日期
-*/
-    function datetimeFormat(longTypeDate ){
-        var dateTypeDate = "";
-        var date = new Date();
-        date.setTime(longTypeDate);
-        dateTypeDate += date.getFullYear();   //年
-        dateTypeDate += "-" + getMonth(date); //月
-        dateTypeDate += "-" + getDay(date);   //日
-        dateTypeDate += " " + getHours(date);   //时
-        dateTypeDate += ":" + getMinutes(date);     //分
-        dateTypeDate += ":" + getSeconds(date);     //分
-        return dateTypeDate;
-    }
-    /*
-     * 时间格式化工具
-     * 把Long类型的1527672756454日期还原yyyy-MM-dd格式日期
-     */
-    function dateFormat(longTypeDate){
-        var dateTypeDate = "";
-        var date = new Date();
-        date.setTime(longTypeDate);
-        dateTypeDate += date.getFullYear();   //年
-        dateTypeDate += "-" + getMonth(date); //月
-        dateTypeDate += "-" + getDay(date);   //日
-        return dateTypeDate;
-    }
-    //返回 01-12 的月份值
-    function getMonth(date){
-        var month = "";
-        month = date.getMonth() + 1; //getMonth()得到的月份是0-11
-        if(month<10){
-            month = "0" + month;
-        }
-        return month;
-    }
-    //返回01-30的日期
-    function getDay(date){
-        var day = "";
-        day = date.getDate();
-        if(day<10){
-            day = "0" + day;
-        }
-        return day;
-    }
-    //小时
-    function getHours(date){
-        var hours = "";
-        hours = date.getHours();
-        if(hours<10){
-            hours = "0" + hours;
-        }
-        return hours;
-    }
-    //分
-    function getMinutes(date){
-        var minute = "";
-        minute = date.getMinutes();
-        if(minute<10){
-            minute = "0" + minute;
-        }
-        return minute;
-    }
-    //秒
-    function getSeconds(date){
-        var second = "";
-        second = date.getSeconds();
-        if(second<10){
-            second = "0" + second;
-        }
-        return second;
-    }
 
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#btn-ok").click(function() {
+            // alert($("#indeportment").val()+"      "+$("#intime").val()+"    ");
+            if(checkForm()){
+                $.ajax({
+                    url : "${pageContext.request.contextPath}/patient/appointment.do",
+                    type : "POST",
+                    /* data : "json", */
+                    // contentType : "application/json;charset=utf-8",
+                    //向后端传输的数据
+                    // data : JSON.stringify({
+                    //     dp_id : $("#indeportment").val(),
+                    //     a_date : $("#intime").val()
+                    // }),
+                    data : {
+                        dp_id:   $("#indeportment").val(),
+                        a_date:  $("#intime").val()
+                    },
+                    dataType : "json",
+                    //处理后端返回的数据
+                    success : function(result) {
+                        //将得到的前台数据转换为json
+                        /*var message = JSON.stringify(result);*/
+                        // alert("接受到的数据是：" + result);//输出默认的json字符串
+                        if (result != null && result != "") {
+                            alert("预约成功");
+                            // var message = eval("(" + result + ")");//万能转换，拿到对象
+                            // //alert("接受到的数据是：" + message.username);
+                            // var username = message.username;
+                            // var password = message.password;
+                            // //在前台做验证
+                            // if (username != null && username != ""
+                            //     && password != null
+                            //     && password != "") {
+                            //     alert("用户登录成功");
+                            //     window.location.href="findUser.action";
+                            // } else {
+                            //     alert("用户登录失败");
+                            // }
+                        }
+                        //alert("接受到的数据是：" + message);
+                    },
+                    //处理失败返回的数据
+                    error : function(result) {
+                        alert("error: " + result);
+                    }
+                });
+            }
+        });
+    });
 </script>
 </body>
 </html>

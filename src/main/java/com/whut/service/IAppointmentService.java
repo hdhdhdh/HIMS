@@ -14,4 +14,7 @@ public interface IAppointmentService {
     public boolean updateAppointmentStatus(Appointment appointment);
     public List<Appointment> getUnprocessedAppointment(int a_status);//得到未处理的预约信息
     public List<Appointment> getProcessedAppointment(int a_status);//得到已处理的预约信息
+
+    //病人根据自己的id找到未处理的预约
+    public List<Appointment> getUnprocessAppointmentByPId(String p_id);
 }

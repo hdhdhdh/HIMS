@@ -1,6 +1,7 @@
 package com.whut.service.imp;
 
 import com.whut.bean.Appointment;
+import com.whut.bean.Patient;
 import com.whut.dao.IAppointmentDao;
 import com.whut.service.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,10 @@ public class AppointmentService implements IAppointmentService
     @Override
     public List<Appointment> getProcessedAppointment(int a_status) {
         return iAppointmentDao.getProcessedAppointment(a_status);
+    }
+
+    @Override
+    public List<Appointment> getUnprocessAppointmentByPId(String p_id) {
+        return iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
     }
 }
