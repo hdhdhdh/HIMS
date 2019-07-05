@@ -57,6 +57,7 @@
         <a type="button"  class="btn btn-primary"  href="${pageContext.request.contextPath}/DoctorMange/toAddDoctor.do">添加医生</a>
     </p>
 
+
     <table class="table table-striped table-bordered">
 
         <thead>
