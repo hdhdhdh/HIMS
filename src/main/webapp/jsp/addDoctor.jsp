@@ -32,26 +32,26 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    <small>添加医生</small>
+                    <small>添加医生信息</small>
                 </h1>
             </div>
         </div>
     </div>
-    <form action="${pageContext.request.contextPath}/user/AddUser.do"
+    <form action="${pageContext.request.contextPath}/DoctorMange/AddDoctor.do"
           method="post">
 
-        医生工号&nbsp;&nbsp;&nbsp;&nbsp;id：<input type="text" name="id"><br><br><br>
+        医生工号&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="id">
         医生编号：<input type="text" name="username"><br><br><br>
-        医生职称：<input type="text" name="password"><br><br><br>
+        医生职称：<input type="text" name="password">
         医生性别：<input type="text" name="username"><br><br><br>
-        医生出生年月：<input type="text" name="password"><br><br>
+        出生年月：<input type="text" name="password">
         医生密码：<input type="text" name="username"><br><br><br>
-        医生姓名：<input type="text" name="password"><br><br><br>
+        医生姓名：<input type="text" name="password">
         医生简介：<input type="text" name="password"><br><br><br>
 
-
-        <input type="submit" value="添加" >
+        <input type="submit" class="btn btn-primary" value="添加" >
     </form>
 
 </div>
 </body>
+</html>
