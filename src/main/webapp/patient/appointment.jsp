@@ -30,7 +30,7 @@
             <ul>
                 <li><a href="user_home.jsp">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/patient/toDepartmentNav.do">科室导航</a></li>
-                <li><a href="#">医生简介</a></li>
+                <li><a href="${pageContext.request.contextPath}/patient/toDoctorNav.do">医生简介</a></li>
                 <li><a href="${pageContext.request.contextPath}/patient/toAppointment.do">预约挂号</a></li>
                 <li><a href="#">个人中心</a></li>
                 <li><a href="#">其他栏目</a></li>
@@ -417,8 +417,8 @@
     //提交按钮，
     function checkForm(){
         var message = $("#message");
-        var dp =  $("#indeportment")[0].value;
-        var time = $("#intime")[0].value;
+        var dp =  $("#indeportment_name").val();
+        var time = $("#intime").val();
         if(dp==null || dp=="") {
             console.log("空的");
             $("#message").text( "*请选择预约科室");

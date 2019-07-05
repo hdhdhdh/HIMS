@@ -28,9 +28,9 @@
         <h1 class="title">PHARMACY</h1>
         <nav class="user-nav">
             <ul>
-                <li><a href="user_home.html">首页</a></li>
+                <li><a href="user_home.jsp">首页</a></li>
                 <li><a href="#" class="active">科室导航</a></li>
-                <li><a href="doctor-nav.html">医生简介</a></li>
+                <li><a href="${pageContext.request.contextPath}/patient/toDoctorNav.do">医生简介</a></li>
                 <li><a href="${pageContext.request.contextPath}/patient/toAppointment.do">预约挂号</a></li>
                 <li><a href="#">个人中心</a></li>
                 <li><a href="#">其他栏目</a></li>
