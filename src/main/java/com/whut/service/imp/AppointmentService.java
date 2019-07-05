@@ -43,15 +43,19 @@ public class AppointmentService implements IAppointmentService
     @Override
     public boolean addAppointment(Appointment appointment)
     {
-        try {
-            iAppointmentDao.addAppointment(appointment);
-            return true;
-        }catch (Exception e)
+        if (iAppointmentDao.getUnprocessedAppointmentByUserId(appointment.getP_id()) == null)
         {
-            e.printStackTrace();
-            return false;
+            try {
+                iAppointmentDao.addAppointment(appointment);
+                return true;
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+                return false;
+            }
         }
 
+        return false;
     }
 
     @Override
