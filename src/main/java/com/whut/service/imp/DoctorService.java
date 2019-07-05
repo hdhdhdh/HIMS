@@ -29,12 +29,14 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
-    public Doctor doctorLogin(String d_id, String d_password) {
-        return iDoctorDao.doctorLogin(d_id,d_password);
+    public Doctor doctorLogin(String d_id, String d_password)
+    {
+        return null;
     }
 
 
-    public Doctor getDoctorById(String d_id) {
+    public Doctor getDoctorById(String d_id)
+    {
         return iDoctorDao.getDoctorById(d_id);
     }
 

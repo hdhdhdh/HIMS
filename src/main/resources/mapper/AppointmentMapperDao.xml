@@ -9,7 +9,7 @@
         select * from tb_appointment where p_id=#{p_id} and a_status = 0
     </select>
     <insert id="addAppointment" parameterType="appointment">
-        insert into tb_appointment (p_id,dp_id,a_date,a_status) value (#{p_id},#{dp_id},#{a_date},#{a_status})
+        insert into tb_appointment (p_id,dp_id,a_date,a_status) value (#{p_id},#{dp_id},#{a_date},0)
     </insert>
     <select id="getAppointmentById" parameterType="int" resultType="appointment">
         select * from tb_appointment where p_id=#{p_id}

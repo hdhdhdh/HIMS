@@ -16,18 +16,20 @@ public class AppointmentService implements IAppointmentService
     @Override
     public boolean addAppointment(String p_id, String dp_id)
     {
-        try {
-//            iAppointmentDao.addAppointment(p_id,dp_id);
-            return true;
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+//        try {
+//  //          iAppointmentDao.addAppointment(p_id,dp_id);
+//            return true;
+//        }catch (Exception e)
+//        {
+//            e.printStackTrace();
+//            return false;
+//        }
+        return false;
     }
 
     @Override
-    public List<Appointment> getAllAppointment() {
+    public List<Appointment> getAllAppointment()
+    {
         return iAppointmentDao.getAllAppointment();
     }
 
@@ -37,17 +39,28 @@ public class AppointmentService implements IAppointmentService
     }
 
     @Override
-    public boolean addAppointment(Appointment appointment) {
+    public boolean addAppointment(Appointment appointment)
+    {
+        try {
+            iAppointmentDao.addAppointment(appointment);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean updateAppointment(Appointment appointment)
+    {
         return false;
     }
 
     @Override
-    public boolean updateAppointment(Appointment appointment) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteAppointment(String a_id) {
+    public boolean deleteAppointment(String a_id)
+    {
         return false;
     }
 

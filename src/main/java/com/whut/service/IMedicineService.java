@@ -9,13 +9,13 @@ public interface IMedicineService {
     public List<Medicine> getAllMedicine();
 
     // 删除药品
-    public void deleteMedicine(String m_id);
+    public boolean deleteMedicine(String m_id);
 
     // 添加药品
-    public void addMedicine(Medicine medicine);
+    public boolean addMedicine(Medicine medicine);
 
     // 药品更新
-    public void updateMedicine(Medicine medicine);
+    public boolean updateMedicine(Medicine medicine);
 
     // 查询药品,根据药品id来查询
     Medicine getMedicineById(String m_id);

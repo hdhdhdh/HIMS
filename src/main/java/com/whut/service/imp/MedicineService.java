@@ -12,26 +12,63 @@ import java.util.List;
 @Service
 public class MedicineService implements IMedicineService {
    @Autowired
-    public IMedicineDao medecineDao;
+    public IMedicineDao iMedicineDao;
 
     // 获取所有药品
     @Override
-    public  List<Medicine> getAllMedicine(){return medecineDao.getAllMedicine();}
+    public  List<Medicine> getAllMedicine()
+    {
+        return iMedicineDao.getAllMedicine();
+    }
 
     // 删除药品
     @Override
-    public void deleteMedicine(String m_id){medecineDao.deleteMedicine(m_id);}
+    public boolean deleteMedicine(String m_id)
+    {
+        try
+        {
+            iMedicineDao.deleteMedicine(m_id);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     // 添加药品
     @Override
-    public void addMedicine(Medicine medicine){medecineDao.addMedicine(medicine);}
+    public boolean addMedicine(Medicine medicine)
+    {
+
+        try
+        {
+            iMedicineDao.addMedicine(medicine);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     // 药品更新
     @Override
-    public  void updateMedicine(Medicine medicine){ medecineDao.updateMedicine(medicine);}
+    public  boolean updateMedicine(Medicine medicine)
+    {
+        try
+        {
+            iMedicineDao.updateMedicine(medicine);
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     // 查询药品,根据药品id来查询
     @Override
-    public Medicine getMedicineById(String m_id){return medecineDao.getMedicineById(m_id);}
+    public Medicine getMedicineById(String m_id){return iMedicineDao.getMedicineById(m_id);}
 
 }
