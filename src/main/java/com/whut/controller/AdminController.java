@@ -1,5 +1,6 @@
 package com.whut.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.whut.bean.Doctor;
 import com.whut.service.IDoctorService;
 import com.whut.service.imp.DoctorService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.AttributedString;
@@ -25,11 +27,12 @@ public class AdminController {
     public IDoctorService docService;
 
     //do是请求说明
-    @RequestMapping("/getAllDoctor.do")
-    public ModelAndView getAllDoctor() {
-        List<Doctor> all = docService.getAllDoctor();
+    @RequestMapping("/findAllDoctor.do")
+    public ModelAndView findAllDoctor(@RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "5")int size) {
+        List<Doctor> all = docService.findAllDoctor(page,size);
+        PageInfo pageInfo = new PageInfo(all);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("DoctorInfo", all);
+        mv.addObject("ps", pageInfo);
         mv.setViewName("DoctorMange");
         return mv;
 
