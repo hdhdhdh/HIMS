@@ -71,4 +71,11 @@ public class MedicineService implements IMedicineService {
     @Override
     public Medicine getMedicineById(String m_id){return iMedicineDao.getMedicineById(m_id);}
 
+    @Override
+    public List<Medicine> getMedicineByName(String m_name)
+    {
+        return  iMedicineDao.getMedicineByName(m_name);
+    }
+
+
 }

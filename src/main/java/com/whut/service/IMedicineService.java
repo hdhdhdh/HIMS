@@ -1,6 +1,7 @@
 package com.whut.service;
 
 import com.whut.bean.Medicine;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,6 @@ public interface IMedicineService {
 
     // 查询药品,根据药品id来查询
     Medicine getMedicineById(String m_id);
+    public List<Medicine> getMedicineByName(String m_name);
 
 }

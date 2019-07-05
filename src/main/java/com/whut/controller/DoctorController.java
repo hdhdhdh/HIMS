@@ -1,12 +1,10 @@
 package com.whut.controller;
 
-import com.whut.bean.Appointment;
-import com.whut.bean.Case;
-import com.whut.bean.Doctor;
-import com.whut.bean.Patient;
+import com.whut.bean.*;
 import com.whut.service.IAppointmentService;
 import com.whut.service.ICaseService;
 import com.whut.service.IDoctorService;
+import com.whut.service.IMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +25,8 @@ public class DoctorController {
     ICaseService iCaseService;
     @Autowired
     IAppointmentService iAppointmentService;
-
-
+    @Autowired
+    IMedicineService iMedicineService;
     @RequestMapping("/updateDoctorInfo.do")//医生更改自己个人信息
     public String updateDoctorInfo(Doctor doctor)
     {
@@ -182,10 +180,15 @@ public class DoctorController {
     {
         ModelAndView mv = new ModelAndView();
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        List<Appointment> selectedAppointment = new ArrayList<Appointment>();
+
         if (doctor == null)
         {
             mv.setViewName("../doctor/doctor_login"); //未登录
+        }else
+        {
+            List<Medicine> selectedMedicine = iMedicineService.getMedicineByName(m_name);
+            mv.addObject("selectedMedicine",selectedMedicine);
+            mv.setViewName("searchMedicine");
         }
         return mv;
     }
