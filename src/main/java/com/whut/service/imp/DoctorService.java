@@ -29,9 +29,13 @@ public class DoctorService implements IDoctorService {
     }
 
     @Override
-    public Doctor doctorLogin(String d_id, String d_password)
+    public boolean doctorLogin(Doctor doctor)
     {
-        return null;
+
+        Doctor doctor1 = iDoctorDao.getDoctorById(doctor.getD_id());
+        if (doctor1 != null && doctor.getD_password().equals(doctor1.getD_password()))
+            return true;
+        return false;
     }
 
 

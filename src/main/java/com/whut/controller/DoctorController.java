@@ -3,6 +3,7 @@ package com.whut.controller;
 import com.whut.bean.Appointment;
 import com.whut.bean.Case;
 import com.whut.bean.Doctor;
+import com.whut.bean.Patient;
 import com.whut.service.IAppointmentService;
 import com.whut.service.ICaseService;
 import com.whut.service.IDoctorService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -55,7 +57,8 @@ public class DoctorController {
         return modelAndView;
     }
     @RequestMapping("/getDoctorById.do")//医生查看自己的信息
-    public ModelAndView getDoctorById(String d_id){
+    public ModelAndView getDoctorById(String d_id)
+    {
         Doctor oneDoctor = iDoctorService.getDoctorById(d_id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("doctor",oneDoctor);
@@ -63,7 +66,8 @@ public class DoctorController {
         return modelAndView;
     }
     @RequestMapping("/getAllAppointment.do")//医生查看所有预约信息
-    public ModelAndView getAllAppointment(){
+    public ModelAndView getAllAppointment()
+    {
         List<Appointment> all = iAppointmentService.getAllAppointment();//从service中获得预约数据
         ModelAndView modelAndView = new ModelAndView();//创建modelAndView对象
         modelAndView.addObject("appointments",all);//给modelAndView对象
@@ -72,15 +76,27 @@ public class DoctorController {
         return modelAndView;
     }
     @RequestMapping("doctorLogin.do")
-    public String doctorLogin(String d_id,String d_password){
-        Doctor doctor = iDoctorService.doctorLogin(d_id,d_password);
-        if(doctor != null){
-            return  "redirect:/doctor/getAllAppointment.do";//医生登录后得到预约信息界面
+    public ModelAndView patientLogin(HttpSession httpSession,Doctor doctor) {
+        ModelAndView mv = new ModelAndView();
+        if (doctor.getD_id() == null || doctor.getD_id().equals("")) {
+            mv.addObject("err", "id is empty");
+            //setViewName的时候不要jsp后缀
+            mv.setViewName("../doctor/doctor_login");
+        } else if (doctor.getD_password() == null || doctor.getD_password().equals("")) {
+            mv.addObject("err", "password is empty");
+            mv.setViewName("../doctor/doctor_login");
+        } else if (iDoctorService.doctorLogin(doctor) == false) {
+            mv.addObject("err", "id or password is wrong");
+            mv.setViewName("../doctor/doctor_login");
+        } else {
+            httpSession.setAttribute("currentDoctor", doctor);//登录成功记录医生id并跳转到医生主界面
+            mv.setViewName("../doctor/doctor_home");
         }
-        else {return "redirect:../doctorLogin.jsp";}//失败返回登录界面
+        return mv;
     }
     @RequestMapping("/updateAppointmentStatus.do")//医生更改预约状态信息
-    public String updateAppointmentStatus(Appointment appointment){
+    public String updateAppointmentStatus(Appointment appointment)
+    {
         iAppointmentService.updateAppointmentStatus(appointment);
         return "#";//返回预约未处理信息界面
     }

@@ -12,7 +12,7 @@ public interface IDoctorService
 
     public Doctor getDoctorById(String d_id);//通过id得到医生信息
     public boolean updateDoctorWithoutId(Doctor doctor);//医生更改自己的个人信息
-    public Doctor doctorLogin(String d_id,String d_password);
+    public boolean doctorLogin(Doctor doctor);
 
 
 }
