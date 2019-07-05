@@ -273,8 +273,7 @@ public class PatientController
         else {
             //根据id查找预约信息 未处理的
             //根据预约信息的id查找科室
-            List<Appointment> appointmentList = iAppointmentService.getUnprocessAppointmentByPId(patient.getP_id());
-            List<Department> departmentList = departmentService.getAllDepartment(); //科室
+            //一个人预约一次
 
 
             mv.setViewName("../patient/person_center");   //登陆过就可以跳转到个人中心

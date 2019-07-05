@@ -105,8 +105,5 @@ public class AppointmentService implements IAppointmentService
         }
     }
 
-    @Override
-    public List<Appointment> getUnprocessAppointmentByPId(String p_id) {
-        return iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
-    }
+
 }
