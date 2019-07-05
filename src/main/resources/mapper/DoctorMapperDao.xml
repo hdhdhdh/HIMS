@@ -2,32 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.IDoctorDao" >
-    <select id="getAllDoctor" resultType="doctor">
-        select * from tb_doctor
+    <select id="getAllDoctor" resultType="Doctor">
+       select * from tb_doctor
     </select>
-    <delete id="deleteDoctor">
+
+    <delete id="deleteDoctor" parameterType="String">
+
         delete from tb_doctor where d_id=#{d_id}
     </delete>
-    <insert id="addDoctor" parameterType="doctor">
-        insert into tb_doctor(d_id,t_id,d_title,d_gender,d_birthday,dp_id,d_password,d_name)
-        value (#{d_id},#{t_id},#{d_title},#{d_gender},#{d_birthday},#{dp_id},#{d_password},#{d_name})
+
+    <insert id="addDoctor" parameterType="Doctor">
+        insert into tb_doctor(d_id,t_id,d_title,d_gender,d_birthday,dp_id,d_password,d_name,d_description)
+        values (#{d_id},#{t_id},#{d_title},#{d_gender},#{d_birthday},#{dp_id},#{d_password},#{d_name},#{d_description})
     </insert>
-    <update id="updateDoctorWithoutId" parameterType="doctor">
+
+    <update id="updateDoctorWithoutId" parameterType="Doctor">
         update tb_doctor
         set t_id=#{t_id},d_title=#{d_title},d_gender=#{d_gender},d_birthday=#{d_birthday},dp_id=#{dp_id},d_password=#{d_password},d_name=#{d_name}
         where d_id=#{d_id}
     </update>
+
     <update id="updateDoctorWithId">
         update tb_doctor
         set d_id=#{newDoctor.d_id},t_id=#{newDoctor.t_id},d_title=#{newDoctor.d_title},d_gender=#{newDoctor.d_gender},d_birthday=#{newDoctor.d_birthday},dp_id=#{newDoctor.dp_id},d_password=#{newDoctor.d_password},d_name=#{newDoctor.d_name}
         where d_id=#{target}
     </update>
-    <select id="getDoctorById"  resultType="doctor">
+
+    <select id="getDoctorById" parameterType="String" resultType="Doctor">
         select *
         from tb_doctor
         where d_id=#{d_id}
     </select>
-    <select id="doctorLogin" resultType="doctor" >
+
+    <select id="queryDoctorById" parameterType="String" resultType="Doctor">
+        select *from tb_doctor where d_id=#{d_id}
+    </select>
+
+    <select id="doctorLogin" resultType="Doctor" >
         select * from tb_doctor where d_id =#{0} and d_password =#{1}
     </select>
 </mapper>
