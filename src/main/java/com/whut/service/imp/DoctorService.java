@@ -1,5 +1,6 @@
 package com.whut.service.imp;
 
+import com.github.pagehelper.PageHelper;
 import com.whut.bean.Case;
 import com.whut.bean.Doctor;
 import com.whut.dao.ICaseDao;
@@ -54,7 +55,14 @@ public class DoctorService implements IDoctorService {
      * @return
      */
     public List<Doctor> getAllDoctor(){
+
         return iDoctorDao.getAllDoctor();
+    }
+
+    @Override
+    public List<Doctor> findAllDoctor(int page, int size) {
+        PageHelper.startPage(page,size);
+        return iDoctorDao.findAllDoctor(page,size);
     }
 
 

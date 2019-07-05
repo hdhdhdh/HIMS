@@ -8,8 +8,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -76,7 +77,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${DoctorInfo}" var="Doctor">
+        <c:forEach items="${ps.list}" var="Doctor">
             <tr>
                 <td>${Doctor.d_id}</td>
                 <td>${Doctor.t_id}</td>
@@ -100,17 +101,15 @@
     <nav aria-label="Page navigation" >
         <ul class="pagination">
             <li>
-                <a href="#" aria-label="Previous">
+                <a href="${pageContext.request.contextPath}/DoctorMange/findAllDoctor.do?page=${ps.pageNum-1}&size=5" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
+            <c:forEach begin="1" end="${ps.pages}" var="pageNumber">
+                <li><a href="${pageContext.request.contextPath}/DoctorMange/findAllDoctor.do?page=${pageNumber}&size=5">${pageNumber}</a></li>
+            </c:forEach>
             <li>
-                <a href="#" aria-label="Next">
+                <a href="${pageContext.request.contextPath}/DoctorMange/findAllDoctor.do?page=${ps.pageNum+1}&size=5" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

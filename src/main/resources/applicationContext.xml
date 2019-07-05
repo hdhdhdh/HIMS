@@ -34,6 +34,19 @@
 
         <!--配置加载映射文件 UserMapper.xml-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>
+                            <prop key="resonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!-- 自动生成dao,mapper-->

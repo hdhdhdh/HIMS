@@ -41,4 +41,8 @@
     <select id="doctorLogin" resultType="Doctor" >
         select * from tb_doctor where d_id =#{0} and d_password =#{1}
     </select>
+
+    <select id="findAllDoctor" resultType="com.whut.bean.Doctor">
+       select * from tb_doctor
+    </select>
 </mapper>
