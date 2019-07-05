@@ -1,21 +1,30 @@
 package com.whut.controller;
 
-import com.whut.bean.Case;
-import com.whut.bean.Department;
-import com.whut.bean.Doctor;
-import com.whut.bean.Patient;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.deploy.net.HttpRequest;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.whut.bean.*;
 import com.whut.service.IAppointmentService;
 import com.whut.service.ICaseService;
 import com.whut.service.IPatientService;
 import com.whut.service.imp.DepartmentService;
 import com.whut.service.imp.DoctorService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.json.JsonObject;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -58,7 +67,7 @@ public class PatientController
             mv.setViewName("../patient/patient_login");
         }else
         {
-            httpSession.setAttribute("currentPatient",patient.getP_id());//登录成功记录病人id并跳转到病人主界面
+            httpSession.setAttribute("currentPatient",patient);//登录成功记录病人并跳转到病人主界面
             mv.setViewName("../patient/user_home");
         }
         return mv;
@@ -172,7 +181,7 @@ public class PatientController
      */
     @RequestMapping("/toAppointment.do")
     public ModelAndView toAppointment(HttpSession session) {
-        String p_id = (String) session.getAttribute("currentPatient"); //获取当前session中存的id
+        String p_id = ((Patient) session.getAttribute("currentPatient")).getP_id(); //获取当前session中存的patient
         ModelAndView mv = new ModelAndView();
         if (p_id == null || p_id.equals("")) {
             mv.setViewName("../patient/patient_login"); //通过id判断，如果没有登录就跳转到登录页面
@@ -183,30 +192,72 @@ public class PatientController
         return mv;
     }
 
-
-    @RequestMapping("/appointment.do")
-    public ModelAndView appointment(HttpSession httpSession, String dp_id, String date)
-    {
-        String p_id = (String)httpSession.getAttribute("currentPatient");
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("../patient/patient_login"); //如果没有登录过跳转到登录页面
-        if (p_id == null || p_id.equals(""))
-        {
-            mv.addObject("err","patient is empty");
-        }
-        else if (dp_id == null || dp_id.equals(""))
-        {
-            mv.addObject("err","department is empty");
-        }
-        else if(iAppointmentService.addAppointment(p_id,dp_id))
-        {
-            mv.addObject("err","appointment failed");
-        }else
-        {
-            mv.setViewName("patient_main");//预约成功
-        }
-        return mv;
+    /**
+     * 注入对象前的初始化方法
+     * SSM框架前后端string转date的lang异常及处理方法
+     * @param binder
+     */
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
+    @RequestMapping( value = "/appointment.do",produces = "application/json; charset=utf-8")
+    public  @ResponseBody String appointment(Appointment appointment,HttpSession session)
+    {
+        String p_id = ((Patient) session.getAttribute("currentPatient")).getP_id(); //获取当前session中存的patient
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+
+        appointment.setA_date(appointment.getA_date());
+        appointment.setP_id(p_id);
+        String flag = null;
+        if(iAppointmentService.addAppointment(appointment)){    //预约成功
+            flag = "预约成功";
+        }else { //预约失败
+            flag = "预约失败";
+        }
+        try {
+            json = objectMapper.writeValueAsString(flag);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+//        System.out.println("------------------------------------------");
+//        System.out.println(appointment.getDp_id());
+////        System.out.println(dp_id);
+//        System.out.println("------------------------------------------");
+//        System.out.println(appointment.getA_date());
+////        System.out.println(a_date);
+//        System.out.println("------------------------------------------");
+////        jsonObject.put("message","hello ajax");
+        return json;
+    }
+
+//    @RequestMapping("/appointment.do")
+//    public ModelAndView appointment(HttpSession httpSession, String dp_id, String date)
+//    {
+//        String p_id = (String)httpSession.getAttribute("currentPatient");
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("../patient/patient_login"); //如果没有登录过跳转到登录页面
+//        if (p_id == null || p_id.equals(""))
+//        {
+//            mv.addObject("err","patient is empty");
+//        }
+//        else if (dp_id == null || dp_id.equals(""))
+//        {
+//            mv.addObject("err","department is empty");
+//        }
+//        else if(iAppointmentService.addAppointment(p_id,dp_id))
+//        {
+//            mv.addObject("err","appointment failed");
+//        }else
+//        {
+//            mv.setViewName("patient_main");//预约成功
+//        }
+//        return mv;
+//    }
     @RequestMapping("/getAllPersonalInfo.do")
     public ModelAndView getAllPersonalInfo(HttpSession httpSession)
     {

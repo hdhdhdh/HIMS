@@ -2,7 +2,7 @@ package com.whut.enums;
 
 public enum AppointmentStatusEnum
 {
-    UNPROCESSED(1, "未处理"), PROCESSED(2, "已处理"),;
+    UNPROCESSED(0, "未处理"), PROCESSED(1, "已处理"),;
 
     private int status;
 
