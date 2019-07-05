@@ -11,6 +11,9 @@
     <select id="getAllMedicine" resultType="medicine">
         select * from tb_medicine where t_id=#{t_id}
     </select>
+    <select id="getMedicineByName" resultType="medicine">
+        select * from tb_medicine where m_name like %#{t_id}%
+    </select>
     <delete id="deleteMedicine">
         delete from tb_medicine where m_id=#{m_id}
     </delete>

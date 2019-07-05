@@ -15,12 +15,7 @@ public interface IDoctorDao {
     void updateDoctorWithId(@Param("newDoctor") Doctor newDoctor,  @Param("target") String target);//管理员更新医生信息
     Doctor getDoctorById(String d_id);//查找医生的id
     Doctor doctorLogin(String d_id,String d_password);
-
-
     public String updateDoctor(Doctor doctor);
-
     Doctor queryDoctorById(String id);
-
-
 
 }

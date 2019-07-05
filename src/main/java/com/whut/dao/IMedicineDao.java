@@ -1,6 +1,7 @@
 package com.whut.dao;
 
 import com.whut.bean.Medicine;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface IMedicineDao {
 
    // 药品更新
     public  void updateMedicine(Medicine medicine);
-
+    public List<Medicine> getMedicineByName(@Param("m_name")String m_name);
     // 查询药品,根据药品id来查询
    public Medicine getMedicineById(String id);
 

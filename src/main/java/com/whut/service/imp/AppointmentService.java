@@ -6,6 +6,7 @@ import com.whut.service.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -65,10 +66,10 @@ public class AppointmentService implements IAppointmentService
     }
 
     @Override
-    public boolean updateAppointmentStatus(Appointment appointment) {
+    public boolean updateAppointmentStatus(String d_id) {
         try
         {
-            iAppointmentDao.updateAppointmentStatus(appointment);
+            iAppointmentDao.updateAppointmentStatus(d_id);
             return true;
         }catch (Exception e)
         {
@@ -78,12 +79,28 @@ public class AppointmentService implements IAppointmentService
     }
 
     @Override
-    public List<Appointment> getUnprocessedAppointment(int a_status) {
-        return iAppointmentDao.getUnprocessedAppointment(a_status);
+    public List<Appointment> getAllUnprocessedAppointment(String d_id) {
+        return iAppointmentDao.getAllUnprocessedAppointment(d_id);
     }
 
+
     @Override
-    public List<Appointment> getProcessedAppointment(int a_status) {
-        return iAppointmentDao.getProcessedAppointment(a_status);
+    public List<Appointment> getProcessedAppointment(String d_id) {
+      return iAppointmentDao.getProcessedAppointment(d_id);
+    }
+    public List<Appointment> getUnprocessedAppointmentBeforTheDay(String d_id , Date day)
+    {
+        return iAppointmentDao.getUnprocessedAppointmentBeforTheDay(d_id,day);
+    }
+    public boolean checkDoctorPermission(String dp_id,String p_id)
+    {
+        Appointment appointment = iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
+        if (appointment != null && appointment.getDp_id().equals(dp_id))
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
     }
 }

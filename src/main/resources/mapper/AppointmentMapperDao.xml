@@ -8,6 +8,7 @@
     <select id="getUnprocessedAppointmentByUserId" parameterType="java.lang.String" resultType="appointment">
         select * from tb_appointment where p_id=#{p_id} and a_status = 0
     </select>
+
     <insert id="addAppointment" parameterType="appointment">
         insert into tb_appointment (p_id,dp_id,a_date,a_status) value (#{p_id},#{dp_id},#{a_date},0)
     </insert>
@@ -25,15 +26,18 @@
         set dp_id=#{dp_id},a_date=#{a_date},a_status=#{a_status}
         where p_id=#{p_id}
     </update>
-    <update id="updateAppointmentStatus" parameterType="appointment">
+    <update id="updateAppointmentStatus">
         update tb_appointment
         set a_status=1
         where a_id=#{a_id}
     </update>
-    <select id="getUnprocessedAppointment" parameterType="int" resultType="appointment">
-        select * from tb_appointment where a_status=1
+    <select id="getAllUnprocessedAppointment" resultType="appointment">
+        select * from tb_appointment where a_status= 0 and d_id = #{d_id}
     </select>
-    <select id="getProcessedAppointment" parameterType="int" resultType="appointment">
-        select * from tb_appointment where a_status=2
+    <select id="getProcessedAppointment"  resultType="appointment">
+        select * from tb_appointment where a_status=1 and d_id = #{d_id}
+    </select>
+    <select id="getUnprocessedAppointmentBeforTheDay"  resultType="appointment">
+        select * from tb_appointment where  a_status = 0 and #{day,jdbcType=DATE} >= a_data and d_id = #{d_id}
     </select>
 </mapper>
