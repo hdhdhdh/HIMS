@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.json.JsonObject;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,7 +75,63 @@ public class PatientController
         return mv;
     }
 
+    /**
+     * ajax登录  ---崔佳豪7-6
+     * @param session
+     * @param patient
+     * @return
+     */
+    @RequestMapping( value = "/patientAjaxLogin.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String patientAjaxLogin(HttpSession session,Patient patient){
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+        String message;
+        if(!iPatientService.patientLogin(patient)) {
+            message = "用户名或者密码错误";
+        } else {
+            session.setAttribute("currentPatient",patient); //登录成功记录病人
+            message = "success";
+        }
+        try {
+            json = objectMapper.writeValueAsString(message);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
 
+
+    /**
+     * ajax用户注册  ---崔佳豪7-6
+     * @param patient
+     * @param birthday 用户出生日期字符串
+     * @return
+     */
+    @RequestMapping( value = "/patientAjaxRegist.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String patientAjaxRegist(Patient patient,String birthday){
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+        String message;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            patient.setP_birthday(dateFormat.parse(birthday));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (iPatientService.addPatient(patient) == false) { //添加注册信息
+            message = "用户已经注册";
+        } else {
+            message = "success";
+        }
+        try {
+            json = objectMapper.writeValueAsString(message);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
 
 
 
