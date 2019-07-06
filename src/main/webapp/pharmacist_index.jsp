@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8" isELIgnored="false"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-
 <html>
 
 	<head>
@@ -82,7 +84,7 @@
 			<div class="site-mobile-shade"></div>
 		  <script type="text/javascript" src="plugins/layui/layui.js"></script>
 			<!--***-->
-			<script type="text/javascript" src="datas/nav_doctor.js"></script>
+			<script type="text/javascript" src="datas/nav_pharmacist.js"></script>
 			<script src="js/index.js"></script>
 			<script>
 				layui.use('layer', function() {

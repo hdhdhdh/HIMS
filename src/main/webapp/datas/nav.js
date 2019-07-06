@@ -5,15 +5,15 @@ var navs = [{
 	"children": [{
 		"title": "待处理",
 		"icon": "fa-table",
-		"href": "danganguanli.html"
+		"href": "danganguanli.jsp"
 	}, {
 		"title": "处方开药",
 		"icon": "fa-table",
-		"href": "shujudangan.html"
+		"href": "shujudangan.jsp"
 	}, {
 		"title": "已处理",
 		"icon": "fa-navicon",
-		"href": "icheck.html"
+		"href": "icheck.jsp"
 	}]
 }, {
 	"title": "药品管理",

@@ -31,5 +31,11 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <mvc:resources mapping="/doctor/js/**" location="/js"/>
+    <mvc:resources mapping="/doctor/images/**" location="/images"/>
+    <mvc:resources mapping="/doctor/css/**" location="/css"/>
+    <mvc:resources mapping="/doctor/datas/**" location="/datas"/>
+    <mvc:resources mapping="/doctor/fonts/**" location="/fonts"/>
+    <mvc:resources mapping="/doctor/plugins/**" location="/plugins"/>
     <mvc:annotation-driven  />
 </beans>

@@ -1,9 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="UTF-8">
-	<title>未处理预约</title>
+	<title>处方开药</title>
 	<!--弹出框-->
 	<style>
 		.black_overlay{
@@ -39,8 +43,8 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="css/begtable.css" />
+	<link rel="stylesheet" href="../plugins/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../css/begtable.css" />
 </head>
 
 <body>
@@ -73,7 +77,7 @@
 						<td class="info">描述描述描述描述</td>
 						<td class="warning"></a></td>
 						<td><Doc class="chen"></Doc></td>
-						<td><a href="writePrescription.html" class="layui-btn layui-btn-small" id="conform">开药</a>
+						<td><a href="../writePrescription.html" class="layui-btn layui-btn-small" id="conform">开药</a>
 					</tr>
 					</thead>
 				</table>
@@ -83,7 +87,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 <script>
 	layui.config({
 		base: 'js/'

@@ -1,18 +1,19 @@
 package com.whut.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whut.bean.*;
-import com.whut.dao.IPrescriptionDao;
 import com.whut.enums.CaseStatusEnum;
 import com.whut.service.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -28,6 +29,84 @@ public class DoctorController {
     IMedicineService iMedicineService;
     @Autowired
     IPrescriptionService iPrescriptionService;
+
+    /**
+     *  ajax登录      实现不同职责跳转不同，医生跳转，药剂师跳转  --崔佳豪
+     * @param session
+     * @param d_id
+     * @param d_password
+     * @return
+     */
+    @RequestMapping( value = "/doctorAjaxLogin.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String doctorAjaxLogin(HttpSession session,String d_id,String d_password){
+        ObjectMapper objectMapper = new ObjectMapper();
+        Doctor doctor = iDoctorService.doctorCheckLogin(d_id,d_password);   //查询到doctor
+        JSONObject json= new JSONObject();
+        if(doctor==null) {
+            json.put("message", "用户名或者密码错误");
+        } else {
+            session.setAttribute("currentDoctor",doctor); //登录成功记录病人
+            json.put("message", "success");
+            if(doctor.getT_id().equals("01")) {
+                json.put("type","doctor");
+            }else if(doctor.getT_id().equals("11")) {
+                json.put("type","pharmacist");
+            }
+
+        }
+//        System.out.println("----------------------------------------");
+//        System.out.println(json);
+//        System.out.println("-----------------------------------------------");
+        return json.toString();
+    }
+
+
+//    @RequestMapping("doctorLogin.do")
+//    public ModelAndView doctorLogin(HttpSession httpSession,Doctor doctor) {
+//        ModelAndView mv = new ModelAndView();
+//        if (doctor.getD_id() == null)
+//        {
+//            mv.addObject("err", "id is empty");//setViewName的时候不要jsp后缀
+//            mv.setViewName("../doctor/doctor_login");
+//        } else if (doctor.getD_password() == null || doctor.getD_password().equals(""))
+//        {
+//            mv.addObject("err", "password is empty");
+//            mv.setViewName("../doctor/doctor_login");
+//        } else if (iDoctorService.doctorLogin(doctor) == false)
+//        {
+//            mv.addObject("err", "id or password is wrong");
+//            mv.setViewName("../doctor/doctor_login");
+//        } else
+//        {
+//            httpSession.setAttribute("currentDoctor", doctor);//登录成功记录医生id并跳转到医生主界面
+//            mv.setViewName("../doctor/doctor_home");
+//        }
+//        return mv;
+//    }
+
+
+//    /**
+//     *  普通职工的登录跳转
+//     * @param id            提交的id
+//     * @param password      提交的password
+//     * @return
+//     */
+//    @RequestMapping("/doctorLogin.do")
+//    public ModelAndView doctorLogin(HttpSession session,String id,String password){
+//        ModelAndView mv = new ModelAndView();
+//        Doctor doctor = iDoctorService.doctorCheckLogin(id,password);
+//        if(doctor==null) {
+//            mv.addObject("err","用户名或者密码错误");
+//            mv.setViewName("../workerLogin");
+//        }else {
+//            session.setAttribute("currentDoctor",doctor);
+//            mv.setViewName("../worker_index");
+//        }
+//        return mv;
+//    }
+
+
     @RequestMapping("/updateDoctorInfo.do")//医生更改自己个人信息
     public String updateDoctorInfo(Doctor doctor)
     {
@@ -85,28 +164,7 @@ public class DoctorController {
         }
         return mv;
     }
-    @RequestMapping("doctorLogin.do")
-    public ModelAndView doctorLogin(HttpSession httpSession,Doctor doctor) {
-        ModelAndView mv = new ModelAndView();
-        if (doctor.getD_id() == null)
-        {
-            mv.addObject("err", "id is empty");//setViewName的时候不要jsp后缀
-            mv.setViewName("../doctor/doctor_login");
-        } else if (doctor.getD_password() == null || doctor.getD_password().equals(""))
-        {
-            mv.addObject("err", "password is empty");
-            mv.setViewName("../doctor/doctor_login");
-        } else if (iDoctorService.doctorLogin(doctor) == false)
-        {
-            mv.addObject("err", "id or password is wrong");
-            mv.setViewName("../doctor/doctor_login");
-        } else
-        {
-            httpSession.setAttribute("currentDoctor", doctor);//登录成功记录医生id并跳转到医生主界面
-            mv.setViewName("../doctor/doctor_home");
-        }
-        return mv;
-    }
+//
 //    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
 //    {
 //
