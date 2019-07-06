@@ -8,6 +8,14 @@
 		<link rel="stylesheet" href="css/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 		<link rel="stylesheet" href="css/table.css" />
+		<style>
+			.page-box {
+				display: inline-block;
+				margin: 6px 0 0 0;
+				vertical-align: middle;
+				line-height: 24px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -30,12 +38,12 @@
 						<thead>
 							<tr>
 								<th>医生工号</th>
-								<th>医生职称</th>
+								<th>医生姓名</th>
 								<th>医生性别</th>
 								<th>出生年月</th>
+								<th>类型编号</th>
+								<th>职称</th>
 								<th>科室编号</th>
-								<th>登录密码</th>
-								<th>医生姓名</th>
 								<th>医生信息变更</th>
 							</tr>
 						</thead>
@@ -46,35 +54,93 @@
 			</fieldset>
 			<div class="admin-table-page">
 				<div id="paged" class="page">
+					<div class="page-box" id="page_box">
+
+					</div>
 				</div>
 			</div>
 		</div>
 		<!--模板-->
-		<script type="text/html" id="tpl">
-			{{# layui.each(d.list, function(index, item){ }}
-			<tr>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>
-					<a href="editDoctor.html" class="layui-btn layui-btn-mini">编辑</a>
-					<a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-				</td>
-			</tr>
-			{{# }); }}
-		</script>
+		<!--<script type="text/html" id="tpl">-->
+			<!--{{# layui.each(d.list, function(index, item){ }}-->
+			<!--<tr>-->
+				<!--<td>1</td>-->
+				<!--<td>1</td>-->
+				<!--<td>1</td>-->
+				<!--<td>1</td>-->
+				<!--<td>1</td>-->
+				<!--<td>1</td>-->
+				<!--<td>1</td>-->
+				<!--<td>-->
+					<!--<a href="editDoctor.html" class="layui-btn layui-btn-mini">编辑</a>-->
+					<!--<a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<!--{{# }); }}-->
+		<!--</script>-->
 		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+		<script src="js/jquery-2.2.1.min.js"></script>
 		<script>
+			//-- 崔佳豪 --
+			$(document).ready(function () {	//页面加载完毕请求医生列表
+                getDoctorList();
+            });
+            /**
+			 * 分页查询
+             * @param page	当前页
+             * @param size	每页的数量
+             */
+			function getDoctorList(page,size) {
+				page=page||1;
+                size=size||5;	//设置默认第一页，每页5条记录
+                $.ajax({
+                    url : "/Administrator/ajaxGetAllDoctor.do",
+                    type : "POST",
+                    data : {
+                        page:   page,
+                        ad_password:  size
+                    },
+                    dataType : "json",
+                    //处理后端返回的数据
+                    success : function(result) {
+						var doctorList = result.doctorList;
+						var pageNum = result.pageNumber;
+						var pages = result.pages;
+						//处理doctorList
+						$.each(doctorList,function (index, item) {
+							$("#content").append("<tr>" +
+                                "<td>" + doctorList[index].d_id +"</td>\n" +
+                                "<td>" + doctorList[index].d_name +"</td>" +
+                                "<td>" + doctorList[index].d_gender +"</td>" +
+                                "<td>" + doctorList[index].d_birthday +"</td>" +
+                                "<td>" + doctorList[index].t_id +"</td>" +
+                                "<td>" + doctorList[index].d_title +"</td>" +
+                                "<td>" + doctorList[index].dp_id +"</td>" +
+                                "<td>" +
+                                "<a href=\"editDoctor.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
+                                "<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +
+                                "</td>" +
+                                "</tr>");
+                        })
+                    },
+                    //处理失败返回的数据
+                    error : function(result) {
+                        window.location.href="err.html";
+                    }
+                });
+			}
+
+
+
+
+
+
+
 			layui.config({
 				base: 'js/'
 			});
-
 			layui.use(['paging', 'form'], function() {
-				var $ = layui.jquery,
+				var $$ = layui.jquery,
 					paging = layui.paging(),
 					layerTips = parent.layer === undefined ? layui.layer : parent.layer, //获取父窗口的layer对象
 					layer = layui.layer, //获取当前窗口的layer对象
@@ -104,8 +170,8 @@
 						form.on('checkbox(allselector)', function(data) {
 							var elem = data.elem;
 
-							$('#content').children('tr').each(function() {
-								var $that = $(this);
+							$$('#content').children('tr').each(function() {
+								var $that = $$(this);
 								//全选或反选
 								$that.children('td').eq(0).children('input[type=checkbox]')[0].checked = elem.checked;
 								form.render('checkbox');
@@ -113,10 +179,10 @@
 						});
 
 						//绑定所有编辑按钮事件						
-						$('#content').children('tr').each(function() {
-							var $that = $(this);
+						$$('#content').children('tr').each(function() {
+							var $that = $$(this);
 							$that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
-								layer.msg($(this).data('name'));
+								layer.msg($$(this).data('name'));
 							});
 
 						});
@@ -124,10 +190,10 @@
 					},
 				});
 				//获取所有选择的列
-				$('#getSelected').on('click', function() {
+				$$('#getSelected').on('click', function() {
 					var names = '';
-					$('#content').children('tr').each(function() {
-						var $that = $(this);
+					$$('#content').children('tr').each(function() {
+						var $that = $$(this);
 						var $cbx = $that.children('td').eq(0).children('input[type=checkbox]')[0].checked;
 						if($cbx) {
 							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('name');
@@ -137,16 +203,16 @@
 					layer.msg('你选择的名称有：' + names);
 				});
 
-				$('#search').on('click', function() {
+				$$('#search').on('click', function() {
 					parent.layer.alert('你点击了搜索按钮')
 				});
 
 				var addBoxIndex = -1;
-				$('#add').on('click', function() {
+				$$('#add').on('click', function() {
 					if(addBoxIndex !== -1)
 						return;
 					//本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
-					$.get('temp/edit-form.html', null, function(form) {
+					$$.get('temp/edit-form.html', null, function(form) {
 						addBoxIndex = layer.open({
 							type: 1,
 							title: '添加表单',
@@ -159,12 +225,12 @@
 							maxmin: true,
 							yes: function(index) {
 								//触发表单的提交事件
-								$('form.layui-form').find('button[lay-filter=edit]').click();
+								$$('form.layui-form').find('button[lay-filter=edit]').click();
 							},
 							full: function(elem) {
 								var win = window.top === window.self ? window : parent.window;
-								$(win).on('resize', function() {
-									var $this = $(this);
+								$$(win).on('resize', function() {
+									var $this = $$(this);
 									elem.width($this.width()).height($this.height()).css({
 										top: 0,
 										left: 0
@@ -206,10 +272,10 @@
 					});
 				});
 
-				$('#import').on('click', function() {
+				$$('#import').on('click', function() {
 					var that = this;
 					var index = layer.tips('只想提示地精准些', that, { tips: [1, 'white'] });
-					$('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
+					$$('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
 				});
 			});
 		</script>

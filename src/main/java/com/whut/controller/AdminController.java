@@ -4,10 +4,12 @@ import com.github.pagehelper.PageInfo;
 import com.whut.bean.Administrators;
 import com.whut.bean.Department;
 import com.whut.bean.Doctor;
+import com.whut.enums.GenderEnum;
 import com.whut.service.IAdministratorsSrevices;
 import com.whut.service.IDepartmentService;
 import com.whut.service.IDoctorService;
 import com.whut.service.imp.DoctorService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -52,6 +54,13 @@ public class AdminController {
     }
     */
 
+    /**
+     *  管理员登录   ---崔佳豪
+     * @param session
+     * @param ad_id             登录id
+     * @param ad_password       登录password
+     * @return
+     */
     @RequestMapping( value = "/administratorAjaxLogin.do",produces = "application/json; charset=utf-8")
     @ResponseBody
     public String administratorAjaxLogin(HttpSession session,String ad_id,String ad_password){
@@ -65,6 +74,56 @@ public class AdminController {
         }
         return json.toString();
     }
+
+    /**
+     * ajax查询医生所有信息--带有分页   ---崔佳豪
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping( value = "/ajaxGetAllDoctor.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  getAllDoctor(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+        List<Doctor> all = docService.getAllDoctor(page, size);
+        PageInfo pageInfo = new PageInfo(all);
+        int pageNum = pageInfo.getPageNum();    //获取当前分页页号
+        int pages = pageInfo.getPages();        //获取总的页数
+
+        JSONArray array = new JSONArray();
+        List<Doctor> list = pageInfo.getList(); //得到分页的结果
+        for (Doctor doctortemp:   list ) {
+            JSONObject jsonItem = new JSONObject();
+            jsonItem.put("d_id",doctortemp.getD_id());                  //doctor的 id
+            jsonItem.put("d_name",doctortemp.getD_name());              //doctor的姓名
+            if(1==doctortemp.getD_gender()){                            //doctor的性别
+                jsonItem.put("d_gender", "男");
+            } else if(2==doctortemp.getD_gender()){
+                jsonItem.put("d_gender", "女");
+            }else {
+                jsonItem.put("d_gender", doctortemp.getD_gender());
+            }
+            /*日期需要转成字符串*/
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String dateString = formatter.format(doctortemp.getD_birthday());
+            jsonItem.put("d_birthday",dateString);                      //doctor的生日
+
+            jsonItem.put("t_id",doctortemp.getT_id());                  //doctor的类型id
+            jsonItem.put("d_title",doctortemp.getD_title());            //doctor的职称
+            jsonItem.put("dp_id",doctortemp.getDp_id());                //doctor的科室id
+
+            array.put(jsonItem);    //将一个医生信息的json对象加入到array中
+        }
+        JSONObject json = new JSONObject();
+        json.put("doctorList",array);   //将医生的信息列表加入到json
+        json.put("pageNum",pageNum);    //将当前页号传入到json
+        json.put("pages",pages);        //将总的页数传入到json
+
+        System.out.println("-----------------------------------------");
+        System.out.println(json.toString());
+        System.out.println("------------------------------------------");
+        return json.toString();
+    }
+
 
 
 
@@ -116,17 +175,7 @@ public class AdminController {
 
     // 分页处理
 
-    //do是请求说明
-    @RequestMapping("/getAllDoctor.do")
-    public ModelAndView getAllDoctor(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-        List<Doctor> all = docService.getAllDoctor(page, size);
-        PageInfo pageInfo = new PageInfo(all);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("ps", pageInfo);
-        mv.setViewName("DoctorMange");
-        return mv;
 
-    }
 
 
     /*
