@@ -11,4 +11,5 @@ public interface IAdministratorsSrevices
     public boolean addAdministrators(Administrators administrators);
     public boolean updateAdministrators(Administrators administrators);
     public boolean deleteAdministrators(String pr_id);
+    public Administrators administratorsCheckLogin(String d_id,String d_password);
 }

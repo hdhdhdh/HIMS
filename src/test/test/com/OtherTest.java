@@ -22,7 +22,7 @@ public class OtherTest extends BaseTest
         Date d = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currdate = format.format(d);
-        System.out.println(d.toString());
+        System.out.println(d.toString() );
 
         Calendar ca = Calendar.getInstance();
         ca.add(Calendar.DATE, 1);// num为增加的天数，可以改变的

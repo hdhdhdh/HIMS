@@ -3,6 +3,7 @@ package com.whut.service;
 import com.whut.bean.Case;
 import com.whut.bean.Doctor;
 import com.whut.bean.Doctor;
+import com.whut.bean.Patient;
 
 import javax.ws.rs.GET;
 import java.util.List;
@@ -15,7 +16,7 @@ public interface IDoctorService
     List<Doctor> getAllDoctor(int page,int size);
     // 删除医生
     public void deleteDoctor(String id);
-
+    public Doctor doctorCheckLogin(String d_id,String d_password);
     // 添加医生
     public String addDoctor(Doctor doctor);
 

@@ -44,6 +44,15 @@ public class PatientService implements IPatientService
     }
 
     @Override
+    public Patient patientCheckLogin(String p_id, String p_password) //返回对象的登录
+    {
+        Patient patient1 = iPatientDao.getPatientById(p_id);
+        if(patient1 == null || patient1.getP_password().equals(p_password) == false)
+            return null;
+        return patient1;
+    }
+
+    @Override
     public List<Patient> getAllPatient() {
         return null;
     }

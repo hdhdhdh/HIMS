@@ -44,6 +44,14 @@ public class DoctorService implements IDoctorService {
         iDoctorDao.deleteDoctor(id);
     }
 
+    @Override
+    public Doctor doctorCheckLogin(String d_id, String d_password) {
+        Doctor doctor1 = iDoctorDao.getDoctorById(d_id);
+        if(doctor1 == null || doctor1.getD_password().equals(d_password) == false)
+            return null;
+        return doctor1;
+    }
+
     public Doctor getDoctorById(String d_id)
     {
         return iDoctorDao.getDoctorById(d_id);

@@ -12,7 +12,7 @@ public interface IPatientService
 {
     public boolean patientLogin(Patient patient);
     public boolean addPatient(Patient patient);
-
+    public Patient patientCheckLogin(String p_id,String p_password);
     public List<Patient> getAllPatient();
     public Patient getPatientById(String p_id);
     public boolean updatePatient(Patient patient);
