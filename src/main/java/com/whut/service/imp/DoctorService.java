@@ -59,24 +59,17 @@ public class DoctorService implements IDoctorService {
         return iDoctorDao.getAllDoctor();
     }
 
+
     @Override
-    public List<Doctor> findAllDoctor(int page, int size) {
+    public List<Doctor> getAllDoctor(int page, int size) {
         PageHelper.startPage(page,size);
         return iDoctorDao.findAllDoctor(page,size);
     }
 
 
     /*
-
     @Autowired
     public IDoctorDao DocService;
-    */
-    /*
-
-    @Override
-    public void deleteDoctor(String id) {
-        DocService.deleteDoctor(id);
-    }
     */
 
     @Override
