@@ -1,16 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: luodi
-  Date: 2019/7/3
-  Time: 17:02
+  Date: 2019/7/5
+  Time: 16:00
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,9 +18,7 @@
     <link rel="stylesheet" href="../css/doc-common.css">
     <link rel="stylesheet" href="../css/hadAppointment.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/search.css">
     <style>
-
         body {
             background: #cccccc;
         }
@@ -42,24 +38,21 @@
             <li><a href="javascript:;"><i class="icon icon-clock"></i><span>药品管理</span></a></li>
             <li class="darkerlishadow"><a href="drugList.html"><i class="icon icon-clock"></i><span>分类列表</span></a></li>
             <li class="darkerlishadowdown"><a href="prescription.html"><i class="icon icon-clock"></i><span>处方开药</span></a></li>
-            <li class="darkerlishadowdown activeli"><a href="javascript:;"><i class="icon icon-banknote"></i><span>医生管理</span></a></li>
-            <li class="darkerlishadowdown activeli"><a href="${pageContext.request.contextPath}/togetAllDepartment.do">
-                <i class="icon icon-banknote"></i><span>科室管理</span></a></li>
-
+            <li class="darkerlishadowdown "><a href="javascript:;"><i class="icon icon-banknote"></i><span>医生管理</span></a></li>
+            <li class="darkerlishadowdown activeli"><a  href="${pageContext.request.contextPath}/todepartmentManage.do"><i class="icon icon-banknote"></i><span>科室管理</span></a></li>
             <li><a href="javascript:;"><i class="icon icon-banknote"></i><span>个人中心</span></a></li>
             <li><a href="javascript:;"><i></i><span>退出</span></a></li>
         </ul>
     </div>
 </nab>
 <div class="card">
-    <p class="card-title">管理医生
+    <p class="card-title">科室管理
         <!--
         <input type="text" class="form-control" placeholder="Search">
         <button type="submit" class="btn btn-default" style="float:right">搜索</button>
         -->
 
-
-        <a type="button"  class="btn btn-primary"  href="${pageContext.request.contextPath}/DoctorMange/toAddDoctor.do">添加医生</a>
+        <a type="button"  class="btn btn-primary"  href="${pageContext.request.contextPath}/DoctorMange/toAddDoctor.do">添加科室</a>
     </p>
 
 
@@ -68,29 +61,21 @@
         <thead>
         <tr>
             <!--   <th>#</th>  -->
-            <th>医生工号</th>
-            <th>医生ID</th>
-            <th>医生职称</th>
-            <th>医生性别</th>
-            <th>出生年月</th>
             <th>科室编号</th>
-            <th>登录密码</th>
-            <th>医生姓名</th>
-            <th>医生信息变更</th>
+            <th>科室名称</th>
+            <th>科室简介</th>
+            <th>科室信息变更</th>
+
 
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${ps.list}" var="Doctor">
+        <c:forEach items="${DepartmentInfo}" var="Department">
             <tr>
-                <td>${Doctor.d_id}</td>
-                <td>${Doctor.t_id}</td>
-                <td>${Doctor.d_title}</td>
-                <td>${Doctor.d_gender}</td>
-                <td>${Doctor.d_birthday}</td>
-                <td>${Doctor.dp_id}</td>
-                <td>${Doctor.d_password}</td>
-                <td>${Doctor.d_name}</td>
+                <td>${Department.dp_id}</td>
+                <td>${Department.dp_name}</td>
+                <td>${Department.dp_description}</td>
+
 
                 <td>
                     <!--注意类型不一致的问题-->
@@ -101,26 +86,28 @@
         </c:forEach>
         </tbody>
 
-    <nav aria-label="Page navigation" >
-        <ul class="pagination">
-            <li>
-                <a href="${pageContext.request.contextPath}/DoctorMange/getAllDoctor.do?page=${ps.pageNum-1}&size=5" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <c:forEach begin="1" end="${ps.pages}" var="pageNumber">
-                <li><a href="${pageContext.request.contextPath}/DoctorMange/getAllDoctor.do?page=${pageNumber}&size=5">${pageNumber}</a></li>
-            </c:forEach>
-            <li>
-                <a href="${pageContext.request.contextPath}/DoctorMange/getAllDoctor.do?page=${ps.pageNum+1}&size=5" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
+        <nav aria-label="Page navigation" >
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </table>
 </div>
 <script src="../js/jquery-2.2.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 </body>
-</html>
