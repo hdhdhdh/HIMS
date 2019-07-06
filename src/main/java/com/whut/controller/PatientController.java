@@ -87,23 +87,23 @@ public class PatientController
         {
             mv.addObject("err","id is empty");
         }
-        if (patient.getP_name() == null || patient.getP_name().equals(""))
+        else if (patient.getP_name() == null || patient.getP_name().equals(""))
         {
             mv.addObject("err","name is empty");
         }
-        if (patient.getP_gender() == null || patient.getP_gender().equals(""))
+        else if (patient.getP_gender() == null || patient.getP_gender().equals(""))
         {
             mv.addObject("err","gender is empty");
         }
-        if (patient.getP_birthday() == null  || patient.getP_birthday().equals(""))
+        else if (patient.getP_birthday() == null  || patient.getP_birthday().equals(""))
         {
             mv.addObject("err","birthday is empty");
         }
-        if (patient.getP_password() == null || patient.getP_password().equals(""))
+        else if (patient.getP_password() == null || patient.getP_password().equals(""))
         {
             mv.addObject("err","password is empty");
         }
-        if (iPatientService.addPatient(patient) == false)
+        else if (iPatientService.addPatient(patient) == false)
         {
             mv.addObject("err","has already registered");
         }else

@@ -3,8 +3,10 @@ package com.whut.dao;
 
 import com.whut.bean.Case;
 import com.whut.bean.Doctor;
+import org.apache.ibatis.annotations.Param;
 
 import javax.swing.*;
+import javax.xml.ws.soap.Addressing;
 import java.util.List;
 
 public interface ICaseDao {
@@ -14,5 +16,6 @@ public interface ICaseDao {
     public void updateCase(Case icase);//更新病例
     public void deleteCase(int c_id);//删除病例
     public List<Case> getCaseByPatientId(String p_id);//通过病人id得到病例
-
+    public void addPrescription(@Param(" c_id") int  c_id, @Param("prescription") String prescription);
+    public List<Case> getUnprescribedCase(@Param("d_id") String d_id);
 }

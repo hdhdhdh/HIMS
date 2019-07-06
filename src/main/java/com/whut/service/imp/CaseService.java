@@ -70,4 +70,20 @@ public class CaseService implements ICaseService {
             return false;
         }
     }
+    public boolean addPrescriptionToCase(int c_id,String prescription)
+    {
+        try {
+            iCaseDao.addPrescription(c_id,prescription);
+            return true;
+        }catch (Exception e)
+        {
+            return false;
+        }
+    }
+    public List<Case> getUnprescribedCase(String d_id)
+    {
+        return iCaseDao.getUnprescribedCase(d_id);
+    }
+
+
 }

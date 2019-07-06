@@ -5,6 +5,9 @@
     <select id="getAllCase" resultType="case">
         select* from tb_case;
     </select>
+    <select id="getAllCase" resultType="case">
+        select* from tb_case where d_id = #{d_id} and pr_description = null;
+    </select>
     <select id="getCaseById" parameterType="int" resultType="case">
         select* from tb_case where p_id = #{p_id};
     </select>
@@ -20,6 +23,10 @@
         insert into tb_case(d_id,p_id,c_description,c_fee,c_status,c_date)
                   value (#{d_id},#{p_id},#{c_description},#{c_fee},#{c_status},#{c_date})
     </insert>
-
+    <update id="addPrescription" >
+        update tb_case
+        set pr_description = #{prescription};
+        where c_id=#{c_id}
+    </update>
 </mapper>
         <!--这个是mapper模板 -->

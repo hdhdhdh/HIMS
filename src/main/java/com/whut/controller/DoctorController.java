@@ -38,7 +38,7 @@ public class DoctorController {
 
         ModelAndView mv = new ModelAndView();
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null || doctor.getD_id().equals(""))
+        if (doctor.getD_id() == null)
         {
             mv.setViewName("../doctor/doctor_login");
         }
@@ -64,7 +64,7 @@ public class DoctorController {
     {
         ModelAndView mv = new ModelAndView();
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null || doctor.getD_id().equals(""))
+        if (doctor.getD_id() == null)
         {
             mv.setViewName("../doctor/doctor_login");
         }
@@ -81,29 +81,10 @@ public class DoctorController {
         }
         return mv;
     }
-//    @RequestMapping("/getDoctorById.do")//医生查看自己的信息
-//    public ModelAndView getDoctorById(String d_id)
-//    {
-//        Doctor oneDoctor = iDoctorService.getDoctorById(d_id);
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("doctor",oneDoctor);
-//        modelAndView.setViewName("#");//显示在展示该医生信息的页面
-//        return modelAndView;
-//    }
-//    @RequestMapping("/getAllAppointment.do")//医生查看所有预约信息
-//    public ModelAndView getAllAppointment()
-//    {
-//        List<Appointment> all = iAppointmentService.getAllAppointment();//从service中获得预约数据
-//        ModelAndView modelAndView = new ModelAndView();//创建modelAndView对象
-//        modelAndView.addObject("appointments",all);//给modelAndView对象
-//        //添加数值，前面的是设置的名字，后面是对应的
-//        modelAndView.setViewName("#");//显示所有预约信息的界面
-//        return modelAndView;
-//    }
     @RequestMapping("doctorLogin.do")
     public ModelAndView doctorLogin(HttpSession httpSession,Doctor doctor) {
         ModelAndView mv = new ModelAndView();
-        if (doctor.getD_id() == null || doctor.getD_id().equals(""))
+        if (doctor.getD_id() == null)
         {
             mv.addObject("err", "id is empty");//setViewName的时候不要jsp后缀
             mv.setViewName("../doctor/doctor_login");
@@ -128,7 +109,7 @@ public class DoctorController {
 
         ModelAndView mv = new ModelAndView();
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null || doctor.getD_id().equals(""))
+        if (doctor.getD_id() == null)
         {
             mv.setViewName("../doctor/doctor_login");
         }
@@ -140,7 +121,29 @@ public class DoctorController {
         else
         {
             mv.addObject("err","Permission denied");
-            mv.setViewName("doctor_home");
+            mv.setViewName("../doctor/doctor_home");
+        }
+        return mv;
+    }
+    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
+    {
+
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        if (doctor.getD_id() == null)
+        {
+            mv.setViewName("../doctor/doctor_login");
+        }
+        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),mycase.getC_id()) == false) //检查是否有权限
+        {
+
+            mv.addObject("err","Permission denied");
+            mv.setViewName("../doctor/doctor_home");
+        }
+        else if(iCaseService.addPrescriptionToCase(mycase.getC_id(),prescription) == false)
+        {
+            mv.setViewName("../doctor/doctor_home");
+            mv.addObject("err","add prescription failed");
         }
         return mv;
     }
@@ -156,6 +159,23 @@ public class DoctorController {
         else
         {
             iAppointmentService.getAUnprocessedAppointmentList(doctor.getDp_id(),type);
+            mv.setViewName("../doctor/doctor_home");
+        }
+        return mv;
+    }
+    public ModelAndView getUnprescribedCase(HttpSession httpSession)
+    {
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");;
+        if (doctor == null)
+        {
+            mv.setViewName("../doctor/doctor_login"); //未登录
+        }
+        else
+        {
+            List<Case> unprescribedCase = iCaseService.getUnprescribedCase(doctor.getD_id());
+            mv.addObject("unprescribedCase",unprescribedCase);
+            mv.setViewName("getUnprescribedCase");
         }
         return mv;
     }
