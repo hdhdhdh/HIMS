@@ -77,7 +77,7 @@
 						<td class="info">描述描述描述描述</td>
 						<td class="warning"></a></td>
 						<td><Doc class="chen"></Doc></td>
-						<td><a href="../writePrescription.html" class="layui-btn layui-btn-small" id="conform">开药</a>
+						<td><a href="../writePrescription.jsp" class="layui-btn layui-btn-small" id="conform">开药</a>
 					</tr>
 					</thead>
 				</table>

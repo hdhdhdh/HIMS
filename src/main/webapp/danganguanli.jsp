@@ -84,8 +84,8 @@
 									<td>骨科</td>
 									<td class="info">待处理</td>
 									<td>
-										<a href="historyCase.html"><button class="layui-btn layui-btn-small">历史病例</button></a>
-										<a href="acceptCase.html"><button class="layui-btn layui-btn-small">受理</button></a>
+										<a href="historyCase.jsp"><button class="layui-btn layui-btn-small">历史病例</button></a>
+										<a href="acceptCase.jsp"><button class="layui-btn layui-btn-small">受理</button></a>
 									</td>
 
 								</tr>
