@@ -25,7 +25,7 @@
 				<div class="layui-main">
 					<div class="admin-login-box">
 						<div style="overflow: hidden; background: #0C0C0C;margin-left: -20px;">
-							<img src="images/logo.png" width="65" height="65">
+							<img src="images/logo.png" width="60" height="60">
 							<span style="color: #ffffff;font-size: 18px;">PHARMACY</span>
 						</div>
 						<div class="admin-side-toggle">

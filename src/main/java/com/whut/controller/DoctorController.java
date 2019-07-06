@@ -40,7 +40,6 @@ public class DoctorController {
     @RequestMapping( value = "/doctorAjaxLogin.do",produces = "application/json; charset=utf-8")
     @ResponseBody
     public String doctorAjaxLogin(HttpSession session,String d_id,String d_password){
-        ObjectMapper objectMapper = new ObjectMapper();
         Doctor doctor = iDoctorService.doctorCheckLogin(d_id,d_password);   //查询到doctor
         JSONObject json= new JSONObject();
         if(doctor==null) {

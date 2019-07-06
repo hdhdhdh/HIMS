@@ -84,7 +84,7 @@
 			<div class="site-mobile-shade"></div>
 		  <script type="text/javascript" src="plugins/layui/layui.js"></script>
 			<!--***-->
-			<script type="text/javascript" src="datas/nav_doctor.js"></script>
+			<script type="text/javascript" src="datas/nav_admin.js"></script>
 			<script src="js/index.js"></script>
 			<script>
 				layui.use('layer', function() {

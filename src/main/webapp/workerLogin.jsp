@@ -83,11 +83,9 @@
         }else if(loing_password==null || loing_password==""){
             alert("密码不能为空");
         }else if(type==1){      // type=1 普通职工登录
-
             <%--$("#login-form").attr("action","${pageContext.request.contextPath}/doctor/doctorLogin.do");--%>
             <%--$("#login-form").submit();--%>
             // alert(login_id +"   " + loing_password + "    " + type);
-            // alert("普通职工登录");
             $.ajax({
                 url : "${pageContext.request.contextPath}/doctor/doctorAjaxLogin.do",
                 type : "POST",
@@ -120,6 +118,30 @@
             // alert("管理员登录");
             // $("#login-form").attr("action","#");
             <%--$("#login-form").attr("action","${pageContext.request.contextPath}/doctor/doctorLogin.do");--%>
+            $.ajax({
+                url : "${pageContext.request.contextPath}/Administrator/administratorAjaxLogin.do",
+                type : "POST",
+                data : {
+                    ad_id:   login_id,
+                    ad_password:  loing_password
+                },
+                dataType : "json",
+                //处理后端返回的数据
+                success : function(result) {
+                    if (result != null && result != "") {
+                        if(result.message=="success") { //登录成功  跳转到主页面
+                            window.location.href="admin_index.jsp";
+                        }else {
+                            alert("用户名或者密码错误");
+                        }
+                    }
+                    // alert("接受到的数据是：" + result.message+"  " + result.type);
+                },
+                //处理失败返回的数据
+                error : function(result) {
+                    window.location.href="err.html";
+                }
+            });
         }
     });
 </script>

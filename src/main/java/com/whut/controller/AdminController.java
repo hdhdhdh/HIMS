@@ -1,11 +1,14 @@
 package com.whut.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.whut.bean.Administrators;
 import com.whut.bean.Department;
 import com.whut.bean.Doctor;
+import com.whut.service.IAdministratorsSrevices;
 import com.whut.service.IDepartmentService;
 import com.whut.service.IDoctorService;
 import com.whut.service.imp.DoctorService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.json.JsonObject;
 import javax.servlet.http.HttpSession;
 import java.text.AttributedString;
 import java.text.SimpleDateFormat;
@@ -23,11 +28,13 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/DoctorMange")
+@RequestMapping("/Administrator")
 public class AdminController {
 
     @Autowired
     public IDoctorService docService;
+    @Autowired
+    IAdministratorsSrevices administratorsSrevices;
 
 
     private IDepartmentService iDepartmentService;
@@ -44,6 +51,21 @@ public class AdminController {
         return mv;
     }
     */
+
+    @RequestMapping( value = "/administratorAjaxLogin.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String administratorAjaxLogin(HttpSession session,String ad_id,String ad_password){
+        Administrators administrator = administratorsSrevices.administratorsCheckLogin(ad_id,ad_password);
+        JSONObject json = new JSONObject();
+        if(null == administrator) {
+            json.put("message","fail");
+        }else {
+            session.setAttribute("currentAdministrator",administrator);     //登录成功，保存administrator到session
+            json.put("message","success");
+        }
+        return json.toString();
+    }
+
 
 
     // 删除医生
