@@ -43,8 +43,7 @@
         <div class="link-box link-box2">
             <img src="images/icon_worker.png" alt="">
             <p class="link-title">员工入口</p>
-            <a href="${pageContext.request.contextPath}/DoctorMange/getAllDoctor.do">跳转医生</a>
-            <a class="link-btn" href="woker_index.html">点击进入</a>
+            <a class="link-btn" href="workerLogin.jsp">点击进入</a>
         </div>
     </div>
     <!--<div class="wrap wrap2">-->
