@@ -18,8 +18,8 @@
 </head>
 <body>
 <header class="home-header">
-    <img src="images/logo.png" alt="">
-    <span class="title">PHARMACY</span>
+    <img src="images/logo.png" style="margin-left: 100px;" alt="">
+    <span class="title"><a href="#" style="color: #ffffff;">PHARMACY</a></span>
     <a class="btn-appointment" href="patient/patient_login.jsp">
         <i class="icon icon-clock"></i>
         <span>预约挂号</span>

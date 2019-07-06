@@ -538,7 +538,13 @@
                         /*var message = JSON.stringify(result);*/
                         // alert("接受到的数据是：" + result);//输出默认的json字符串
                         if (result != null && result != "") {
-                            alert("预约成功");
+                            if(result=="success"){
+                                alert("预约成功");
+                            }else if(result=="fail") {
+                                alert("你已有预约");
+                            }else {
+                                window.location.href = "../err.html";
+                            }
                             // var message = eval("(" + result + ")");//万能转换，拿到对象
                             // //alert("接受到的数据是：" + message.username);
                             // var username = message.username;

@@ -277,9 +277,9 @@ public class PatientController
         appointment.setP_id(p_id);
         String flag = null;
         if(iAppointmentService.addAppointment(appointment)){    //预约成功
-            flag = "预约成功";
+            flag = "success";
         }else { //预约失败
-            flag = "预约失败";
+            flag = "fail";
         }
         try {
             json = objectMapper.writeValueAsString(flag);

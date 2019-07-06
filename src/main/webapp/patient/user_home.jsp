@@ -78,21 +78,21 @@
                 <span class="h1">Hospital doctors examine patients </span>
                 <span class="h1">so that they can diagnose</span>
                 <div class="item">
-                    <div class="icon-pic icon icon-atom" style="color: red"></div>
+                    <div class="icon-pic icon icon-atom" style="color: #1cba9f; text-align:center; line-height:100px;font-size: 36px;"></div>
                     <div class="item-content">
                         <span class="h2">Intensive care</span>
                         <p>Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="icon-pic icon icon icon-syringe"></div>
+                    <div class="icon-pic icon icon-syringe" style="color: #558dca; text-align:center; line-height:100px;font-size: 36px;"></div>
                     <div class="item-content">
                         <span class="h2">Specialised Support Service</span>
                         <p>Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="icon-pic icon icon-pill" style="color:#22ff55;"></div>
+                    <div class="icon-pic icon icon-pill" style="color:#223a66; text-align:center; line-height:100px;font-size: 36px;"></div>
                     <div class="item-content">
                         <span class="h2">Medical & Surgical</span>
                         <p>Behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>

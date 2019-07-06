@@ -29,17 +29,18 @@ var navs = [{
 		"icon": "&#xe63c",
 		"href": "btable.html"
 	}, ]
-}, {
+}
+, {
 	"title": "医生管理",
 	"icon": "fa-stop-circle",
 	"href": "doctorManger.html",
 	"spread": false
-}, {
+}
+, {
 	"title": "科室管理",
 	"icon": "fa-stop-circle",
 	"href": "departmentManger.html",
 	"spread": false,
-	
 },
 ];
 
