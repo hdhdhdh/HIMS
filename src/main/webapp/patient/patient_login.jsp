@@ -224,11 +224,13 @@
             $('#denglu').addClass("container-hide");
             $('#zhuce').removeClass("container-hide");
             // alert("tozhuce");
+            $("#denglu-message").text("");
         });
         $('#lab-denglu').click(function () {
             $('#zhuce').addClass("container-hide");
             $('#denglu').removeClass("container-hide");
             // alert("denglu");
+            $("#zhuce-message").text("");
         })
     });
     //登录提交
@@ -318,7 +320,7 @@
                 success : function(result) {
                     if (result != null && result != "") {
                         if(result=="success") { //登录成功  跳转到主页面
-                            // window.location.href="user_home.jsp";
+                            window.location.href="#denglu";
                         }else {
                             $("#zhuce-message").text(result);
                         }
