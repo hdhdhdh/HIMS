@@ -279,7 +279,7 @@ public class PatientController
         if(iAppointmentService.addAppointment(appointment)){    //预约成功
             flag = "success";
         }else { //预约失败
-            flag = "fail";
+            flag = "false";
         }
         try {
             json = objectMapper.writeValueAsString(flag);
