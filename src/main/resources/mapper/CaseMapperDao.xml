@@ -5,8 +5,8 @@
     <select id="getAllCase" resultType="case">
         select* from tb_case;
     </select>
-    <select id="getAllCase" resultType="case">
-        select* from tb_case where d_id = #{d_id} and pr_description = null;
+    <select id="getCaseByPatientId" resultType="case">
+        select* from tb_case where p_id = #{p_id} and pr_description = null;
     </select>
     <select id="getCaseById" parameterType="int" resultType="case">
         select* from tb_case where p_id = #{p_id};

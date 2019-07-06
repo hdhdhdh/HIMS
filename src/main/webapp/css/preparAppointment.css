@@ -1,0 +1,37 @@
+/*
+ * 待处理预约 样式
+ */
+.card-prepar-apointment {
+  top: 80px;
+  left: 250px;
+  right: 0;
+  margin: 40px;
+  position: absolute;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  min-height: 500px;
+}
+.card-prepar-apointment form {
+  margin-bottom: 10px;
+}
+.card-prepar-apointment form select {
+  width: 200px;
+  float: left;
+}
+.card-prepar-apointment form button {
+  margin-left: 10px;
+  float: left;
+}
+.card-prepar-apointment nav {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
+  text-align: center;
+}
+.input-group {
+  margin: 10px 0;
+}
+
