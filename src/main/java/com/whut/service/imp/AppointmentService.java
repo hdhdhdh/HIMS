@@ -1,6 +1,7 @@
 package com.whut.service.imp;
 
 import com.whut.bean.Appointment;
+import com.whut.bean.Case;
 import com.whut.bean.Patient;
 import com.whut.dao.IAppointmentDao;
 import com.whut.service.IAppointmentService;
@@ -97,7 +98,19 @@ public class AppointmentService implements IAppointmentService
     {
         return iAppointmentDao.getUnprocessedAppointmentBeforTheDay(d_id,day);
     }
-    public boolean checkDoctorPermission(String dp_id,String p_id)
+    public boolean checkDoctorPermissionForTreatment(String dp_id, String p_id)
+    {
+        Appointment appointment = iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
+        if (appointment != null && appointment.getDp_id().equals(dp_id))
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+
+    public boolean checkDoctorPermissionForDiagnosis(String dp_id, String p_id)
     {
         Appointment appointment = iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
         if (appointment != null && appointment.getDp_id().equals(dp_id))

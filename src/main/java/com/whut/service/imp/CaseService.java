@@ -59,4 +59,15 @@ public class CaseService implements ICaseService {
             return false;
         }
     }
+    public boolean checkDoctorPermissionForPrescribe(String d_id, int c_id)
+    {
+        Case mycase = iCaseDao.getCaseById(c_id);
+        if (mycase != null && mycase.getD_id().equals(d_id))
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
 }

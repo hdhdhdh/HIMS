@@ -7,7 +7,6 @@ import com.whut.service.IDoctorService;
 import com.whut.service.IMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,7 +46,7 @@ public class DoctorController {
         {
             mv.addObject("err","patient id is empty");
         }
-        else if(iAppointmentService.checkDoctorPermission(doctor.getDp_id(),newCase.getP_id()) == true) //检查是否有权限
+        else if(iAppointmentService.checkDoctorPermissionForTreatment(doctor.getDp_id(),newCase.getP_id()) == true) //检查是否有权限
         {
             iCaseService.addCase(newCase);
             mv.setViewName("doctor_home");
@@ -68,7 +67,7 @@ public class DoctorController {
         {
             mv.setViewName("../doctor/doctor_login");
         }
-        else if(iAppointmentService.checkDoctorPermission(doctor.getDp_id(),p_id) == true) //检查是否有权限
+        else if(iAppointmentService.checkDoctorPermissionForTreatment(doctor.getDp_id(),p_id) == true) //检查是否有权限
         {
             List<Case> all = iCaseService.getCaseByPatientId(p_id);
             mv.addObject("patientcase",all);

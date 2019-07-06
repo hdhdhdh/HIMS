@@ -11,7 +11,7 @@ public interface IDoctorService
 {
     // 获取所有医生
     List<Doctor> getAllDoctor();
-
+    public List<Doctor> findAllDoctor(int page, int size);
     // 删除医生
     public void deleteDoctor(String id);
 

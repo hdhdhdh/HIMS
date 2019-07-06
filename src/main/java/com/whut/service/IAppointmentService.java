@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IAppointmentService {
     public boolean addAppointment(String p_id, String dp_id);
-    public boolean checkDoctorPermission(String dp_id,String p_id);
+    public boolean checkDoctorPermissionForTreatment(String dp_id, String p_id);
     public List<Appointment> getAllAppointment();//导出所有预约
     public Appointment getAppointmentById(String a_id);
     public boolean addAppointment(Appointment appointment);
