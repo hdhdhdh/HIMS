@@ -8,6 +8,8 @@ import com.whut.service.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -72,7 +74,7 @@ public class AppointmentService implements IAppointmentService
     }
 
     @Override
-    public boolean updateAppointmentStatus(String d_id) {
+    public boolean updateAppointmentStatus(int d_id) {
         try
         {
             iAppointmentDao.updateAppointmentStatus(d_id);
@@ -98,18 +100,6 @@ public class AppointmentService implements IAppointmentService
     {
         return iAppointmentDao.getUnprocessedAppointmentBeforTheDay(d_id,day);
     }
-    public boolean checkDoctorPermissionForTreatment(String dp_id, String p_id)
-    {
-        Appointment appointment = iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
-        if (appointment != null && appointment.getDp_id().equals(dp_id))
-        {
-            return true;
-        }else
-        {
-            return false;
-        }
-    }
-
     public boolean checkDoctorPermissionForDiagnosis(String dp_id, String p_id)
     {
         Appointment appointment = iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
@@ -120,6 +110,47 @@ public class AppointmentService implements IAppointmentService
         {
             return false;
         }
+    }
+    @Override
+    public List<Appointment> getAUnprocessedAppointmentList(String dp_id,String type)
+    {
+        List<Appointment> unprocessedAppointmentList;
+        if(type == null)
+        {
+            unprocessedAppointmentList = new ArrayList<>();
+        }else if(type.equals("all"))
+        {
+            unprocessedAppointmentList = iAppointmentDao.getAllUnprocessedAppointment(dp_id);
+        }
+        else
+        {
+            int days = 0;
+            if(type.equals("today"))
+            {
+                days = 1;
+            }else if(type.equals("threeday"))
+            {
+                days = 3;
+            }
+            else if(type.equals("week"))
+            {
+                days = 7;
+            }
+            else if(type.equals("month"))
+            {
+                days = 30;
+            }
+            if(days > 0)
+            {
+                Calendar ca = Calendar.getInstance();
+                ca.add(Calendar.DATE,days);// num为增加的天数，可以改变的
+                unprocessedAppointmentList = iAppointmentDao.getUnprocessedAppointmentBeforTheDay(dp_id,ca.getTime());
+            }else
+            {
+                unprocessedAppointmentList = new ArrayList<>();
+            }
+        }
+        return unprocessedAppointmentList;
     }
 
 

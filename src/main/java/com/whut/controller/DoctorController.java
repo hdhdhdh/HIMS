@@ -46,8 +46,9 @@ public class DoctorController {
         {
             mv.addObject("err","patient id is empty");
         }
-        else if(iAppointmentService.checkDoctorPermissionForTreatment(doctor.getDp_id(),newCase.getP_id()) == true) //检查是否有权限
+        else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),newCase.getP_id()) == true) //检查是否有权限
         {
+            newCase.setPr_description(null);
             iCaseService.addCase(newCase);
             mv.setViewName("doctor_home");
         }
@@ -67,7 +68,7 @@ public class DoctorController {
         {
             mv.setViewName("../doctor/doctor_login");
         }
-        else if(iAppointmentService.checkDoctorPermissionForTreatment(doctor.getDp_id(),p_id) == true) //检查是否有权限
+        else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),p_id) == true) //检查是否有权限
         {
             List<Case> all = iCaseService.getCaseByPatientId(p_id);
             mv.addObject("patientcase",all);
@@ -122,10 +123,26 @@ public class DoctorController {
         return mv;
     }
     @RequestMapping("/updateAppointmentStatus.do")//医生更改预约状态信息
-    public String updateAppointmentStatus(String a_id)
+    public ModelAndView updateAppointmentStatus(HttpSession httpSession,Case mycase)
     {
-        iAppointmentService.updateAppointmentStatus(a_id);
-        return "#";//返回预约未处理信息界面
+
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        if (doctor.getD_id() == null || doctor.getD_id().equals(""))
+        {
+            mv.setViewName("../doctor/doctor_login");
+        }
+        else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),mycase.getP_id()) == true) //检查是否有权限
+        {
+            iAppointmentService.updateAppointmentStatus(mycase.getC_id());
+            mv.setViewName("../doctor/doctor_home");
+        }
+        else
+        {
+            mv.addObject("err","Permission denied");
+            mv.setViewName("doctor_home");
+        }
+        return mv;
     }
     public ModelAndView getUnprocessedAppointment(HttpSession httpSession,String type)
     {
@@ -136,42 +153,9 @@ public class DoctorController {
         {
             mv.setViewName("../doctor/doctor_login"); //未登录
         }
-        else if(type == null)
-        {
-            mv.setViewName("");
-            mv.addObject("selectedAppointment",selectedAppointment);
-        }else if(type.equals("all"))
-        {
-            selectedAppointment = iAppointmentService.getAllUnprocessedAppointment(doctor.getDp_id());
-            mv.addObject("selectedAppointment",selectedAppointment);
-            mv.setViewName("");
-        }
         else
         {
-            int days = 0;
-            if(type.equals("today"))
-            {
-                days = 1;
-            }else if(type.equals("threeday"))
-            {
-                days = 3;
-            }
-            else if(type.equals("week"))
-            {
-                days = 7;
-            }
-            else if(type.equals("month"))
-            {
-                days = 30;
-            }
-            if(days > 0)
-            {
-                Calendar ca = Calendar.getInstance();
-                ca.add(Calendar.DATE,days);// num为增加的天数，可以改变的
-                selectedAppointment = iAppointmentService.getUnprocessedAppointmentBeforTheDay(doctor.getDp_id(),ca.getTime());
-            }
-            mv.addObject("selectedAppointment",selectedAppointment);
-            mv.setViewName("#");//显示在未处理预约界面
+            iAppointmentService.getAUnprocessedAppointmentList(doctor.getDp_id(),type);
         }
         return mv;
     }
