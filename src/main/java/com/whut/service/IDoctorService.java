@@ -10,26 +10,22 @@ import java.util.List;
 
 public interface IDoctorService
 {
-    // 病人获取所有医生
-    List<Doctor> getAllDoctor();
-    //管理员导出所有医生信息
-    List<Doctor> getAllDoctor(int page,int size);
-    // 删除医生
-    public void deleteDoctor(String id);
-    public Doctor doctorCheckLogin(String d_id,String d_password);
-    // 添加医生
-    public String addDoctor(Doctor doctor);
 
-    public Doctor getDoctorById(String d_id);
+    List<Doctor> getAllDoctor();// 病人获取所有医生
 
-    // 更新医生信息
-    // 通过id得到医生信息
-    // 医生更改自己的个人信息
-    public boolean updateDoctorWithoutId(Doctor doctor);
-    public boolean doctorLogin(Doctor doctor);
+    List<Doctor> getAllDoctor(int page,int size);//管理员导出所有医生信息
 
-    // 更新医生信息
-    public String updateDoctor(Doctor doctor);
+    public void deleteDoctor(String id);// 删除医生
+    public Doctor doctorCheckLogin(String d_id,String d_password);//医生登录检查
 
-    Doctor queryDoctorById(String id);
+    public String addDoctor(Doctor doctor);// 添加医生
+
+    public Doctor getDoctorById(String d_id);//根据id获取医生信息
+    public boolean updateDoctorWithoutId(Doctor doctor);//医生更新自己的信息
+    public boolean doctorLogin(Doctor doctor);//医生登录检查
+
+
+    public String updateDoctor(Doctor doctor); // 更新医生信息 不明
+
+    Doctor queryDoctorById(String id);//根据id获取医生信息
 }
