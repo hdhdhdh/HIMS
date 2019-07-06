@@ -1,33 +1,22 @@
 package com.whut.bean;
 
 import java.util.Date;
+import java.util.List;
 
 // 药方类
 
 public class Prescription {
 
-    private int pr_id;// 药方编号
+    private Integer c_id;// 药方编号
 
-    private int c_id;// 病例编号
+    private String m_id;// 病例编号
+    private String m_name;
 
-    private String m_id;// 药品编码（国药）
-
-    private Date pr_date; // 药方的时间
-
-
-    public int getPr_id() {
-        return pr_id;
-    }
-
-    public void setPr_id(int pr_id) {
-        this.pr_id = pr_id;
-    }
-
-    public int getC_id() {
+    public Integer getC_id() {
         return c_id;
     }
 
-    public void setC_id(int c_id) {
+    public void setC_id(Integer c_id) {
         this.c_id = c_id;
     }
 
@@ -39,21 +28,20 @@ public class Prescription {
         this.m_id = m_id;
     }
 
-    public Date getPr_date() {
-        return pr_date;
+    public String getM_name() {
+        return m_name;
     }
 
-    public void setPr_date(Date pr_date) {
-        this.pr_date = pr_date;
+    public void setM_name(String m_name) {
+        this.m_name = m_name;
     }
 
     @Override
     public String toString() {
         return "Prescription{" +
-                "pr_id=" + pr_id +
-                ", c_id=" + c_id +
+                "c_id=" + c_id +
                 ", m_id='" + m_id + '\'' +
-                ", pr_date=" + pr_date +
+                ", m_name='" + m_name + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.whut.service.imp;
 
 
 import com.whut.bean.Medicine;
+import com.whut.bean.Prescription;
 import com.whut.dao.IMedicineDao;
 import com.whut.service.IMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,28 @@ public class MedicineService implements IMedicineService {
     {
         return  iMedicineDao.getMedicineByName(m_name);
     }
-
+    public boolean checkInventory(List<Prescription> prescriptions)//检查库存
+    {
+        for (Prescription p:prescriptions)
+        {
+            Medicine medicine = getMedicineById(p.getM_id());
+            if(medicine == null || medicine.getM_num() > 0)
+                return false;
+        }
+        return true;
+    }
+    public boolean checkout(List<Prescription> prescriptions)//出库
+    {
+        if(checkInventory(prescriptions) == true)
+        {
+            for (Prescription p:prescriptions)
+            {
+                Medicine medicine = getMedicineById(p.getM_id());
+                medicine.setM_num(medicine.getM_num()-1);
+                iMedicineDao.updateMedicine(medicine);
+            }
+        }
+        return false;
+    }
 
 }

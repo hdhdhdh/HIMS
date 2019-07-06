@@ -48,7 +48,8 @@ public class AppointmentService implements IAppointmentService
     {
         if (iAppointmentDao.getUnprocessedAppointmentByUserId(appointment.getP_id()) == null)
         {
-            try {
+            try
+            {
                 iAppointmentDao.addAppointment(appointment);
                 return true;
             }catch (Exception e)

@@ -15,7 +15,10 @@ public interface ICaseDao {
     public void addCase(Case icase);//增加病例
     public void updateCase(Case icase);//更新病例
     public void deleteCase(int c_id);//删除病例
+    public boolean updateCaseSataus(@Param("c_id") int c_id,@Param("c_status") int c_status);
     public List<Case> getCaseByPatientId(String p_id);//通过病人id得到病例
     public void addPrescription(@Param(" c_id") int  c_id, @Param("prescription") String prescription);
     public List<Case> getUnprescribedCase(@Param("d_id") String d_id);
+    public List<Case> getUncheckouCaseByPatientId (@Param("p_id") String p_id);
+    public List<Case> getUnpayedCaseByPatientId (@Param("p_id") String p_id);
 }

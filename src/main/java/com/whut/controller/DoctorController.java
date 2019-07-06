@@ -1,16 +1,16 @@
 package com.whut.controller;
 
 import com.whut.bean.*;
-import com.whut.service.IAppointmentService;
-import com.whut.service.ICaseService;
-import com.whut.service.IDoctorService;
-import com.whut.service.IMedicineService;
+import com.whut.dao.IPrescriptionDao;
+import com.whut.enums.CaseStatusEnum;
+import com.whut.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,6 +26,8 @@ public class DoctorController {
     IAppointmentService iAppointmentService;
     @Autowired
     IMedicineService iMedicineService;
+    @Autowired
+    IPrescriptionService iPrescriptionService;
     @RequestMapping("/updateDoctorInfo.do")//医生更改自己个人信息
     public String updateDoctorInfo(Doctor doctor)
     {
@@ -33,7 +35,7 @@ public class DoctorController {
         return "redirect:/doctor/findAppointment.do";//返回预约信息界面
     }
     @RequestMapping("/addCase.do")//医生增加病例
-    public ModelAndView addCase(HttpSession httpSession,Case newCase)
+    public ModelAndView addCase(HttpSession httpSession,Case newCase,Integer a_id)
     {
 
         ModelAndView mv = new ModelAndView();
@@ -48,7 +50,9 @@ public class DoctorController {
         }
         else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),newCase.getP_id()) == true) //检查是否有权限
         {
+            iAppointmentService.updateAppointmentStatus(a_id);
             newCase.setPr_description(null);
+            newCase.setC_status(CaseStatusEnum.UNPRESCRIBED.getStatus());
             iCaseService.addCase(newCase);
             mv.setViewName("doctor_home");
         }
@@ -103,50 +107,28 @@ public class DoctorController {
         }
         return mv;
     }
-    @RequestMapping("/updateAppointmentStatus.do")//医生更改预约状态信息
-    public ModelAndView updateAppointmentStatus(HttpSession httpSession,Case mycase)
-    {
-
-        ModelAndView mv = new ModelAndView();
-        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null)
-        {
-            mv.setViewName("../doctor/doctor_login");
-        }
-        else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),mycase.getP_id()) == true) //检查是否有权限
-        {
-            iAppointmentService.updateAppointmentStatus(mycase.getC_id());
-            mv.setViewName("../doctor/doctor_home");
-        }
-        else
-        {
-            mv.addObject("err","Permission denied");
-            mv.setViewName("../doctor/doctor_home");
-        }
-        return mv;
-    }
-    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
-    {
-
-        ModelAndView mv = new ModelAndView();
-        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null)
-        {
-            mv.setViewName("../doctor/doctor_login");
-        }
-        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),mycase.getC_id()) == false) //检查是否有权限
-        {
-
-            mv.addObject("err","Permission denied");
-            mv.setViewName("../doctor/doctor_home");
-        }
-        else if(iCaseService.addPrescriptionToCase(mycase.getC_id(),prescription) == false)
-        {
-            mv.setViewName("../doctor/doctor_home");
-            mv.addObject("err","add prescription failed");
-        }
-        return mv;
-    }
+//    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
+//    {
+//
+//        ModelAndView mv = new ModelAndView();
+//        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+//        if (doctor.getD_id() == null)
+//        {
+//            mv.setViewName("../doctor/doctor_login");
+//        }
+//        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),mycase.getC_id()) == false) //检查是否有权限
+//        {
+//
+//            mv.addObject("err","Permission denied");
+//            mv.setViewName("../doctor/doctor_home");
+//        }
+//        else if(iCaseService.addPrescriptionToCase(mycase.getC_id(),prescription) == false)
+//        {
+//            mv.setViewName("../doctor/doctor_home");
+//            mv.addObject("err","add prescription failed");
+//        }
+//        return mv;
+//    }
     public ModelAndView getUnprocessedAppointment(HttpSession httpSession,String type)
     {
         ModelAndView mv = new ModelAndView();
@@ -210,4 +192,76 @@ public class DoctorController {
         }
         return mv;
     }
+    public ModelAndView addMedicineToPrescription(HttpSession httpSession,Integer c_id,String m_id)
+    {
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        if (doctor.getD_id() == null)
+        {
+            mv.setViewName("../doctor/doctor_login");
+        }
+        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),c_id) == false) //检查是否有权限
+        {
+
+            mv.addObject("err","Permission denied");
+            mv.setViewName("../doctor/doctor_home");
+        }
+        else if(iPrescriptionService.addMedicineToPrescription(c_id,iMedicineService.getMedicineById(m_id)) == false)
+        {
+            mv.addObject("err","add medicine to prescription failed");
+            mv.setViewName("editPrescription");
+        }else
+        {
+            mv.setViewName("editPrescription");
+        }
+        return mv;
+    }
+    public ModelAndView deleteMedicineFromPrescription(HttpSession httpSession,Prescription prescription)
+    {
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        if (doctor.getD_id() == null)
+        {
+            mv.setViewName("../doctor/doctor_login");
+        }
+        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),prescription.getC_id()) == false) //检查是否有权限
+        {
+
+            mv.addObject("err","Permission denied");
+            mv.setViewName("../doctor/doctor_home");
+        }
+        else if(iPrescriptionService.deletePrescription(prescription) == false)
+        {
+            mv.addObject("err","delete medicine from prescription failed");
+            mv.setViewName("editPrescription");
+        }else
+        {
+            mv.setViewName("editPrescription");
+        }
+        return mv;
+    }
+    public ModelAndView confirmPrescription(HttpSession httpSession,Integer c_id)
+    {
+        ModelAndView mv = new ModelAndView();
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        if (doctor.getD_id() == null)
+        {
+            mv.setViewName("../doctor/doctor_login");
+        }
+        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),c_id) == false) //检查是否有权限
+        {
+            mv.addObject("err","Permission denied");
+            mv.setViewName("../doctor/doctor_home");
+        }
+        else if(iCaseService.updateCaseSataus(c_id,CaseStatusEnum.UNPADE.getStatus()) == false)
+        {
+            mv.addObject("err","confirm prescription failed");
+            mv.setViewName("editPrescription");
+        }else
+        {
+            mv.setViewName("editPrescription");
+        }
+        return mv;
+    }
+
 }

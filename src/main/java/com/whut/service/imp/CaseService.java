@@ -1,11 +1,14 @@
 package com.whut.service.imp;
 
 import com.whut.bean.Case;
+import com.whut.bean.UncheckoutPrescription;
 import com.whut.dao.ICaseDao;
+import com.whut.enums.CaseStatusEnum;
 import com.whut.service.ICaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,6 +45,19 @@ public class CaseService implements ICaseService {
     }
 
     @Override
+    public boolean updateCaseSataus(int c_id, int c_status)
+    {
+        try {
+            iCaseDao.updateCaseSataus(c_id,c_status);
+            return true;
+        }catch (Exception e)
+        {
+            return false;
+        }
+
+    }
+
+    @Override
     public boolean updateCase(Case icase) {
         return false;
     }
@@ -61,19 +77,44 @@ public class CaseService implements ICaseService {
     }
     public boolean checkDoctorPermissionForPrescribe(String d_id, int c_id)
     {
-        Case mycase = iCaseDao.getCaseById(c_id);
-        if (mycase != null && mycase.getD_id().equals(d_id))
+
+        try
         {
-            return true;
-        }else
+            Case mycase = iCaseDao.getCaseById(c_id);
+            if (mycase == null || mycase.getD_id().equals(d_id)||mycase.getC_status() == CaseStatusEnum.UNPRESCRIBED.getStatus())
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
+        }catch (Exception e)
         {
             return false;
         }
     }
+
+    @Override
+    public boolean checkPermissionForCheckout(int c_id)
+    {
+        try {
+            Case mycase = iCaseDao.getCaseById(c_id);
+            if(mycase != null && mycase.getC_status() == CaseStatusEnum.UNCHECKOUT.getStatus())
+                return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return false;
+    }
+
     public boolean addPrescriptionToCase(int c_id,String prescription)
     {
         try {
             iCaseDao.addPrescription(c_id,prescription);
+    //        iCaseDao.updateCaseSataus(c_id, CaseStatusEnum..getStatus());
             return true;
         }catch (Exception e)
         {
@@ -84,6 +125,33 @@ public class CaseService implements ICaseService {
     {
         return iCaseDao.getUnprescribedCase(d_id);
     }
+    public List<Case> getUncheckoutCaseByPatientId(String p_id)
+    {
+        return iCaseDao.getUncheckouCaseByPatientId(p_id);
+    }
 
+    @Override
+    public List<UncheckoutPrescription> getUncheckoutPrescription(String p_id)
+    {
+        List<UncheckoutPrescription> uncheckoutPrescriptions = new ArrayList<UncheckoutPrescription>();
+        try {
+            List<Case> cases = iCaseDao.getUncheckouCaseByPatientId(p_id);
+
+            for (Case mycase:cases)
+            {
+                UncheckoutPrescription n = new UncheckoutPrescription();
+                n.setC_id(mycase.getC_id().toString());
+                n.setDate(mycase.getC_date().toString());
+                n.setP_id(mycase.getP_id());
+                uncheckoutPrescriptions.add(n);
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return uncheckoutPrescriptions;
+        }
+
+        return uncheckoutPrescriptions;
+    }
 
 }

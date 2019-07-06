@@ -6,7 +6,7 @@
         select * from tb_appointment where p_id=#{p_id}
     </select>
     <select id="getUnprocessedAppointmentByUserId" parameterType="java.lang.String" resultType="appointment">
-        select * from tb_appointment where p_id=#{p_id} and a_status = 0
+        select * from tb_appointment where p_id = #{p_id} and a_status = 0
     </select>
 
     <insert id="addAppointment" parameterType="appointment">
@@ -32,10 +32,10 @@
         where a_id=#{a_id}
     </update>
     <select id="getAllUnprocessedAppointment" resultType="appointment">
-        select * from tb_appointment where a_status= 0 and d_id = #{d_id}
+        select * from tb_appointment where a_status = 0 and p_id = #{p_id}
     </select>
     <select id="getProcessedAppointment"  resultType="appointment">
-        select * from tb_appointment where a_status=1 and d_id = #{d_id}
+        select * from tb_appointment where a_status=1 and dp_id = #{dp_id}
     </select>
     <select id="getUnprocessedAppointmentBeforTheDay"  resultType="appointment">
         select * from tb_appointment where  a_status = 0 and #{day,jdbcType=DATE} >= a_data and dp_id = #{dp_id}

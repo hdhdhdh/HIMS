@@ -1,6 +1,8 @@
 package com.whut.service;
 
 import com.whut.bean.Medicine;
+import com.whut.bean.Prescription;
+import com.whut.bean.UncheckoutPrescription;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,9 +19,14 @@ public interface IMedicineService {
 
     // 药品更新
     public boolean updateMedicine(Medicine medicine);
+    public boolean checkInventory(List<Prescription> prescriptions);//检查库存
+
+    public boolean checkout(List<Prescription> prescriptions);//出库
+
 
     // 查询药品,根据药品id来查询
     Medicine getMedicineById(String m_id);
     public List<Medicine> getMedicineByName(String m_name);
+
 
 }
