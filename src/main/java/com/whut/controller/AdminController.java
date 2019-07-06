@@ -46,7 +46,7 @@ public class AdminController {
     */
 
 
-// 删除医生
+    // 删除医生
     @RequestMapping("/deleteDoctor.do")
     public String deleteDoctor(String id) {
         docService.deleteDoctor(id);
@@ -107,12 +107,25 @@ public class AdminController {
     }
 
 
-    //
+    /*
     @RequestMapping("/togetAllDepartment")
     public String togetAllDepartment() {
         return "departmentManage";
     }
+    */
 
+
+    @RequestMapping("/getAllDepartment.do")
+    public ModelAndView AllDepartment() {
+        List<Department> all = iDepartmentService.getAllDepartment();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("DepartmentInfo", all);
+        mv.setViewName("departmentManage");
+        return mv;
+    }
+
+
+    /*
 
     @RequestMapping("/addDepartment.do")//增加科室
     public ModelAndView addDepartment(HttpSession httpSession, Department department) {
@@ -153,6 +166,7 @@ public class AdminController {
         }
         return mv;
     }
+    */
 
 
 }

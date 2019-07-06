@@ -1,0 +1,61 @@
+<!---->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Layui</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="css/begtable.css" />
+	</head>
+
+	<body>
+		<div style="margin: 15px;">
+			<fieldset class="layui-elem-field">
+				<legend>药品清单</legend>
+				<div style="width: 1300px; height: 350px; border: 1px solid #009688;">
+					<a href="addDrug.html" class="layui-btn layui-btn-small" id="add">
+						<i class="layui-icon">&#xe608;</i> 添加药品
+						<a href="javascript:;" class="layui-btn layui-btn-small" id="search" style="float: right">
+							<i class="layui-icon">&#xe615;</i> 搜索
+						</a>
+						<p style="float: right"><input name="" type="text" value=""></p>
+					</a>
+					<div class="beg-table-box">
+						<div class="beg-table-body">
+							<table class="beg-table beg-table-bordered beg-table-striped beg-table-hovered">
+								<thead>
+								<tr>
+									<th>#</th>
+									<th>药品编号</th>
+									<th>药品名称</th>
+									<th>剩余库存</th>
+									<th>所属类别</th>
+									<th>单价</th>
+									<th>信息变更</th>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>86900373000051</td>
+									<td>阿司匹林栓</td>
+									<td>500</td>
+									<td>OTC</td>
+									<td>40.00</td>
+									<!-- Button trigger modal -->
+									<td><a href="danganguanli_bianji.html" class="layui-btn layui-btn-mini">编辑</a>
+										<a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+								</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="beg-table-paged"></div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+	</body>
+
+</html>

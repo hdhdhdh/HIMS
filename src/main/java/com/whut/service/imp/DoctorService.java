@@ -54,10 +54,8 @@ public class DoctorService implements IDoctorService {
      * 获取所有doctor   ---崔佳豪
      * @return
      */
-    public List<Doctor> getAllDoctor(){
 
-        return iDoctorDao.getAllDoctor();
-    }
+    public List<Doctor> getAllDoctor(){ return iDoctorDao.getAllDoctor(); }
 
 
     @Override
@@ -66,11 +64,6 @@ public class DoctorService implements IDoctorService {
         return iDoctorDao.getAllDoctor(page,size);
     }
 
-
-    /*
-    @Autowired
-    public IDoctorDao DocService;
-    */
 
     @Override
     public String addDoctor(Doctor doctor) {

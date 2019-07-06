@@ -40,18 +40,25 @@
     <form action="${pageContext.request.contextPath}/DoctorMange/AddDoctor.do"
           method="post">
 
-        医生工号&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="id">
-        医生编号：<input type="text" name="username"><br><br><br>
-        医生职称：<input type="text" name="password">
-        医生性别：<input type="text" name="username"><br><br><br>
-        出生年月：<input type="text" name="password">
-        医生密码：<input type="text" name="username"><br><br><br>
-        医生姓名：<input type="text" name="password">
-        医生简介：<input type="text" name="password"><br><br><br>
+        医生工号&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="d_id">
+        医生编号：<input type="text" name="t_id"><br><br><br>
+        医生职称：<input type="text" name="d_title">
+        医生性别：<input type="number" name="d_gender"><br><br><br>
+        出生年月： <input type="date" name="d_birthday">
+            部门编号：<input type="text" name="dp_id"><br><br><br>
+        医生密码：<input type="text" name="dp_password">
+        医生姓名：<input type="text" name="dp_name"><br><br><br>
+        医生简介：<input type="text" name="d_description"><br><br><br>
 
-        <input type="submit" class="btn btn-primary" value="添加" >
+        <input type="submit" class="btn btn-primary" value="添加" id="add-btn">
     </form>
-
+    <script src="../js/jquery-2.2.1.min.js"></script>
+    <script>
+        $("#add-btn").click(function () {
+            var username  = $("input[name='username']").val();
+            alert(username);
+        })
+    </script>
 </div>
 </body>
 </html>

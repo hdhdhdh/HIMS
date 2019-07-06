@@ -49,7 +49,7 @@
         医生的ID: <input type="text" name="t_id" value="${Doctor.t_id}"/><br><br>
         医生职称：<input type="text" name="d_title" value="${Doctor.d_title}"/>
         医生性别：<input type="text" name="d_gender" value="${Doctor.d_gender}"/><br><br>
-        出生年月：<input type="text" name="d_birthday" value="${Doctor.d_birthday}"/>
+        出生日期：<input type="date" name="d_birthday" value="${Doctor.d_birthday}"/>
         科室编号：<input type="text" name="dp_id" value="${Doctor.dp_id}"/><br><br>
         登录密码：<input type="text" name="d_password" value="${Doctor.d_password}"/>
         医生姓名：<input type="text" name="d_name" value="${Doctor.d_name}"/><br><br>

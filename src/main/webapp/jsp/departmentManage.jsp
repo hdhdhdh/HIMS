@@ -39,11 +39,12 @@
             <li class="darkerlishadow"><a href="drugList.html"><i class="icon icon-clock"></i><span>分类列表</span></a></li>
             <li class="darkerlishadowdown"><a href="prescription.html"><i class="icon icon-clock"></i><span>处方开药</span></a></li>
             <li class="darkerlishadowdown "><a href="javascript:;"><i class="icon icon-banknote"></i><span>医生管理</span></a></li>
-            <li class="darkerlishadowdown activeli"><a  href="${pageContext.request.contextPath}/todepartmentManage.do"><i class="icon icon-banknote"></i><span>科室管理</span></a></li>
+            <li class="darkerlishadowdown activeli"><a  href="${pageContext.request.contextPath}/departmentManage.do"><i class="icon icon-banknote"></i><span>科室管理</span></a></li>
             <li><a href="javascript:;"><i class="icon icon-banknote"></i><span>个人中心</span></a></li>
             <li><a href="javascript:;"><i></i><span>退出</span></a></li>
         </ul>
     </div>
+
 </nab>
 <div class="card">
     <p class="card-title">科室管理

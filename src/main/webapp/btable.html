@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>btable</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link rel="stylesheet" href="css/btable.css" />
+    <link rel="stylesheet" href="css/begtable.css" />
+</head>
+
+<body style=" background-color: gainsboro;">
+
+<div style="margin: 15px;">
+    <fieldset class="layui-elem-field">
+        <legend>处方确认</legend>
+        <div style="width: 1300px; height: 350px; border: 1px solid #009688;">
+            <div class="beg-table-box">
+                <div class="beg-table-body">
+                    <a href="javascript:;" class="layui-btn layui-btn-small" id="search" style="float: right">
+                        <i class="layui-icon">&#xe615;</i> 查询
+                    </a>
+                    <p style="float: right"><input name="" type="text" value="请输入身份证号"></p>
+                    <table class="beg-table beg-table-bordered beg-table-striped beg-table-hovered">
+                        <thead>
+                        <tr>
+                            <th>病例编号</th>
+                            <th>病人姓名</th>
+                            <th>诊断时间</th>
+                            <th>诊断科目</th>
+                            <th>药物条目</th>
+                            <th>诊断医师</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>723</td>
+                            <td>张三</td>
+                            <td>2019-7-6</td>
+                            <td>骨科</td>
+                            <td>药物a、药物b、药物c</a></td>
+                            <td><Doc class="chen"></Doc></td>
+                            <!-- Button trigger modal -->
+                            <td><a class="layui-btn layui-btn-small" id="#conform" >确认</a>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="beg-table-paged"></div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+
+
+
+    <script type="text/javascript" src="plugins/layui/layui.js"></script>
+    <script>
+
+
+        layui.config({
+            base: 'js/'
+        }).use(['btable'], function () {
+            var btable = layui.btable(),
+                $ = layui.jquery;
+
+            btable.set({
+                elem: '#content',
+                url: 'datas/btable_data.json',
+                pageSize: 3,
+                columns: [{
+                    fieldName: '昵称',
+                    field: 'name'
+                }, {
+                    fieldName: '加入时间',
+                    field: 'createtime'
+                }, {
+                    fieldName: '签名',
+                    field: 'sign'
+                }],
+                even: true,
+                //skin: 'row',
+                checkbox: true,
+                paged: true,
+                singleSelect: false
+            });
+            btable.render();
+
+            $('#getAll').on('click', function () {
+
+                //btable.getSelected(function(obj){
+                //	console.log(obj.elem);
+                //	layer.msg(obj.id);
+                //});
+                //获取选择的数据
+                btable.getSelections(function (obj) {
+                    console.log(obj.elem);
+                    console.log(obj.ids);
+                    console.log(obj.count);
+                    layer.msg(obj.ids.join(','))
+                });
+
+            });
+
+            $(window).on('resize', function (e) {
+                var $that = $(this);
+                $('#content').height($that.height() - 92);
+            }).resize();
+        });
+    </script>
+</body>
+
+</html>

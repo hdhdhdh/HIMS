@@ -43,7 +43,7 @@
             <li class="darkerlishadow"><a href="drugList.html"><i class="icon icon-clock"></i><span>分类列表</span></a></li>
             <li class="darkerlishadowdown"><a href="prescription.html"><i class="icon icon-clock"></i><span>处方开药</span></a></li>
             <li class="darkerlishadowdown activeli"><a href="javascript:;"><i class="icon icon-banknote"></i><span>医生管理</span></a></li>
-            <li class="darkerlishadowdown activeli"><a href="${pageContext.request.contextPath}/togetAllDepartment.do">
+            <li class="darkerlishadowdown activeli"><a href="${pageContext.request.contextPath}/getAllDepartment.do">
                 <i class="icon icon-banknote"></i><span>科室管理</span></a></li>
 
             <li><a href="javascript:;"><i class="icon icon-banknote"></i><span>个人中心</span></a></li>
@@ -72,7 +72,7 @@
             <th>医生ID</th>
             <th>医生职称</th>
             <th>医生性别</th>
-            <th>出生年月</th>
+            <th>出生日期</th>
             <th>科室编号</th>
             <th>登录密码</th>
             <th>医生姓名</th>
