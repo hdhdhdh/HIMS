@@ -21,27 +21,3 @@
         opacity: 1;
     }
 }
-@keyframes title-animation {
-    from {
-        left:-200px ;
-    }
-    to {
-        left: 0;
-    }
-}
-@keyframes text1-animation {
-    from {
-        left:-270px ;
-    }
-    to {
-        left: 0;
-    }
-}
-@keyframes text2-animation {
-    from {
-        left:-340px ;
-    }
-    to {
-        left: 0;
-    }
-}

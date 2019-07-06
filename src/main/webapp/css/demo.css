@@ -1,0 +1,30 @@
+form{
+    width: 500px;
+    overflow: hidden;
+    margin: 50px auto;
+}
+div{
+    line-height: 40px;
+}
+input{
+    width: 250px;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    font-size: 14px;
+    border: 1px solid #666;
+    outline: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+span{
+    display: inline-block;
+}
+.submit{
+    width: 120px;
+    background: #666;
+    color: #fff;
+    margin-left: 70px;
+    cursor: pointer;
+}

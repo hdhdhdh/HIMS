@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../css/doc-common.css">
     <link rel="stylesheet" href="../css/hadAppointment.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
 
         body {
