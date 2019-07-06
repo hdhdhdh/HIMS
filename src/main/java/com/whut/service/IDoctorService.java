@@ -9,14 +9,10 @@ import java.util.List;
 
 public interface IDoctorService
 {
-
-    //
-    List<Doctor> getAllDoctor(int page,int size);
-
-
-    // 获取所有医生
+    // 病人获取所有医生
     List<Doctor> getAllDoctor();
-   // public List<Doctor> findAllDoctor(int page, int size);
+    //管理员导出所有医生信息
+    List<Doctor> getAllDoctor(int page,int size);
     // 删除医生
     public void deleteDoctor(String id);
 

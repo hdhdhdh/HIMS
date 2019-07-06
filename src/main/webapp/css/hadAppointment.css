@@ -1,0 +1,11 @@
+.card {
+  top: 80px;
+  left: 250px;
+  right: 0;
+  margin: 40px;
+}
+.card .card-title {
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}

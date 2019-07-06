@@ -63,7 +63,7 @@ public class DoctorService implements IDoctorService {
     @Override
     public List<Doctor> getAllDoctor(int page, int size) {
         PageHelper.startPage(page,size);
-        return iDoctorDao.findAllDoctor(page,size);
+        return iDoctorDao.getAllDoctor(page,size);
     }
 
 

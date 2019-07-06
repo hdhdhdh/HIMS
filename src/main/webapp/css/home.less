@@ -1,25 +1,25 @@
 @import "home-animation.css";
 .home-header {
   //background: #5cb85c;
-  position: relative;
-  height: 160px;
+  height: 80px;
+  padding-left: 50px;
   padding-right: 50px;
   img {
-    position: absolute;
+    float: left;
     display: block;
-    height: 100px;
-    width: 100px;
-    top: 40px;
-    left: 200px;
+    height: 80px;
+    width: 80px;
+    left: 0;
+    top: 0;
   }
   .title {
-    position: absolute;
-    left: 320px;
-    top: 40px;
+    float: left;
+    margin-left: 30px;
+    left: 80px;
+    top: 0;
     font-size: 28px;
-    height: 100px;
-    color: #ffffff;
-    line-height: 100px;
+    height: 80px;
+    line-height: 80px;
     //color:  #ffffff;
   }
   .btn-appointment {
@@ -32,13 +32,13 @@
     height: 50px;
     line-height: 50px;
     font-size: 24px;
-    color: #dedede;
-    border: 3px solid #dedede;
+    color: #707070;
+    border: 3px solid #707070;
     border-radius: 10px;
     box-sizing: border-box;
     &:hover{
-      color: #ffffff;
-      border-color: #ffffff ;
+      color: #2e6da4;
+      border-color: #2e6da4 ;
     }
   }
 
@@ -54,23 +54,17 @@
     box-sizing: border-box;
   }
   .wrap1 {
-    min-height: 600px;
     margin-top: 120px;
+    overflow: hidden;
     color: #ffffff;
     .title {
-      position: absolute;
       display: block;
       height: 120px;
       width: 50%;
       line-height: 120px;
       font-size: 50px;
-      left: 0;
-      animation: title-animation 1s ease;
     }
     .content {
-      position: absolute;
-      top: 140px;
-      display: block;
       margin-top: 10px;
       font-size: 24px;
       display: block;
@@ -216,15 +210,4 @@
       }
     }
   }
-}
-
-#text1 {
-  top: 140px;
-  left: 0;
-  animation: text1-animation 1.4s ease;
-}
-#text2 {
-  top: 260px;
-  left: 0;
-  animation: text2-animation 1.8s ease;
 }

@@ -1,0 +1,34 @@
+.overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10001;
+    /*display: none;*/
+    filter: alpha(opacity=60);
+    background-color: #000000;
+    opacity: 0.6;
+    -moz-opacity: 0.6;
+}
+
+#history-case-dialog {
+    position:absolute;
+    width: 70%;
+    height: 600px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+    background: #ffffff;
+    display: none;
+    z-index: 10003;
+    border-radius: 6px;
+}
+#history-case-dialog .close {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background: url("../images/close.jpg");
+    background-size: 100%;
+    right: 0;
+    top: 0;
+}

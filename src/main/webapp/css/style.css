@@ -1,0 +1,25 @@
+#box{
+    width: 380px;
+    margin: 45px auto;
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+}
+input{
+    width: 260px;
+    border: 1px solid #e2e2e2;
+    height: 45px;
+    float: left;
+    background-repeat: no-repeat;
+    background-size: 45px;
+    background-position:5px center;
+    padding:0 0 0 40px;
+}
+#search{
+    width: 60px;
+    height: 25px;
+    background: black;
+    color: white;
+    text-align: center;
+    line-height: 32px;
+    cursor: pointer;
+}
