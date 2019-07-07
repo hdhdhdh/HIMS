@@ -149,7 +149,7 @@
         /*#denglu { display: none; }*/
         /*#zhuce {display: none; }*/
     </style>
-    <title>Title</title>
+    <title>医院挂号系统</title>
 </head>
 <body>
 <div class="container" id="denglu">

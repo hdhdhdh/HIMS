@@ -40,4 +40,8 @@
     <select id="getUnprocessedAppointmentBeforTheDay"  resultType="appointment">
         select * from tb_appointment where  a_status = 0 and #{day,jdbcType=DATE} >= a_data and dp_id = #{dp_id}
     </select>
+
+    <select id="getPatientAppointmentById" resultType="appointment">
+        select * from tb_appointment where  a_status = 0 and p_id = #{p_id}
+    </select>
 </mapper>

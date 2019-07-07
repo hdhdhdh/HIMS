@@ -156,5 +156,15 @@ public class AppointmentService implements IAppointmentService
         return unprocessedAppointmentList;
     }
 
+    /**
+     * 病人得到预约信息
+     * @param p_id
+     * @return
+     */
+    @Override
+    public Appointment getPatientAppointmentById(String p_id) {
+        return iAppointmentDao.getPatientAppointmentById(p_id);
+    }
+
 
 }

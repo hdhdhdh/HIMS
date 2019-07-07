@@ -154,4 +154,24 @@ public class CaseService implements ICaseService {
         return uncheckoutPrescriptions;
     }
 
+    /**
+     *  通过病人id获取未缴费的病历单
+     * @param p_id
+     * @return
+     */
+    @Override
+    public List<Case> getUnpayedCaseByPatientId(String p_id) {
+        return iCaseDao.getUnpayedCaseByPatientId(p_id);
+    }
+
+    /**
+     * 通过病人id 获取已经缴费的病历单
+     * @param p_id
+     * @return
+     */
+    @Override
+    public List<Case> getHaveChechoutCaseByPatientId(String p_id) {
+        return iCaseDao.getHaveChechoutCaseByPatientId(p_id);
+    }
+
 }

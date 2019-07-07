@@ -20,4 +20,5 @@ public interface IAppointmentDao
     public List<Appointment> getProcessedAppointment(@Param("dp_id") String dp_id);//得到已处理的预约信息
     public List<Appointment> getUnprocessedAppointmentBeforTheDay(@Param("dp_id") String dp_id , @Param("day") Date day);//得到已处理的预约信息
     public Appointment getUnprocessedAppointmentByUserId(String p_id);
+    public Appointment getPatientAppointmentById(@Param("p_id") String p_id);  /*病人得到ziji预约记录*/
 }

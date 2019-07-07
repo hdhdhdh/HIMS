@@ -8,6 +8,7 @@ import com.whut.bean.*;
 import com.whut.service.IAppointmentService;
 import com.whut.service.ICaseService;
 import com.whut.service.IPatientService;
+import com.whut.service.imp.CaseService;
 import com.whut.service.imp.DepartmentService;
 import com.whut.service.imp.DoctorService;
 import org.json.JSONObject;
@@ -267,7 +268,12 @@ public class PatientController
     }
 
 
-    //预约的ajax
+    /**
+     *     ajax的预约 ---崔佳豪
+     * @param appointment
+     * @param session
+     * @return
+     */
     @RequestMapping( value = "/appointment.do",produces = "application/json; charset=utf-8")
     public  @ResponseBody String appointment(Appointment appointment,HttpSession session)
     {
@@ -299,6 +305,34 @@ public class PatientController
 ////        jsonObject.put("message","hello ajax");
         return json;
     }
+
+    @RequestMapping("/toPersonCenter.do")
+    public ModelAndView toPersonCenter(HttpSession session){
+        Patient patient = (Patient) session.getAttribute("currentPatient");
+        ModelAndView mv = new ModelAndView();
+        if (patient == null ) {
+            mv.setViewName("../patient/patient_login"); //通过id判断，如果没有登录就跳转到登录页面
+        }
+        else {
+            //个人信息 session中
+            //预约信息--通过id查找
+            Appointment appointment = iAppointmentService.getPatientAppointmentById(patient.getP_id());
+            Department department = departmentService.getDepartmentById(appointment.getDp_id());
+            //代缴费
+            List<Case> feesCaseList = iCaseService.getUnpayedCaseByPatientId(patient.getP_id());
+            //历史病例
+            List<Case> historyCaseList = iCaseService.getHaveChechoutCaseByPatientId(patient.getP_id());
+            mv.addObject("appointment",appointment);
+            mv.addObject("department",department);
+            mv.addObject("feesCaseList",feesCaseList);
+            mv.addObject("historyCaseList",historyCaseList);
+            mv.setViewName("../patient/person_center");   //登陆过就可以跳转到预约界面
+        }
+        return mv;
+    }
+
+
+
 
 //    @RequestMapping("/appointment.do")
 //    public ModelAndView appointment(HttpSession httpSession, String dp_id, String date)
@@ -339,6 +373,7 @@ public class PatientController
         }
         return mv;
     }
+
 
 
 

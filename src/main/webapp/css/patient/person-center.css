@@ -1,14 +1,18 @@
 .user-body {
   width: 100%;
   clear: both;
-  min-height: 600px;
+  min-height: 1700px;
   background: #ffffff;
   padding-top: 10px;
 }
 .user-body .wrap {
   width: 1330px;
   margin: 0 auto;
+  position: relative;
+  /*background: red;*/
 }
+
+
 .wrap-x {
   width: 100%;
   margin: 10px 0;

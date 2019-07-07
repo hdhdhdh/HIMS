@@ -19,4 +19,5 @@ public interface IAppointmentService {
     public List<Appointment> getProcessedAppointment(String d_id);//得到本部门已处理的预约信息
     public List<Appointment> getUnprocessedAppointmentBeforTheDay(String d_id , Date day);//根据日期获取未处理的预约
     public List<Appointment> getAUnprocessedAppointmentList(String dp_id,String type);//获取本部门未处理的预约按日期筛选
+    public Appointment getPatientAppointmentById(String p_id);  /*病人查找自己的预约*/
 }

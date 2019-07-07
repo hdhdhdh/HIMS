@@ -17,21 +17,21 @@
     <link rel="stylesheet" href="../css/patient/user-header.css">
     <link rel="stylesheet" href="../css/patient/user-footer.css">
     <link rel="stylesheet" href="../css/patient/doctor-item.css">
-    <title>Title</title>
+    <title>医院挂号系统</title>
 
 </head>
 <body>
 <header class="user-header">
     <div class="wrap">
         <div class="logo"></div>
-        <h1 class="title">PHARMACY</h1>
+        <a href="../index.jsp" class="title" style="margin: 0;font-family:'Microsoft Yahei'; text-decoration: none;color: #ffffff">PHARMACY</a>
         <nav class="user-nav">
             <ul>
                 <li><a href="user_home.jsp">首页</a></li>
                 <li><a href="${pageContext.request.contextPath}/patient/toDepartmentNav.do">科室导航</a></li>
                 <li><a href="#" class="active">医生简介</a></li>
                 <li><a href="${pageContext.request.contextPath}/patient/toAppointment.do">预约挂号</a></li>
-                <li><a href="#">个人中心</a></li>
+                <li><a href="${pageContext.request.contextPath}/patient/toPersonCenter.do">个人中心</a></li>
                 <li><a href="#">其他栏目</a></li>
             </ul>
         </nav>

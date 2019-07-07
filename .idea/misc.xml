@@ -11,7 +11,7 @@
     </option>
   </component>
   <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/src/main/webapp/patient/patient_login.html" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/patient/person_center.jsp" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
