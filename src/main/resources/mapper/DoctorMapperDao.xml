@@ -45,4 +45,10 @@
     <select id="findAllDoctor" resultType="com.whut.bean.Doctor">
        select * from tb_doctor
     </select>
+
+    <update id="updateDoctorTitleAndDescription" parameterType="com.whut.bean.Doctor">
+         update tb_doctor
+         set d_title=#{d_title},d_description=#{d_description}
+         where d_id=#{d_id}
+    </update>
 </mapper>

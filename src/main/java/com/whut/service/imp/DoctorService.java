@@ -93,6 +93,15 @@ public class DoctorService implements IDoctorService {
         return iDoctorDao.queryDoctorById(id);
     }
 
+    @Override
+    public boolean updateDoctorTitleAndDescription(Doctor doctor) {
+        try {
+            iDoctorDao.updateDoctorTitleAndDescription(doctor);
+            return true;
+        }catch (Exception e) {
+            return  false;
+        }
+    }
 
 
 }

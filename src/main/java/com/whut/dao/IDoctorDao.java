@@ -19,5 +19,5 @@ public interface IDoctorDao {
     Doctor doctorLogin(String d_id,String d_password);
     public String updateDoctor(Doctor doctor);
     Doctor queryDoctorById(String id);
-
+    void updateDoctorTitleAndDescription(Doctor doctor);    //更新医生title 和 description
 }

@@ -249,8 +249,55 @@ public class AdminController {
         return json.toString();
     }
 
+    /**
+     * 编辑  医生 页面加载时，返回当前id的医生信息---崔佳豪
+     * @param session
+     * @param d_id
+     * @return
+     */
+    @RequestMapping( value = "/ajaxGetDoctorById.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxGetDoctorById(HttpSession session, String d_id) {
+        JSONObject json = new JSONObject();
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        Doctor  doctor = docService.getDoctorById(d_id);
+        if(null==doctor) {
+            json.put("message","err");
+        }else {
+            json.put("d_id",doctor.getD_id());
+            json.put("d_name",doctor.getD_name());
+            json.put("dp_id",doctor.getDp_id());
+            json.put("d_title",doctor.getD_title());
+            json.put("d_desc",doctor.getD_description());
+        }
+        return json.toString();
+    }
 
 
+    /**
+     * 更新医生的title  description信息
+     * @param session
+     * @param doctor
+     * @return
+     */
+    @RequestMapping( value = "/ajaxUpdateDoctorTitleAndDescription.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxUpdateDoctorTitleAndDescription(HttpSession session, Doctor doctor) {
+        JSONObject json = new JSONObject();
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {
+            json.put("message","unlogin");
+        }
+        if(docService.updateDoctorTitleAndDescription(doctor)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
 
     // 删除医生
     @RequestMapping("/deleteDoctor.do")

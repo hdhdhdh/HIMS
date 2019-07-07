@@ -27,39 +27,36 @@
                 <tr>
                     <td width="13%">医生姓名</td>
                     <td width="40%"  style="table-layout:fixed">
-                        <form name="form1" method="post" action="">
-                            <label for="textfield1"></label>
-                            <input type="text" name="textfield" id="textfield1" width="257" style="width:100%; height:100%">
-                        </form></td>
+                        <input type="text" name="d_name" id="d_name" width="257" style="width:100%; height:100%" disabled>
+                    </td>
+                </tr>
+                <tr>
                     <td width="11%">医生工号</td>
-                    <td width="40%" ><form name="form1" method="post" action="">
-                        <label for="textfield2"></label>
-                        <input type="text" name="textfield" id="textfield2" width="257" style="width:100%; height:100%">
-                    </form></td>
+                    <td width="40%" >
+                        <input type="text" name="d_id" id="d_id" width="257" style="width:100%; height:100%" disabled>
+                    </td>
                 </tr>
                 <tr>
                     <td width="13%">所在科室</td>
                     <td width="40%"  style="table-layout:fixed">
-                        <form name="form1" method="post" action="">
-                            <label for="textfield3"></label>
-                            <input type="text" name="textfield" id="textfield3" width="257" style="width:100%; height:100%">
-                        </form></td>
-                    <td width="11%">医生职称</td>
-                    <td width="40%" ><form name="form1" method="post" action="">
-                        <label for="textfield4"></label>
-                        <input type="text" name="textfield" id="textfield4" width="257" style="width:100%; height:100%">
-                    </form></td>
+                        <input type="text" name="dp_id" id="dp_id" width="257" style="width:100%; height:100%" disabled>
+                    </td>
                 </tr>
                 <tr>
-                    <td width="11%">医生密码</td>
-                    <td width="40%" ><form name="form1" method="post" action="">
-                        <label for="textfield6"></label>
-                        <input type="text" name="textfield" id="textfield6" width="257" style="width:100%; height:100%">
-                    </form></td>
+                    <td width="11%">医生职称</td>
+                    <td width="40%" >
+                        <input type="text" name="d_title" id="d_title" width="257" style="width:100%; height:100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="11%">医生介绍</td>
+                    <td width="40%" >
+                        <input type="text" name="d_desc" id="d_desc" width="257" style="width:100%; height:100%">
+                    </td>
                 </tr>
             </table>
             <div style="text-align: center">
-                <a><button class="layui-btn layui-btn-normal layui-btn-radius" align="center">确认</button></a>
+                <a><button id="btn-ok" class="layui-btn layui-btn-normal layui-btn-radius" align="center">确认</button></a>
             </div>
 
         </div>
@@ -67,6 +64,84 @@
 
 </div>
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script>
+    //根据参数部分和参数名来获取参数值
+    function GetQueryString(paraPart,name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = paraPart.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    $(document).ready(function () {
+        var para=window.location.search;//当前请求的url的参数部分
+        var d_id = GetQueryString(para,"d_id");
+        //加载页面 获取对应科室的简介
+        $.ajax({
+            url : "/Administrator/ajaxGetDoctorById.do",
+            type : "POST",
+            data : {
+                d_id: d_id
+            },
+            dataType : "json",
+            //处理后端返回的数据
+            success : function(result) {
+                if(result.message){
+                    if(result.message=="unlogin") {
+                        alert("您的登录已过期,请返回主界面重新登录");
+                    }else{
+                        alert("没有当前医生信息");
+                        window.location.href = "doctorManger.html";
+                    }
+                }else{
+                    $("#d_id").val(result.d_id);
+                    $("#d_name").val(result.d_name);
+                    $("#d_title").val(result.d_title);
+                    $("#d_desc").val(result.d_desc);
+                    $("#dp_id").val(result.dp_id);
+                }
+            },
+            //处理失败返回的数据
+            error : function(result) {
+                alert("发生了错误 " + result);
+            }
+        });
+
+
+
+
+        $("#btn-ok").click(function () {        //点击提交 更新科室简介
+            if(d_id==null || d_id=="") return;
+            $.ajax({
+                url : "/Administrator/ajaxUpdateDoctorTitleAndDescription.do",
+                type : "POST",
+                data : {
+                    d_id:   d_id,
+                    d_title:  $("#d_title").val(),
+                    d_description : $("#d_desc").val()
+                },
+                dataType : "json",
+                //处理后端返回的数据
+                success : function(result) {
+                    if(result.message == "success") {
+                        alert("更新成功");
+                        window.location.href = "doctorManger.html";
+                    }else if(result.message == "fail") {
+                        alert("更新失败");
+                    }else if(result.message=="unlogin") {
+                        alert("您的登录已过期,请返回主界面重写登录");
+                    }
+                },
+                //处理失败返回的数据
+                error : function(result) {
+                    // window.location.href="err.html";
+                    alert("发生了错误 " + result);
+                }
+            });
+        });
+    });
+
+</script>
 </body>
 
 </html>
