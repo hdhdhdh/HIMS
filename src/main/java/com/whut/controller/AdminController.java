@@ -201,6 +201,54 @@ public class AdminController {
         return json.toString();
     }
 
+    /**
+     * 编辑科室页面加载时，返回当前id的科室简介---崔佳豪
+     * @param session
+     * @param dp_id     需要查询的科室id
+     * @return
+     */
+    @RequestMapping( value = "/ajaxGetDepartmentById.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxGetDepartmentById(HttpSession session, String dp_id) {
+        JSONObject json = new JSONObject();
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        Department department = departmentService.getDepartmentById(dp_id);
+        if(null==department) {
+            json.put("message","err");
+        }else {
+            json.put("dp_desc",department.getDp_description());
+        }
+        return json.toString();
+    }
+
+
+
+    /**
+     * ajax更新科室简介  ---崔佳豪
+     * @param session
+     * @param department
+     * @return
+     */
+    @RequestMapping( value = "/ajaxUpdateDepartmentDescription.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxUpdateDepartmentDescription(HttpSession session, Department department) {
+        JSONObject json = new JSONObject();
+
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        if(departmentService.UpdateDepartmentDescription(department)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
+
 
 
 
