@@ -8,6 +8,8 @@ import com.whut.enums.GenderEnum;
 import com.whut.service.IAdministratorsSrevices;
 import com.whut.service.IDepartmentService;
 import com.whut.service.IDoctorService;
+import com.whut.service.imp.AdministratorsService;
+import com.whut.service.imp.DepartmentService;
 import com.whut.service.imp.DoctorService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,8 +38,9 @@ public class AdminController {
     @Autowired
     public IDoctorService docService;
     @Autowired
-    IAdministratorsSrevices administratorsSrevices;
-
+    AdministratorsService administratorsSrevices;
+    @Autowired
+    DepartmentService departmentService;
 
     private IDepartmentService iDepartmentService;
 
@@ -90,6 +93,9 @@ public class AdminController {
         int pages = pageInfo.getPages();        //获取总的页数
 
         JSONArray array = new JSONArray();
+        departmentService.getAllDepartment();
+
+
         List<Doctor> list = pageInfo.getList(); //得到分页的结果
         for (Doctor doctortemp:   list ) {
             JSONObject jsonItem = new JSONObject();
@@ -117,12 +123,27 @@ public class AdminController {
         json.put("doctorList",array);   //将医生的信息列表加入到json
         json.put("pageNum",pageNum);    //将当前页号传入到json
         json.put("pages",pages);        //将总的页数传入到json
-
-        System.out.println("-----------------------------------------");
-        System.out.println(json.toString());
-        System.out.println("------------------------------------------");
         return json.toString();
     }
+
+    /**
+     * 添加医生 页面获取所有科室   ---崔佳豪
+     * @return
+     */
+    @RequestMapping( value = "/ajaxGetAllDepartmentToSelect.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  getAllDepartmentToSelect() {
+        List<Department> departmentList = departmentService.getAllDepartment();     //获取所有的科室信息
+        JSONArray array = new JSONArray();
+        for (Department departmentTemp :  departmentList ) {
+            JSONObject jsonItem = new JSONObject();
+            jsonItem.put("dp_id",departmentTemp.getDp_id());                  //department 的 id
+            jsonItem.put("dp_name",departmentTemp.getDp_name());              //department 的名字
+            array.put(jsonItem);    //将一个科室信息的json对象加入到array中
+        }
+        return array.toString();
+    }
+
 
 
 
