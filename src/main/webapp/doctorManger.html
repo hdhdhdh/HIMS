@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="css/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 		<link rel="stylesheet" href="css/table.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<style>
 			.page-box {
 				display: inline-block;
@@ -20,7 +21,6 @@
 
 	<body>
 		<div class="admin-main">
-
 			<blockquote class="layui-elem-quote">
 				<a href="addDoctor.html" class="layui-btn layui-btn-small" id="add">
 					<i class="layui-icon">&#xe608;</i> 添加医生
@@ -54,9 +54,23 @@
 			</fieldset>
 			<div class="admin-table-page">
 				<div id="paged" class="page">
-					<div class="page-box" id="page_box">
-
-					</div>
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<li><a href="#" id="first-page">首页</a></li>
+							<li>
+								<a href="#" aria-label="Previous" id="pre-page">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li><a href="#" id="current-page">4</a></li>
+							<li>
+								<a href="#" aria-label="Next" id="next-page">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+							<li><a href="#" id="last-page">末页</a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
@@ -78,58 +92,97 @@
 			<!--</tr>-->
 			<!--{{# }); }}-->
 		<!--</script>-->
-		<script type="text/javascript" src="plugins/layui/layui.js"></script>
-		<script src="js/jquery-2.2.1.min.js"></script>
-		<script>
-			//-- 崔佳豪 --
-			$(document).ready(function () {	//页面加载完毕请求医生列表
-                getDoctorList();
-            });
-            /**
-			 * 分页查询
-             * @param page	当前页
-             * @param size	每页的数量
-             */
-			function getDoctorList(page,size) {
-				page=page||1;
-                size=size||5;	//设置默认第一页，每页5条记录
-                $.ajax({
-                    url : "/Administrator/ajaxGetAllDoctor.do",
-                    type : "POST",
-                    data : {
-                        page:   page,
-                        ad_password:  size
-                    },
-                    dataType : "json",
-                    //处理后端返回的数据
-                    success : function(result) {
-						var doctorList = result.doctorList;
-						var pageNum = result.pageNumber;
-						var pages = result.pages;
-						//处理doctorList
-						$.each(doctorList,function (index, item) {
-							$("#content").append("<tr>" +
-                                "<td>" + doctorList[index].d_id +"</td>\n" +
-                                "<td>" + doctorList[index].d_name +"</td>" +
-                                "<td>" + doctorList[index].d_gender +"</td>" +
-                                "<td>" + doctorList[index].d_birthday +"</td>" +
-                                "<td>" + doctorList[index].t_id +"</td>" +
-                                "<td>" + doctorList[index].d_title +"</td>" +
-                                "<td>" + doctorList[index].dp_id +"</td>" +
-                                "<td>" +
-                                "<a href=\"editDoctor.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
-                                "<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +
-                                "</td>" +
-                                "</tr>");
-                        })
-                    },
-                    //处理失败返回的数据
-                    error : function(result) {
-                        window.location.href="err.html";
-                    }
-                });
-			}
+<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script>
+	//-- 崔佳豪 --
+	$(document).ready(function () {	//页面加载完毕请求医生列表
+		getDoctorList();
+	});
+	/**
+	 * 分页查询
+	 * @param page	当前页
+	 * @param size	每页的数量
+	 */
+	function getDoctorList(page,size) {
+		page=page||1;
+		size=size||5;	//设置默认第一页，每页5条记录
+		$.ajax({
+			url : "/Administrator/ajaxGetAllDoctor.do",
+			type : "POST",
+			data : {
+				page:   page,
+				size:  size
+			},
+			dataType : "json",
+			//处理后端返回的数据
+			success : function(result) {
+				var doctorList = result.doctorList;
+				var pageNum = result.pageNum;
+				var pages = result.pages;
+				//处理doctorList
+                $("#content").html("");
+				$.each(doctorList,function (index, item) {
+					$("#content").append("<tr>" +
+						"<td>" + doctorList[index].d_id +"</td>\n" +
+						"<td>" + doctorList[index].d_name +"</td>" +
+						"<td>" + doctorList[index].d_gender +"</td>" +
+						"<td>" + doctorList[index].d_birthday +"</td>" +
+						"<td>" + doctorList[index].t_id +"</td>" +
+						"<td>" + doctorList[index].d_title +"</td>" +
+						"<td>" + doctorList[index].dp_id +"</td>" +
+						"<td>" +
+						"<a href=\"editDoctor.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
+						"<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +
+						"</td>" +
+						"</tr>");
+				});
+				console.log(pageNum + "   " + pages);
+				if(pageNum>0 && pages>0) {
 
+					//***重要：清除之前绑定的，不然绑定多个，就会触发多个
+                    $("#first-page").unbind("click");
+                    $("#pre-page").unbind("click");
+                    $("#next-page").unbind("click");
+                    $("#last-page").unbind("click");
+
+
+                    $("#first-page").click(function () {	//首页
+                        alert(123);
+                        getDoctorList(1,5)
+                    });
+                    $("#current-page").text(pageNum);
+                    $("#pre-page").click(function () {	//上一页
+                        getDoctorList(pageNum-1,5)
+                    });
+                    $("#next-page").click(function () {
+                        getDoctorList(pageNum+1,5)
+                    });
+                    $("#last-page").click(function () {
+                        getDoctorList(pages,5)
+                    });
+				}
+			},
+			//处理失败返回的数据
+			error : function(result) {
+				window.location.href="err.html";
+			}
+		});
+	}
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+		<script>
 			layui.config({
 				base: 'js/'
 			});
