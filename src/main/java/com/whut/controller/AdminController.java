@@ -144,7 +144,35 @@ public class AdminController {
         return array.toString();
     }
 
+    /**
+     *  添加医生 提交的 ajax --崔佳豪
+     * @return
+     */
+    @RequestMapping( value = "/ajaxAddDoctor.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxAddDoctor(HttpSession session, Doctor doctor) {
 
+
+        System.out.println("-----------------------------------");
+        System.out.println(doctor);
+        System.out.println("--------------------------------------------------------");
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            return "";
+        }
+        if(doctor.getDp_id().equals("0901")) {  //分配到药房的为 药剂师
+            doctor.setT_id("11");       //药剂师 11
+        }else {
+            doctor.setT_id("01");       //普通医生 01
+        }
+        JSONObject json = new JSONObject();
+        if(docService.addDoctor(doctor)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
 
 
 
@@ -174,7 +202,7 @@ public class AdminController {
      */
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
