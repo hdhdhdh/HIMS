@@ -38,11 +38,11 @@ public class Doctor {
         this.d_title = d_title;
     }
 
-    public int getD_gender() {
+    public Integer getD_gender() {
         return d_gender;
     }
 
-    public void setD_gender(int d_gender) {
+    public void setD_gender(Integer d_gender) {
         this.d_gender = d_gender;
     }
 

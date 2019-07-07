@@ -57,9 +57,9 @@
                 </tr>
                 <tr>
                     <td width="11%"><font color="#FF0000">*</font>医生密码</td>
-                    <td width="40%" ><form name="form1" method="post" action="">
+                    <td width="40%" >
                         <input type="text" name="password"  width="257" style="width:100%; height:100%">
-                    </form></td>
+                    </td>
                 </tr>
                 <tr>
                     <td width="11%"><font color="#FF0000">*</font>医生简介</td>
@@ -91,7 +91,7 @@
 <script>
     $(document).ready(function(){
         $.ajax({
-            url : "/Administrator/ajaxGetAllDepartment.do",
+            url : "/Administrator/ajaxGetAllDepartmentToSelect.do",
             type : "POST",
             //     data : {
             //         page:   page,
@@ -121,6 +121,7 @@
         var title = $("input[name='title']").val();
         var d_desc = $("input[name='d_desc']").val();
         var dp_id =$("#department option:selected").val();
+        var password = $("input[name='password']").val();
 
         if(name=="" || name==null) {
             alert("请填写姓名");
@@ -131,7 +132,39 @@
         }else if(title==null || title=="") {
             alert("请填写职称");
         }else{
-
+            $.ajax({
+                url : "/Administrator/ajaxAddDoctor.do",
+                type : "POST",
+                    data : {
+                        d_id:id,
+                        d_name:name,
+                        // t_id:
+                        d_title:title,
+                        d_password:password,
+                        d_birthday:birthday,
+                        d_description:d_desc,
+                        d_gender:gender,
+                        dp_id : dp_id
+        },
+                dataType : "json",
+                //处理后端返回的数据
+                success : function(result) {
+                  if(resutl=="" || result==null) {
+                      alert("你没有登录");
+                  }else {
+                      if(result.message=="success"){
+                          alert("添加成功");
+                          window.location.href = "doctorManger.html";
+                      }else if(result.message=="fail"){
+                          alert("添加失败，该工号已经存在");
+                      }
+                  }
+                },
+                //处理失败返回的数据
+                error : function(result) {
+                    window.location.href="err.html";
+                }
+            });
         }
 
         alert(name + "   " + id + "   " + gender + "  " + birthday + "  " + title + "   " + d_desc + "  "+dp_id);
