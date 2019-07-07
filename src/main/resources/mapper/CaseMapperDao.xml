@@ -14,7 +14,7 @@
     <select id="getUnpayedCaseByPatientId" resultType="case">
         select* from tb_case where d_id = #{d_id} and c_status = 3;
     </select>
-    <select id="getCaseByPatientId" parameterType="int" resultType="case">
+    <select id="getCaseByPatientId"  resultType="case">
         select* from tb_case where p_id = #{p_id};
     </select>
     <update id="updateCase" parameterType="case">

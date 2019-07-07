@@ -148,6 +148,9 @@
 	$("#refresh").click(function () {
         getUnprocessedList();
     });
+    $(document).ready(function () {	//页面加载完毕请求医生列表
+        getUnprocessedList();
+    });
     function getUnprocessedList() {
         // alert("fuck");
         // page=page||1;
@@ -173,7 +176,7 @@
                         "<td>" + item.p_id +"</td>" +
                         "<td>" + item.a_date +"</td>" +
                         "<td>" +
-                        "<a href=\"historyCase.jsp\"><button class=\"layui-btn layui-btn-small\">历史病例</button></a>" +
+                        "<a href=\"historyCase.jsp?p_id='" + item.p_id + "'\"><button class=\"layui-btn layui-btn-small\">历史病例</button></a>" +
                         "<a href=\"acceptCase.jsp\"><button class=\"layui-btn layui-btn-small\">受理</button></a>" +
                         "</td>" +
                         "</tr>"

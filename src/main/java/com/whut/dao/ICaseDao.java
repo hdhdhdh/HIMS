@@ -16,7 +16,7 @@ public interface ICaseDao {
     public void updateCase(Case icase);//更新病例 未使用
     public void deleteCase(int c_id);//删除病例
     public boolean updateCaseSataus(@Param("c_id") int c_id,@Param("c_status") int c_status);//更新病例状态
-    public List<Case> getCaseByPatientId(String p_id);//通过病人id得到病例
+    public List<Case> getCaseByPatientId(@Param("p_id") String p_id);//通过病人id得到病例
     public void addPrescription(@Param(" c_id") int  c_id, @Param("prescription") String prescription);//添加药物使用记录到Prescription表
     public List<Case> getUnprescribedCase(@Param("d_id") String d_id);//获取指定医生诊断但是未开处方的病例
     public List<Case> getUncheckouCaseByPatientId (@Param("p_id") String p_id);//获取指定病人未出库的病历
