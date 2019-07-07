@@ -154,10 +154,10 @@ public class AdminController {
     @ResponseBody
     public String  ajaxAddDoctor(HttpSession session, Doctor doctor) {
 
-
-        System.out.println("-----------------------------------");
-        System.out.println(doctor);
-        System.out.println("--------------------------------------------------------");
+//
+//        System.out.println("-----------------------------------");
+//        System.out.println(doctor);
+//        System.out.println("--------------------------------------------------------");
         Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
         if(administrator==null) {   //没有登录返回空字符串
             return "";

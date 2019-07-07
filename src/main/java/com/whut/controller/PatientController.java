@@ -44,36 +44,37 @@ public class PatientController
     @Autowired
     DoctorService doctorService;
 
-    /**
-     * 用户登录 ---崔佳豪
-     * @param httpSession   session对象
-     * @param patient   patient对象
-     * @return      登录成功进入主页    |   登录失败返回登录页面
-     */
-    @RequestMapping("/login.do")
-    public ModelAndView patientLogin(HttpSession httpSession,Patient patient)
-    {
-        ModelAndView mv = new ModelAndView();
-        if (patient.getP_id() == null || patient.getP_id().equals(""))
-        {
-            mv.addObject("err","id is empty");
-            //setViewName的时候不要jsp后缀
-            mv.setViewName("../patient/patient_login");
-        }else if (patient.getP_password() == null || patient.getP_password().equals(""))
-        {
-            mv.addObject("err","password is empty");
-            mv.setViewName("../patient/patient_login");
-        }else if(!iPatientService.patientLogin(patient))
-        {
-            mv.addObject("err","id or password is wrong");
-            mv.setViewName("../patient/patient_login");
-        }else
-        {
-            httpSession.setAttribute("currentPatient",patient);//登录成功记录病人并跳转到病人主界面
-            mv.setViewName("../patient/user_home");
-        }
-        return mv;
-    }
+//    /**
+//     * 用户登录 ---崔佳豪
+//     * @param httpSession   session对象
+//     * @param patient   patient对象
+//     * @return      登录成功进入主页    |   登录失败返回登录页面
+//     */
+//    @RequestMapping("/login.do")
+//    public ModelAndView patientLogin(HttpSession httpSession,Patient patient)
+//    {
+//        ModelAndView mv = new ModelAndView();
+//        if (patient.getP_id() == null || patient.getP_id().equals(""))
+//        {
+//            mv.addObject("err","id is empty");
+//            //setViewName的时候不要jsp后缀
+//            mv.setViewName("../patient/patient_login");
+//        }else if (patient.getP_password() == null || patient.getP_password().equals(""))
+//        {
+//            mv.addObject("err","password is empty");
+//            mv.setViewName("../patient/patient_login");
+//        }else {
+//            Patient patient1 = iPatientService.patientCheckLogin(patient.getP_id(),patient.getP_password());
+//            if(null == patient1) {
+//                mv.addObject("err","id or password is wrong");
+//                mv.setViewName("../patient/patient_login");
+//            } else {
+//                httpSession.setAttribute("currentPatient",patient1);//登录成功记录病人并跳转到病人主界面
+//                mv.setViewName("../patient/user_home");
+//            }
+//        }
+//        return mv;
+//    }
 
     /**
      * ajax登录  ---崔佳豪7-6
@@ -87,10 +88,11 @@ public class PatientController
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
         String message;
-        if(!iPatientService.patientLogin(patient)) {
+        Patient patient1 = iPatientService.patientCheckLogin(patient.getP_id(),patient.getP_password());
+        if(null == patient1) {
             message = "用户名或者密码错误";
         } else {
-            session.setAttribute("currentPatient",patient); //登录成功记录病人
+            session.setAttribute("currentPatient",patient1); //登录成功记录病人
             message = "success";
         }
         try {

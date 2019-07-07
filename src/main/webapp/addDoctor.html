@@ -113,7 +113,7 @@
         });
     });
 
-    $("#btn-ok").click(function () {
+    $("#btn-ok").click(function () {        //添加按钮点击提交
         var name = $("input[name='name']").val();
         var id = $("input[name='id']").val();
         var gender = $("input[name='gender']").val();
@@ -135,21 +135,21 @@
             $.ajax({
                 url : "/Administrator/ajaxAddDoctor.do",
                 type : "POST",
-                    data : {
-                        d_id:id,
-                        d_name:name,
-                        // t_id:
-                        d_title:title,
-                        d_password:password,
-                        d_birthday:birthday,
-                        d_description:d_desc,
-                        d_gender:gender,
-                        dp_id : dp_id
-        },
+                data : {
+                    d_id:id,
+                    d_name:name,
+                    // t_id:
+                    d_title:title,
+                    d_password:password,
+                    d_birthday:birthday,
+                    d_description:d_desc,
+                    d_gender:gender,
+                    dp_id : dp_id
+                },
                 dataType : "json",
                 //处理后端返回的数据
                 success : function(result) {
-                  if(resutl=="" || result==null) {
+                  if(result=="" || result==null) {
                       alert("你没有登录");
                   }else {
                       if(result.message=="success"){
@@ -167,7 +167,7 @@
             });
         }
 
-        alert(name + "   " + id + "   " + gender + "  " + birthday + "  " + title + "   " + d_desc + "  "+dp_id);
+        // alert(name + "   " + id + "   " + gender + "  " + birthday + "  " + title + "   " + d_desc + "  "+dp_id);
     });
 
 </script>
