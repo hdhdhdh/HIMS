@@ -224,7 +224,12 @@ public class AdminController {
     }
 
 
-    // 部门管理 luodi
+    /**
+     * 查询所有部门
+     * @param page
+     * @param size
+     * @return
+     */
     @RequestMapping(value = "/ajaxGetAllDepartment.do", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String getAllDepartment(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
