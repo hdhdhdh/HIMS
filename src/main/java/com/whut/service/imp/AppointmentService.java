@@ -104,6 +104,7 @@ public class AppointmentService implements IAppointmentService
     public boolean checkDoctorPermissionForDiagnosis(String dp_id, String p_id)
     {
         Appointment appointment = iAppointmentDao.getUnprocessedAppointmentByUserId(p_id);
+        System.out.println(p_id+appointment.toString() + dp_id);
         if (appointment != null && appointment.getDp_id().equals(dp_id))
         {
             return true;
@@ -151,6 +152,7 @@ public class AppointmentService implements IAppointmentService
                 unprocessedAppointmentList = new ArrayList<>();
             }
         }
+//        System.out.println(unprocessedAppointmentList.toString());
         return unprocessedAppointmentList;
     }
 

@@ -5,7 +5,7 @@ var navs = [{
 	"children": [{
 		"title": "待处理",
 		"icon": "fa-table",
-		"href": "danganguanli.jsp"
+		"href": "unprocessedAppointmentPage.jsp"
 	}, {
 		"title": "处方开药",
 		"icon": "fa-table",

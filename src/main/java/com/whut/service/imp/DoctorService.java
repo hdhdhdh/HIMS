@@ -74,8 +74,13 @@ public class DoctorService implements IDoctorService {
 
 
     @Override
-    public String addDoctor(Doctor doctor) {
-        return iDoctorDao.addDoctor(doctor);
+    public boolean addDoctor(Doctor doctor) {
+        try{
+            iDoctorDao.addDoctor(doctor);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override

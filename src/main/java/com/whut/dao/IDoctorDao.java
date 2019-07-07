@@ -8,7 +8,9 @@ import java.util.List;
 public interface IDoctorDao {
     List<Doctor> getAllDoctor();//病人导出所有医生信息
     void deleteDoctor(String d_id);//删除医生信息
-    String addDoctor(Doctor doctor);//增加医生
+
+    void addDoctor(Doctor doctor);//增加医生
+
     List<Doctor> getAllDoctor(int page,int size);//管理员导出所有医生信息
 
     void updateDoctorWithoutId(Doctor doctor);//医生更新医生信息

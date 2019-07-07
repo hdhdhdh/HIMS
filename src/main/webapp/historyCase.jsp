@@ -19,8 +19,8 @@
 <body>
 <div style="margin: 15px;">
     <blockquote class="layui-elem-quote">
-        <h1><a href="danganguanli.jsp">返回</a></h1></blockquote>
-    <fieldset class="layui-elem-field">
+        <h1><a href="unprocessedAppointmentPage.jsp">返回</a></h1></blockquote>
+    <div class="layui-elem-field">
         <legend align="center">历史病例</legend>
         <div style="width: 90%; height: 400px; border: 1px solid #009688;">
             <div class="beg-table-box">
@@ -28,31 +28,84 @@
                     <table class="beg-table beg-table-bordered beg-table-striped beg-table-hovered">
                         <thead>
                         <tr>
-                            <th>病例编号</th>
                             <th>病人姓名</th>
+                            <th>病人性别</th>
+                            <th>出生日期</th>
                             <th>诊断时间</th>
-                            <th>诊断科目</th>
-                            <th>病状描述/医疗指导</th>
-                            <th>药物条目</th>
                             <th>诊断医师</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>张三</td>
-                            <td>2019-7-6</td>
-                            <td>骨科</td>
-                            <td class="info">描述描述描述描述</td>
-                            <td><a role="button" class="warning">药物a、药物b、药物c</a></td>
-                            <td><Doc class="chen"></Doc></td>
+                            <th>诊断结果</th>
                         </tr>
                         </thead>
+                        <tbody id="patientCaseTable">
+                        <%--<c:forEach items="${patientCaseList}" var="patientCase">--%>
+                            <%--<tr>--%>
+                                <%--<th>"${p_name}"</th>--%>
+                                <%--<th>"${p_gender}"</th>--%>
+                                <%--<th>"${p_birthday}"</th>--%>
+                                <%--<th>"${patientCase.c_date}"</th>--%>
+                                <%--<th>"${patientCase.d_id}"</th>--%>
+                                <%--<th>"${patientCase.c_description}"</th>--%>
+                            <%--</tr>--%>
+                        <%--</c:forEach>--%>
+                        </tbody>
                     </table>
                 </div>
                 <div class="beg-table-paged"></div>
             </div>
         </div>
-    </fieldset>
+    </div>
 </div>
+
+<script src="js/jquery-2.2.1.min.js"></script>
+<script>
+    $(document).ready(function ()
+    {
+        console.log("获取到的：" +<%=request.getParameter("p_id")%>);
+        getPatientCaseList();
+    });
+    function getPatientCaseList() {
+        // alert("fuck");
+        // page=page||1;
+        // size=size||5;	//设置默认第一页，每页5条记录
+        $.ajax({
+            url : "/doctor/getPatientCase.do",
+            type : "POST",
+            data :
+                {
+                    p_id:   <%=request.getParameter("p_id")%>,
+                    // ad_password:  size
+                },
+            dataType : "json",
+            //处理后端返回的数据
+            success : function(result) {
+                if(result.message)
+                {
+                    alert(result.message); return;
+                }
+
+                console.log(result);
+                $("#patientCaseTable").html("");
+                $.each(result,function (index, item) {
+
+                    $("#patientCaseTable").append("<tr>" +
+                        "<td>" + item.p_name+"</td>\n" +
+                        "<td>" + item.p_gender +"</td>" +
+                        "<td>" + item.p_birthday +"</td>"+
+                        "<td>" + item.c_date +"</td>" +
+                        "<td>" + item.d_id +"</td>" +
+                        "<td>" + item.c_description +"</td>" +
+                        "</tr>"
+                    )
+                });
+            },
+            //处理失败返回的数据
+            error : function(result) {
+                window.location.href="err.html";
+            }
+        });
+    }
+</script>
+
 
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
 <script>

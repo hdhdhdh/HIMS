@@ -2,7 +2,7 @@ package com.whut.enums;
 
 public enum CaseStatusEnum
 {
-    UNPRESCRIBED(1, "待开药"),UNPADE(3, "待支付"), UNCHECKOUT(5, "待出库"),CHECKOUT(6, "已出库");
+    UNPRESCRIBED(1, "待开药"),UNPADE(2, "待支付"), UNCHECKOUT(3, "待出库"),CHECKOUT(4, "已出库");
 
     private int status;
 

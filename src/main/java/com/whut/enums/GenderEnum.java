@@ -17,11 +17,11 @@ public enum GenderEnum
     {
         return state;
     }
-    public String getValues(int index)
+    public static GenderEnum getGenderEnum(int index)
     {
         for (GenderEnum state : values()) {
             if (state.getState() == index) {
-                return state.values;
+                return state;
             }
         }
         return null;
