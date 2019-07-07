@@ -147,38 +147,28 @@ public class DoctorController {
         }
         return mv;
     }
-    @RequestMapping( value = "/getPatientCase.do",produces = "application/json; charset=utf-8")//医生查找病例
-    @ResponseBody
-    public String getPatientCase(HttpSession httpSession,String p_id)
+    @RequestMapping("/getPatientCase.do")//医生查找病例
+
+    public ModelAndView getPatientCase(HttpSession httpSession,String p_id)
     {
+        ModelAndView mv = new ModelAndView();
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
         if (doctor.getD_id() == null)
         {
-            return "";
+            mv.setViewName("../doctor/doctor_login");
         }
         else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),p_id) == true) //检查是否有权限
         {
-            List<Case> allCase = iCaseService.getCaseByPatientId(p_id);
-            JSONArray array = new JSONArray();
-            for(Case aCase:allCase)
-            {
-                JSONObject jsonItem = new JSONObject();
-                Patient patient = iPatientService.getPatientById(appointment.getP_id());
-
-                jsonItem.put("p_name",patient.getP_name());
-                jsonItem.put("p_gender", GenderEnum.getGenderEnum(patient.getP_gender()).getValues());
-                jsonItem.put("p_age",new Date().getYear() - patient.getP_birthday().getYear());
-                jsonItem.put("p_id",patient.getP_id());
-                jsonItem.put("a_date",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(appointment.getA_date()));
-                array.put(jsonItem);
-            }
+            List<Case> all = iCaseService.getCaseByPatientId(p_id);
+            mv.addObject("patientcase",all);
+            mv.setViewName("patientcase");
         }
         else
         {
             mv.addObject("err","Permission denied");
             mv.setViewName("doctor_home");
         }
-        return "";
+        return mv;
     }
 //
 //    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
