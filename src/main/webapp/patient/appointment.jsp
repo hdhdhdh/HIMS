@@ -538,26 +538,14 @@
                         /*var message = JSON.stringify(result);*/
                         // alert("接受到的数据是：" + result);//输出默认的json字符串
                         if (result != null && result != "") {
-                            if(result=="success"){
+                            if(result.message=="success"){
                                 alert("预约成功");
-                            }else if(result=="fail") {
+                            }else if(result.message=="fail") {
                                 alert("你已有预约");
                             }else {
-                                window.location.href = "../err.html";
+                                alert("登录已过期");
+                                window.location.href = "patient_login.jsp";
                             }
-                            // var message = eval("(" + result + ")");//万能转换，拿到对象
-                            // //alert("接受到的数据是：" + message.username);
-                            // var username = message.username;
-                            // var password = message.password;
-                            // //在前台做验证
-                            // if (username != null && username != ""
-                            //     && password != null
-                            //     && password != "") {
-                            //     alert("用户登录成功");
-                            //     window.location.href="findUser.action";
-                            // } else {
-                            //     alert("用户登录失败");
-                            // }
                         }
                         //alert("接受到的数据是：" + message);
                     },

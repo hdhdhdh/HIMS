@@ -277,33 +277,23 @@ public class PatientController
     @RequestMapping( value = "/appointment.do",produces = "application/json; charset=utf-8")
     public  @ResponseBody String appointment(Appointment appointment,HttpSession session)
     {
-        String p_id = ((Patient) session.getAttribute("currentPatient")).getP_id(); //获取当前session中存的patient
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = null;
-
-        appointment.setA_date(appointment.getA_date());
+        Patient patient = (Patient) session.getAttribute("currentPatient"); //获取当前session中存的patient
+        JSONObject json = new JSONObject();
+        if(null==patient) {
+            json.put("message","nologin");
+        }
+        String p_id = patient.getP_id();
         appointment.setP_id(p_id);
-        String flag = null;
         if(iAppointmentService.addAppointment(appointment)){    //预约成功
-            flag = "success";
+            json.put("message","success");
         }else { //预约失败
-            flag = "false";
+            json.put("message","fail");
         }
-        try {
-            json = objectMapper.writeValueAsString(flag);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//        System.out.println("-------------------------------------------");
+//        System.out.println(appointment);
+//        System.out.println("--------------------------------------------");
 
-//        System.out.println("------------------------------------------");
-//        System.out.println(appointment.getDp_id());
-////        System.out.println(dp_id);
-//        System.out.println("------------------------------------------");
-//        System.out.println(appointment.getA_date());
-////        System.out.println(a_date);
-//        System.out.println("------------------------------------------");
-////        jsonObject.put("message","hello ajax");
-        return json;
+        return json.toString();
     }
 
     @RequestMapping("/toPersonCenter.do")
