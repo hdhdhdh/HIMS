@@ -78,7 +78,7 @@
     });
     $("#size-select").change(function(){
         var size = $("#size-select option:selected").val();
-        getDoctorList(1,size);
+        getDepartmentList(1,size);
     });
 
     /**
@@ -101,9 +101,10 @@
             //处理后端返回的数据
             success: function (result) {
                 var departmentList = result.departmentList;
-                var pageNum = result.pageNumber;
+                var pageNum = result.pageNum;
                 var pages = result.pages;
                 //处理departmentList
+                $("#content").html("");
                 $.each(departmentList, function (index, item) {
                     <!--content 是id-->
                     $("#content").append("<tr>" +
@@ -116,6 +117,7 @@
                         "</td>" +
                         "</tr>");
                 });
+                console.log(pageNum + "  " + pages);
                 if(pageNum>0 && pages>0) {
 
                     //***重要：清除之前绑定的，不然绑定多个，就会触发多个
@@ -128,25 +130,26 @@
 
 
                     $("#first-page").click(function () {	//首页
-                        getDoctorList(1,size)
+                        getDepartmentList(1,size)
                     });
                     $("#current-page").text(pageNum);
                     $("#pre-page").click(function () {	//上一页
-                        getDoctorList(pageNum-1,size)
+                        getDepartmentList(pageNum-1,size)
                     });
                     $("#next-page").click(function () {
                         if(pageNum<pages) {
-                            getDoctorList(pageNum+1,size)
+                            getDepartmentList(pageNum+1,size)
                         }
                     });
                     $("#last-page").click(function () {
-                        getDoctorList(pages,size)
+                        getDepartmentList(pages,size)
                     });
                 }
             },
             //处理失败返回的数据
             error: function (result) {
-                window.location.href = "err.html";
+                // window.location.href = "err.html";
+                alert("发生了错误  "+ result);
             }
         });
     }

@@ -51,6 +51,6 @@ public class DepartmentService implements IDepartmentService
        return iDepartmentDao.getAllDepartment(page,size);
    }
 
-   }
+}
 
 

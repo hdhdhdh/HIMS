@@ -95,8 +95,6 @@ public class AdminController {
         int pages = pageInfo.getPages();        //获取总的页数
 
         JSONArray array = new JSONArray();
-        departmentService.getAllDepartment();
-
 
         List<Doctor> list = pageInfo.getList(); //得到分页的结果
         for (Doctor doctortemp:   list ) {
@@ -176,13 +174,18 @@ public class AdminController {
         return json.toString();
     }
 
-
+    /**
+     * ajax添加科室信息  ---崔佳豪
+     * @param session
+     * @param department
+     * @return
+     */
     @RequestMapping( value = "/ajaxAddDepartment.do",produces = "application/json; charset=utf-8")
     @ResponseBody
     public String  ajaxAddDepartment(HttpSession session, Department department) {
-        System.out.println("-----------------------------------");
-        System.out.println(department);
-        System.out.println("--------------------------------------------------------");
+//        System.out.println("-----------------------------------");
+//        System.out.println(department);
+//        System.out.println("--------------------------------------------------------");
 
         JSONObject json = new JSONObject();
 
@@ -208,18 +211,7 @@ public class AdminController {
         return "redirect:getAllDoctor.do";
     }
 
-    // 添加医生
-    @RequestMapping("/toAddDoctor")
-    public String toAddDoctor() {
-        return "addDoctor";
-    }
 
-    // 返回添加医生的页面
-    @RequestMapping("/AddDoctor.do")
-    public String addDoctorPaper(Doctor doctor) {
-        docService.addDoctor(doctor);
-        return "redirect:getAllDoctor.do";
-    }
     /**
      * 注入对象前的初始化方法
      * SSM框架前后端string转date的lang异常及处理方法
@@ -273,7 +265,7 @@ public class AdminController {
             array.put(jsonItem);    //将一个医生信息的json对象加入到array中
         }
         JSONObject json = new JSONObject();
-        json.put("departmentList", array);   //将医生的信息列表加入到json
+        json.put("departmentList", array);   //将department的信息列表加入到json
         json.put("pageNum", pageNum);    //将当前页号传入到json
         json.put("pages", pages);        //将总的页数传入到json
 
