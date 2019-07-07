@@ -11,4 +11,6 @@ public interface IDepartmentDao
     void deleteDepartment(String dp_id);
     void updateDepartment(Department department);
     Department getDepartmentById(String dp_id);
+    List<Department> getAllDepartment(int page, int size);
+
 }

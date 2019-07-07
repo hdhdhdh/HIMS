@@ -1,6 +1,8 @@
 package com.whut.service.imp;
 
 
+import com.github.pagehelper.PageHelper;
+import com.whut.bean.Department;
 import com.whut.bean.Medicine;
 import com.whut.bean.Prescription;
 import com.whut.dao.IMedicineDao;
@@ -15,11 +17,13 @@ public class MedicineService implements IMedicineService {
    @Autowired
     public IMedicineDao iMedicineDao;
 
+    public  List<Medicine> getAllMedicine(){return iMedicineDao.getAllMedicine();}
+
     // 获取所有药品
     @Override
-    public  List<Medicine> getAllMedicine()
-    {
-        return iMedicineDao.getAllMedicine();
+    public List<Medicine> getAllMedicine(int page, int size){
+        PageHelper.startPage(page,size);
+        return iMedicineDao.getAllMedicine(page,size);
     }
 
     // 删除药品
@@ -41,7 +45,6 @@ public class MedicineService implements IMedicineService {
     @Override
     public boolean addMedicine(Medicine medicine)
     {
-
         try
         {
             iMedicineDao.addMedicine(medicine);

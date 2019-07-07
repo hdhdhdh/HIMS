@@ -28,7 +28,7 @@
 							<table class="beg-table beg-table-bordered beg-table-striped beg-table-hovered">
 								<thead>
 								<tr>
-									<th>#</th>
+
 									<th>药品编号</th>
 									<th>药品名称</th>
 									<th>剩余库存</th>
@@ -36,18 +36,11 @@
 									<th>单价</th>
 									<th>信息变更</th>
 								</tr>
-								<tr>
-									<td>1</td>
-									<td>86900373000051</td>
-									<td>阿司匹林栓</td>
-									<td>500</td>
-									<td>OTC</td>
-									<td>40.00</td>
-									<!-- Button trigger modal -->
-									<td><a href="danganguanli_bianji.html" class="layui-btn layui-btn-mini">编辑</a>
-										<a href="javascript:;" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-								</tr>
+
 								</thead>
+								<tbody id="content">
+								</tbody>
+
 							</table>
 						</div>
 						<div class="beg-table-paged"></div>
@@ -56,6 +49,60 @@
 			</fieldset>
 		</div>
 		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+
+
+
+
+		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+		<script src="js/jquery-2.2.1.min.js"></script>
+		<script>
+            $(document).ready(function () {	//页面加载完毕请求医生列表
+                getMedicineList();
+            });
+            /*分页查询
+             * @param page	当前页
+             * @param size	每页的数量
+             */
+            function getMedicineList(page,size) {
+                page=page||1;
+                size=size||5;	//设置默认第一页，每页5条记录
+                $.ajax({
+                    url : "/doctor/ajaxGetAllMedicine.do",
+                    type : "POST",
+                    data : {
+                        page:   page,
+                        ad_password:  size
+                    },
+                    dataType : "json",
+                    //处理后端返回的数据
+                    success : function(result) {
+                        var medicineList = result.medicineList;
+                        var pageNum = result.pageNumber;
+                        var pages = result.pages;
+                        //处理medicineList
+                        $.each(medicineList,function (index, item) {
+                            $("#content").append("<tr>" +
+                                "<td>" + medicineList[index].m_id +"</td>\n" +
+                                "<td>" + medicineList[index].m_name +"</td>" +
+                                "<td>" + medicineList[index].m_num +"</td>" +
+                                "<td>" + medicineList[index].m_class +"</td>" +
+                                "<td>" + medicineList[index].m_price +"</td>" +
+                                "<td>" +
+                                "<a href=\"editDoctor.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
+                                "<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +
+                                "</td>" +
+                                "</tr>");
+                        })
+                    },
+                    //处理失败返回的数据
+                    error : function(result) {
+                        window.location.href="err.html";
+                    }
+                });
+            }
+</script>
+
+
 	</body>
 
 </html>

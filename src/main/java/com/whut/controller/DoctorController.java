@@ -2,17 +2,21 @@ package com.whut.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import com.whut.bean.*;
 import com.whut.enums.CaseStatusEnum;
 import com.whut.service.*;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,7 +167,7 @@ public class DoctorController {
         }
         return mv;
     }
-//
+
 //    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
 //    {
 //
@@ -320,5 +324,63 @@ public class DoctorController {
         }
         return mv;
     }
+
+    /** luodi
+     * ajax查询药品的所有信息--带有分页
+     * @param page
+     * @param size
+     * @return */
+    @RequestMapping( value = "/ajaxGetAllMedicine.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  getAllMedicine(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size) {
+        List<Medicine> all = iMedicineService.getAllMedicine(page, size);
+        PageInfo pageInfo = new PageInfo(all);
+        int pageNum = pageInfo.getPageNum();    //获取当前分页页号
+        int pages = pageInfo.getPages();        //获取总的页数
+
+        JSONArray array = new JSONArray();
+        iMedicineService.getAllMedicine();
+
+
+        List<Medicine> list = pageInfo.getList(); //得到分页的结果
+        for (Medicine medicineTemp:   list ) {
+
+            JSONObject jsonItem = new JSONObject();
+            jsonItem.put("m_id",medicineTemp.getM_id());                  //药品的 id
+            jsonItem.put("m_name",medicineTemp.getM_name());              //药品的名称
+            jsonItem.put("m_num",medicineTemp.getM_num());                  //药品的数量
+            jsonItem.put("m_class",medicineTemp.getM_class());            //药品的类型
+            jsonItem.put("m_price",medicineTemp.getM_price());                //药品的价格
+
+            array.put(jsonItem);    //将一个医生信息的json对象加入到array中
+        }
+        JSONObject json = new JSONObject();
+        json.put("medicineList",array);   //将医生的信息列表加入到json
+        json.put("pageNum",pageNum);    //将当前页号传入到json
+        json.put("pages",pages);        //将总的页数传入到json
+        return json.toString();
+    }
+
+    // 部门管理 luodi
+    @RequestMapping(value = "/ajaxAddMedicine.do", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String ajaxAddMedicine(HttpSession session,Medicine medicine) {
+        System.out.println(medicine);
+        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
+       // Doctor doctorMageMedicine=(Doctor) session.getAttribute("currentMedicine");
+
+      JSONObject json=new JSONObject();
+      if(iMedicineService.addMedicine(medicine)){
+          json.put("message","success");
+      }
+      else {
+          json.put("message","fail");
+      }
+        return json.toString();
+    }
+
+
+
 
 }

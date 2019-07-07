@@ -70,7 +70,7 @@
             base: 'js/'
         }).use(['btable'], function () {
             var btable = layui.btable(),
-                $ = layui.jquery;
+                $$ = layui.jquery;
 
             btable.set({
                 elem: '#content',
@@ -94,7 +94,7 @@
             });
             btable.render();
 
-            $('#getAll').on('click', function () {
+            $$('#getAll').on('click', function () {
 
                 //btable.getSelected(function(obj){
                 //	console.log(obj.elem);
@@ -110,12 +110,13 @@
 
             });
 
-            $(window).on('resize', function (e) {
-                var $that = $(this);
-                $('#content').height($that.height() - 92);
+            $$(window).on('resize', function (e) {
+                var $that = $$(this);
+                $$('#content').height($that.height() - 92);
             }).resize();
         });
     </script>
 </body>
 
 </html>
+<!----出发确认---->

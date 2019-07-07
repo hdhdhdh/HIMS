@@ -41,8 +41,10 @@ public class AdminController {
     AdministratorsService administratorsSrevices;
     @Autowired
     DepartmentService departmentService;
-
+    @Autowired
     private IDepartmentService iDepartmentService;
+
+
 
 /*
 
@@ -194,8 +196,36 @@ public class AdminController {
     }
 
 
-    // 分页处理
+    // 部门管理 luodi
+    @RequestMapping(value = "/ajaxGetAllDepartment.do", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getAllDepartment(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+        List<Department> all = iDepartmentService.getAllDepartment(page, size);
+        PageInfo pageInfo = new PageInfo(all);
+        int pageNum = pageInfo.getPageNum();    //获取当前分页页号
+        int pages = pageInfo.getPages();        //获取总的页数
 
+
+        JSONArray array = new JSONArray();
+        List<Department> list = pageInfo.getList(); //得到分页的结果
+        for (Department departmentTemp : list) {
+            JSONObject jsonItem = new JSONObject();
+            jsonItem.put("dp_id", departmentTemp.getDp_id());                  //department的 id
+            jsonItem.put("dp_name", departmentTemp.getDp_name());              //department的名称
+            jsonItem.put("dp_description", departmentTemp.getDp_description());                  //department的简介
+
+            array.put(jsonItem);    //将一个医生信息的json对象加入到array中
+        }
+        JSONObject json = new JSONObject();
+        json.put("departmentList", array);   //将医生的信息列表加入到json
+        json.put("pageNum", pageNum);    //将当前页号传入到json
+        json.put("pages", pages);        //将总的页数传入到json
+
+        System.out.println("-----------------------------------------");
+        System.out.println(json.toString());
+        System.out.println("------------------------------------------");
+        return json.toString();
+    }
 
 
 
@@ -204,8 +234,6 @@ public class AdminController {
     public String togetAllDepartment() {
         return "departmentManage";
     }
-    */
-
 
     @RequestMapping("/getAllDepartment.do")
     public ModelAndView AllDepartment() {
@@ -216,8 +244,6 @@ public class AdminController {
         return mv;
     }
 
-
-    /*
 
     @RequestMapping("/addDepartment.do")//增加科室
     public ModelAndView addDepartment(HttpSession httpSession, Department department) {

@@ -40,17 +40,60 @@
         </div>
     </div>
 </div>
-<!--模板-->
-<script type="text/html" id="tpl">
-    {{# layui.each(d.list, function(index, item){ }}
-    <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td><a href="editDepartment.html" class="layui-btn layui-btn-mini">编辑</a></td>
-    </tr>
-    {{# }); }}
+
+<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script>
+    //-- luodi --
+    $(document).ready(function () {	//页面加载完毕请求部门列表
+        getDepartmentList();
+    });
+    /**
+     * 分页查询
+     * @param page	当前页
+     * @param size	每页的数量
+     */
+    function getDepartmentList(page,size) {
+        page = page || 1;
+        size = size || 5;	//设置默认第一页，每页5条记录
+        $.ajax({
+            // 修该请求
+            url: "/Administrator/ajaxGetAllDepartment.do",
+            type: "POST",
+            data: {
+                page: page,
+                ad_password: size
+            },
+            dataType: "json",
+            //处理后端返回的数据
+            success: function (result) {
+                var departmentList = result.departmentList;
+                var pageNum = result.pageNumber;
+                var pages = result.pages;
+                //处理departmentList
+                $.each(departmentList, function (index, item) {
+                    <!--content 是id-->
+                    $("#content").append("<tr>" +
+                        "<td>" + departmentList[index].dp_id + "</td>\n" +
+                        "<td>" + departmentList[index].dp_name + "</td>" +
+                        "<td>" + departmentList[index].dp_description + "</td>" +
+                        "<td>" +
+                        "<a href=\"editDoctor.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
+                        /*"<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +*/
+                        "</td>" +
+                        "</tr>");
+                })
+            },
+            //处理失败返回的数据
+            error: function (result) {
+                window.location.href = "err.html";
+            }
+        });
+    }
 </script>
+
+
+
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
 <script>
     layui.config({
@@ -66,8 +109,8 @@
 
         paging.init({
             url: 'datas/laytpl_laypage_data.json', //地址
-            elem: '#content', //内容容器
-            params: { //发送到服务端的参数
+            elem: '#content',     //内容容器
+            params: {             //发送到服务端的参数
             },
             type: 'GET',
             tempElem: '#tpl', //模块容器

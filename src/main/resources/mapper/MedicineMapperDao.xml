@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
-<mapper namespace="com.whut.dao.IMedicineDao" >
+<mapper namespace="com.whut.dao.IMedicineDao">
     <select id="getMedicineById" parameterType="java.lang.String" resultType="medicine">
         select * from tb_medicine where p_id=#{p_id}
     </select>
     <insert id="addMedicine" parameterType="medicine">
-        insert into tb_medicine (p_id,p_name,p_gender,p_birthday,p_password) value (#{p_id},#{p_name},#{p_gender},#{p_birthday},#{p_password})
+        insert into tb_medicine (m_id,m_name,m_num,m_class,m_price) values (#{m_id},#{m_name},#{m_num},#{m_class},#{m_price})
     </insert>
+
     <select id="getAllMedicine" resultType="medicine">
-        select * from tb_medicine where t_id=#{t_id}
+        select * from tb_medicine
     </select>
+
     <select id="getMedicineByName" resultType="medicine">
         select * from tb_medicine where m_name like "%"#{m_name}"%"
     </select>
