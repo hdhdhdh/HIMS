@@ -177,6 +177,29 @@ public class AdminController {
     }
 
 
+    @RequestMapping( value = "/ajaxAddDepartment.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxAddDepartment(HttpSession session, Department department) {
+        System.out.println("-----------------------------------");
+        System.out.println(department);
+        System.out.println("--------------------------------------------------------");
+
+        JSONObject json = new JSONObject();
+
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        if(departmentService.addDepartment(department)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
+
+
+
 
     // 删除医生
     @RequestMapping("/deleteDoctor.do")

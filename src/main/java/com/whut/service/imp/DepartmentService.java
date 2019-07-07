@@ -25,7 +25,12 @@ public class DepartmentService implements IDepartmentService
     @Override
     public boolean addDepartment(Department department)
     {
-        return false;
+        try{
+            iDepartmentDao.addDepartment(department);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override

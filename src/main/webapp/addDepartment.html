@@ -27,28 +27,25 @@
                 <tr>
                     <td width="13%"><font color="#FF0000">*</font>科室编号</td>
                     <td width="40%"  style="table-layout:fixed">
-                        <form name="form1" method="post" action="">
-                            <label for="textfield1"></label>
-                            <input type="text" name="textfield" id="textfield1" width="257" style="width:100%; height:100%">
-                        </form></td>
+                        <input type="text" name="deportment-id" maxlength="4" id="deportment-id" width="257" style="width:100%; height:100%">
+                    </td>
+
                 </tr>
                 <tr>
                     <td width="11%"><font color="#FF0000">*</font>科室名称</td>
-                    <td width="40%" ><form name="form1" method="post" action="">
-                        <label for="textfield2"></label>
-                        <input type="text" name="textfield" id="textfield2" width="257" style="width:100%; height:100%">
-                    </form></td>
+                    <td width="40%" >
+                        <input type="text" name="deportment-name" maxlength="15" id="deportment-name" width="257" style="width:100%; height:100%">
+                    </td>
                 </tr>
                 <tr>
                     <td width="11%"><font color="#FF0000">*</font>科室描述</td>
-                    <td width="40%" ><form name="form1" method="post" action="">
-                        <label for="textfield3"></label>
-                        <textarea type="text" name="textfield" id="textfield3" width="257" style="width:100%; height:200px;resize: none" ></textarea>
-                    </form></td>
+                    <td width="40%" >
+                        <textarea type="text" name="deportment-desc" id="deportment-desc" width="257" style="width:100%; height:200px;resize: none" ></textarea>
+                    </td>
                 </tr>
             </table>
             <div style="text-align: center">
-                <a><button class="layui-btn layui-btn-normal layui-btn-radius" align="center">确认</button></a>
+                <a ><button id="btn-ok"  class="layui-btn layui-btn-normal layui-btn-radius" align="center">确认</button></a>
             </div>
 
         </div>
@@ -56,6 +53,64 @@
 
 </div>
 <script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script>
+
+    function isNumber(val){         //判断参数是否是数字
+        var regPos = /^[0-9]*$/;
+        if(regPos.test(val)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    $("#btn-ok").click(function () {
+
+        var dp_id = $("#deportment-id").val();
+        var dp_name = $("#deportment-name").val();
+        var dp_desc = $("#deportment-desc").val();
+
+        // alert(d_id + "  " + d_name +  "  " + d_desc);
+        // alert(isNumber(d_id));
+        if(dp_id==null || dp_id=="") {
+            alert("科室编号不能为空");
+        }else if(dp_name ==null || dp_name=="") {
+            alert("科室名称不能为空");
+        }else if(dp_desc==null || dp_desc=="") {
+            alert("科室描述不能为空");
+        }else if(dp_id.length!=4 || !isNumber(dp_id)) {    //4为长 数字
+            alert("科室编号应该是4位数字编码");
+        }else {
+            $.ajax({
+                url : "/Administrator/ajaxAddDepartment.do",
+                type : "POST",
+                data : {
+                    dp_id:dp_id,
+                    dp_name:dp_name,
+                    dp_description:dp_desc
+                },
+                dataType : "json",
+                //处理后端返回的数据
+                success : function(result) {
+                    if(result.message == "success") {
+                        alert("添加成功");
+                        window.location.href = "departmentManger.html";
+                    }else if(result.message == "fail") {
+                        alert("科室编号已存在");
+                    }else if(result.message=="unlogin") {
+                        alert("您的登录已过期,请返回主界面重写登录");
+                    }
+                },
+                //处理失败返回的数据
+                error : function(result) {
+                   alert("发生了错误 " + result)
+                }
+            });
+        }
+    });
+</script>
 </body>
 
 </html>
