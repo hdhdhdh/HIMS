@@ -163,9 +163,13 @@
             <div id="myappointment-box">
                 <h3>我的预约:</h3>
                 <span class="line"></span>
+                <% if(null != request.getAttribute("appointment")) { %>
                 <p>预约科室：<span>${department.dp_name}</span></p>
                 <p>预约时间：<span><%=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(((Appointment)request.getAttribute("appointment")).getA_date())%></span></p>
                 <p>编号：<span>${appointment.a_id}</span></p>
+                <% } else { %>
+                <p>暂无预约信息</p>
+                <% } %>
             </div>
         </div>
 

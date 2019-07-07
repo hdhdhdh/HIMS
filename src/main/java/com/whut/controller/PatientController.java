@@ -296,6 +296,11 @@ public class PatientController
         return json.toString();
     }
 
+    /**
+     * 跳转到 个人中心的页面 --崔佳豪
+     * @param session
+     * @return
+     */
     @RequestMapping("/toPersonCenter.do")
     public ModelAndView toPersonCenter(HttpSession session){
         Patient patient = (Patient) session.getAttribute("currentPatient");
@@ -306,8 +311,14 @@ public class PatientController
         else {
             //个人信息 session中
             //预约信息--通过id查找
-            Appointment appointment = iAppointmentService.getPatientAppointmentById(patient.getP_id());
-            Department department = departmentService.getDepartmentById(appointment.getDp_id());
+            Appointment appointment = null;
+            Department department = null;
+
+            appointment = iAppointmentService.getPatientAppointmentById(patient.getP_id());
+            if(null != appointment) {
+                department = departmentService.getDepartmentById(appointment.getDp_id());
+            }
+
             //代缴费
             List<Case> feesCaseList = iCaseService.getUnpayedCaseByPatientId(patient.getP_id());
             //历史病例
