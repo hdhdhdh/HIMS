@@ -121,9 +121,10 @@ public class DoctorController {
         return "redirect:/doctor/findAppointment.do";//返回预约信息界面
     }
     @RequestMapping( value = "/addCase.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
     public String addCase(HttpSession httpSession, String p_id,  String c_description, String c_fee)
     {
-        System.out.println("addcase"+p_id+c_description+c_fee);
+//        System.out.println("addcase"+p_id+c_description+c_fee);
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
         if (doctor.getD_id() == null)
         {
@@ -135,7 +136,7 @@ public class DoctorController {
         }
         else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),p_id) == true && iAppointmentService.updateAppointmentStatus(p_id) == true) //检查是否有权限
         {
-            System.out.println("addCasePermissionChecked");
+//            System.out.println("addCasePermissionChecked");
             Case ncase = new Case();
             ncase.setP_id(p_id);
             ncase.setD_id(doctor.getD_id());
@@ -143,15 +144,19 @@ public class DoctorController {
             ncase.setC_fee(new BigDecimal(c_fee));
             ncase.setC_status(1);
             ncase.setC_date(new Date());
-            System.out.println(ncase.toString());
+//            System.out.println(ncase.toString());
             iCaseService.addCase(ncase);
-            return new JSONObject().put("message","successed").toString();
+            return (new JSONObject().put("message","successed")).toString();
         }
         else
         {
-            return  new JSONObject().put("message","Permission denied").toString();
+            return  (new JSONObject().put("message","Permission denied")).toString();
         }
+//        JSONObject json = new JSONObject();
+//        json.put("message","hhhh");
+//        return  json.toString();
 
+//        return  (new JSONObject().put("message","Permission denied")).toString();
     }
 
 
@@ -262,7 +267,7 @@ public class DoctorController {
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
         if (doctor == null)
         {
-            return "";
+            return   new JSONObject().put("message","please login").toString();
         }
         else
         {
@@ -282,21 +287,35 @@ public class DoctorController {
             return array.toString();
         }
     }
-    public ModelAndView getUnprescribedCase(HttpSession httpSession)
+    @RequestMapping( value = "/getUnprescribedCase.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getUnprescribedCase(HttpSession httpSession)
     {
-        ModelAndView mv = new ModelAndView();
+        System.out.println("getUnprescribedCaseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");;
         if (doctor == null)
         {
-            mv.setViewName("../doctor/doctor_login"); //未登录
+            return   new JSONObject().put("message","please login").toString();
         }
         else
         {
             List<Case> unprescribedCase = iCaseService.getUnprescribedCase(doctor.getD_id());
-            mv.addObject("unprescribedCase",unprescribedCase);
-            mv.setViewName("getUnprescribedCase");
+            JSONArray array = new JSONArray();
+            if(unprescribedCase == null || unprescribedCase.size() == 0)
+            {
+                return   new JSONObject().put("message","no case").toString();
+            }
+            for(Case c:unprescribedCase)
+            {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("c_id",c.getC_id());
+                jsonObject.put("p_name",iPatientService.getPatientById(c.getP_id()).getP_name());
+                jsonObject.put("c_date",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getC_date()));
+                array.put(jsonObject);
+            }
+                return array.toString();
         }
-        return mv;
+
     }
     public ModelAndView searchMedicineByName(HttpSession httpSession ,String m_name)
     {

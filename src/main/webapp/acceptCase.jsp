@@ -79,20 +79,21 @@
             dataType : "json",
             //处理后端返回的数据
             success : function(result) {
-                if(result.message == "successed")
+                if(result.message != "successed")
                 {
                     alert(result.message);
-                    <%--window.location.href="${pageContext.request.contextPath}/unprocessedAppointmentPage.jsp";--%>
+                    window.location.href="${pageContext.request.contextPath}/unprocessedAppointmentPage.jsp";
 
                 }else
                 {
-                    <%--window.location.href="${pageContext.request.contextPath}/unprocessedAppointmentPage.jsp";--%>
+                    window.location.href="${pageContext.request.contextPath}/unprocessedAppointmentPage.jsp";
                 }
 
             },
             //处理失败返回的数据
             error : function(result) {
-                window.location.href="err.html";
+                alert(result.message);
+                // window.location.href="err.html";
             }
         });
     }

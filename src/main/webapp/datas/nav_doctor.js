@@ -9,7 +9,7 @@ var navs = [{
 	}, {
 		"title": "处方开药",
 		"icon": "fa-table",
-		"href": "shujudangan.jsp"
+		"href": "getUnprescribedCasePage.jsp"
 	}, {
 		"title": "已处理",
 		"icon": "fa-navicon",
