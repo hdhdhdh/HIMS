@@ -60,7 +60,7 @@
 						<option value="week">一周内</option>
 						<option value="all">全部</option>
 					</select>
-					<button type="button" class="btn btn-primary" >刷新</button>
+					<button type="button" class="btn btn-primary" id="refresh">刷新</button>
 				</form>
 			</fieldset>
 			<hr>
@@ -70,27 +70,28 @@
 						<table class="beg-table beg-table-bordered beg-table-striped beg-table-hovered">
 							<thead>
 								<tr>
-									<th>身份证号</th>
 									<th>病人姓名</th>
+									<th>病人性别</th>
+									<th>病人年龄</th>
+									<th>身份证号</th>
 									<th>预约时间</th>
-									<th>预约科目</th>
 									<th>状态</th>
 									<th>操作</th>
 								</tr>
-								<tr>
-									<td>1</td>
-									<td>张三</td>
-									<td>2019-7-6</td>
-									<td>骨科</td>
-									<td class="info">待处理</td>
-									<td>
-										<a href="historyCase.jsp"><button class="layui-btn layui-btn-small">历史病例</button></a>
-										<a href="acceptCase.jsp"><button class="layui-btn layui-btn-small">受理</button></a>
-									</td>
-
-								</tr>
-								</tr>
 							</thead>
+							<tbody id="unprocessedAppointmentTable">
+								<%--<tr>--%>
+									<%--<td>1</td>--%>
+									<%--<td>张三</td>--%>
+									<%--<td>2019-7-6</td>--%>
+									<%--<td>骨科</td>--%>
+									<%--<td class="info">待处理</td>--%>
+									<%--<td>--%>
+										<%--<a href="historyCase.jsp"><button class="layui-btn layui-btn-small">历史病例</button></a>--%>
+										<%--<a href="acceptCase.jsp"><button class="layui-btn layui-btn-small">受理</button></a>--%>
+									<%--</td>--%>
+								<%--</tr>--%>
+							</tbody>
 						</table>
 					</div>
 					<div class="beg-table-paged"></div>
@@ -140,7 +141,52 @@
 
 			});
 		</script>
+		<script src="js/jquery-2.2.1.min.js">
+		</script>
+<script>
 
+	$("#refresh").click(function () {
+        getUnprocessedList();
+    });
+    function getUnprocessedList() {
+        // alert("fuck");
+        // page=page||1;
+        // size=size||5;	//设置默认第一页，每页5条记录
+        $.ajax({
+            url : "/doctor/getUnprocessedAppointment.do",
+            type : "POST",
+            data :
+			{
+                type:   "all",
+                // ad_password:  size
+            },
+            dataType : "json",
+            //处理后端返回的数据
+            success : function(result) {
+                console.log(result);
+                //处理doctorList
+                $.each(result,function (index, item) {
+                    $("#unprocessedAppointmentTable").append("<tr>" +
+                        "<td>" + item.p_name+"</td>\n" +
+                        "<td>" + item.p_gender +"</td>" +
+                        "<td>" + item.p_age +"</td>"+
+                        "<td>" + item.p_id +"</td>" +
+                        "<td>" + item.a_date +"</td>" +
+                        "<td>" +
+                        "<a href=\"historyCase.jsp\"><button class=\"layui-btn layui-btn-small\">历史病例</button></a>" +
+                        "<a href=\"acceptCase.jsp\"><button class=\"layui-btn layui-btn-small\">受理</button></a>" +
+                        "</td>" +
+                        "</tr>"
+					)
+                });
+            },
+            //处理失败返回的数据
+            error : function(result) {
+                window.location.href="err.html";
+            }
+        });
+    }
+</script>
 	</body>
 
 </html>

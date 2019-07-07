@@ -58,8 +58,9 @@ public class PatientService implements IPatientService
     }
 
     @Override
-    public Patient getPatientById(String p_id) {
-        return null;
+    public Patient getPatientById(String p_id)
+    {
+        return iPatientDao.getPatientById(p_id);
     }
 
     @Override

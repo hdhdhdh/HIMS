@@ -32,7 +32,7 @@
         where a_id=#{a_id}
     </update>
     <select id="getAllUnprocessedAppointment" resultType="appointment">
-        select * from tb_appointment where a_status = 0 and p_id = #{p_id}
+        select * from tb_appointment where a_status = 0 and dp_id = #{dp_id}
     </select>
     <select id="getProcessedAppointment"  resultType="appointment">
         select * from tb_appointment where a_status=1 and dp_id = #{dp_id}

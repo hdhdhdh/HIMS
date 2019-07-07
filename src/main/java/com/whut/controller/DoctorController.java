@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whut.bean.*;
 import com.whut.enums.CaseStatusEnum;
+import com.whut.enums.GenderEnum;
 import com.whut.service.*;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -29,6 +33,8 @@ public class DoctorController {
     IMedicineService iMedicineService;
     @Autowired
     IPrescriptionService iPrescriptionService;
+    @Autowired
+    IPatientService iPatientService;
 
     /**
      *  ajax登录      实现不同职责跳转不同，医生跳转，药剂师跳转  --崔佳豪
@@ -141,27 +147,38 @@ public class DoctorController {
         }
         return mv;
     }
-    @RequestMapping("/getPatientCase.do")//医生查找病例
-    public ModelAndView getPatientCase(HttpSession httpSession,String p_id)
+    @RequestMapping( value = "/getPatientCase.do",produces = "application/json; charset=utf-8")//医生查找病例
+    @ResponseBody
+    public String getPatientCase(HttpSession httpSession,String p_id)
     {
-        ModelAndView mv = new ModelAndView();
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
         if (doctor.getD_id() == null)
         {
-            mv.setViewName("../doctor/doctor_login");
+            return "";
         }
         else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),p_id) == true) //检查是否有权限
         {
-            List<Case> all = iCaseService.getCaseByPatientId(p_id);
-            mv.addObject("patientcase",all);
-            mv.setViewName("patientcase");
+            List<Case> allCase = iCaseService.getCaseByPatientId(p_id);
+            JSONArray array = new JSONArray();
+            for(Case aCase:allCase)
+            {
+                JSONObject jsonItem = new JSONObject();
+                Patient patient = iPatientService.getPatientById(appointment.getP_id());
+
+                jsonItem.put("p_name",patient.getP_name());
+                jsonItem.put("p_gender", GenderEnum.getGenderEnum(patient.getP_gender()).getValues());
+                jsonItem.put("p_age",new Date().getYear() - patient.getP_birthday().getYear());
+                jsonItem.put("p_id",patient.getP_id());
+                jsonItem.put("a_date",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(appointment.getA_date()));
+                array.put(jsonItem);
+            }
         }
         else
         {
             mv.addObject("err","Permission denied");
             mv.setViewName("doctor_home");
         }
-        return mv;
+        return "";
     }
 //
 //    public ModelAndView prescribeCase(HttpSession httpSession,Case mycase,String prescription)
@@ -186,21 +203,42 @@ public class DoctorController {
 //        }
 //        return mv;
 //    }
-    public ModelAndView getUnprocessedAppointment(HttpSession httpSession,String type)
+
+    /**
+     * sfh
+     * @param httpSession
+     * @param type
+     * @return
+     */
+    @RequestMapping( value = "/getUnprocessedAppointment.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String getUnprocessedAppointment(HttpSession httpSession,String type)
     {
-        ModelAndView mv = new ModelAndView();
+        System.out.println("shit");
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        List<Appointment> selectedAppointment = new ArrayList<Appointment>();
         if (doctor == null)
         {
-            mv.setViewName("../doctor/doctor_login"); //未登录
+            return "";
         }
         else
         {
-            iAppointmentService.getAUnprocessedAppointmentList(doctor.getDp_id(),type);
-            mv.setViewName("../doctor/doctor_home");
+            JSONArray array = new JSONArray();
+            List<Appointment> selectedAppointment = iAppointmentService.getAUnprocessedAppointmentList(doctor.getDp_id(),type);
+            for(Appointment appointment:selectedAppointment)
+            {
+                JSONObject jsonItem = new JSONObject();
+                Patient patient = iPatientService.getPatientById(appointment.getP_id());
+
+                jsonItem.put("p_name",patient.getP_name());
+                jsonItem.put("p_gender", GenderEnum.getGenderEnum(patient.getP_gender()).getValues());
+                jsonItem.put("p_age",new Date().getYear() - patient.getP_birthday().getYear());
+                jsonItem.put("p_id",patient.getP_id());
+                jsonItem.put("a_date",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(appointment.getA_date()));
+                array.put(jsonItem);
+            }
+            System.out.println(array.toString());
+            return array.toString();
         }
-        return mv;
     }
     public ModelAndView getUnprescribedCase(HttpSession httpSession)
     {

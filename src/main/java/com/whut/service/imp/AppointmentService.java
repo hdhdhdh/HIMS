@@ -151,6 +151,7 @@ public class AppointmentService implements IAppointmentService
                 unprocessedAppointmentList = new ArrayList<>();
             }
         }
+        System.out.println(unprocessedAppointmentList.toString());
         return unprocessedAppointmentList;
     }
 
