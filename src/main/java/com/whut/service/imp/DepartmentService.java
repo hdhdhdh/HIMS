@@ -1,5 +1,6 @@
 package com.whut.service.imp;
 
+import com.github.pagehelper.PageHelper;
 import com.whut.bean.Department;
 import com.whut.dao.IDepartmentDao;
 import com.whut.service.IDepartmentService;
@@ -38,4 +39,13 @@ public class DepartmentService implements IDepartmentService
     {
         return false;
     }
-}
+
+   @Override
+    public List<Department> getAllDepartment(int page, int size){
+       PageHelper.startPage(page,size);
+       return iDepartmentDao.getAllDepartment(page,size);
+   }
+
+   }
+
+

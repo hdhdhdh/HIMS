@@ -27,33 +27,102 @@
             <form action="" class="form-group" id="drug-form">
                 <div class="input-group">
                     <span class="input-group-addon">药品编号</span>
-                    <input type="text" class="form-control " placeholder="" name="drugcard" value="">
+                    <input type="text" class="form-control " placeholder="" name="id" value="">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">药品名称</span>
-                    <input type="text" class="form-control " placeholder="" name="drugcard" value="">
+                    <input type="text" class="form-control " placeholder="" name="name" value="">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</span>
-                    <input type="text" class="form-control " placeholder="" name="drugcard" value="">
+                    <input type="text" class="form-control " placeholder="" name="num" value="">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
-                    <input type="text" class="form-control " placeholder="" name="drugcard" value="">
+                    <input type="text" class="form-control " placeholder="" name="m_class" value="">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</span>
-                    <input type="text" class="form-control " placeholder="" name="drugcard" value="">
+                    <input type="text" class="form-control " placeholder="" name="price" value="">
                 </div>
             </form>
             <div style="text-align: center">
-                <a><button class="layui-btn layui-btn-normal layui-btn-radius" align="center">确认</button></a>
+
+                <!--添加ID bnt-ok-->
+
+                <a><a type="button" id="btn-ok" class="layui-btn layui-btn-normal layui-btn-radius" align="center">确认</a></a>
             </div>
         </div>
     </fieldset>
 
 </div>
-<script type="text/javascript" src="plugins/layui/layui.js"></script>
+<script type="text/javascript" src="plugins/layui/layui.js"></script>;
+<script src="js/jquery-2.2.1.min.js"></script>
+<script>
+
+    // 提交按钮
+    $("#btn-ok").click(function () {
+        var id = $("input[name='id']").val();
+        var name = $("input[name='name']").val();
+        var num = $("input[name='num']").val();
+        var m_class = $("input[name='m_class']").val();
+        var price = $("input[name='price']").val();
+
+        if (id == "" || id == null) {
+            alert("请填写药品ID");
+        }
+        else if (name == "" || name == null) {
+            alert("请填写药品名称");
+        }
+        else if (num == "" || num == null) {
+            alert("请填写药品数量");
+        }
+        else if (m_class == "" || m_class == null) {
+            alert("请填写药品类型");
+        }
+        else if (price == "" || price == null) {
+            alert("请填写药品价格");
+        }
+        else {
+
+            $.ajax({
+
+                url: "/doctor/ajaxAddMedicine.do",
+                type: "POST",
+                data: {
+                    m_id: id,
+                    m_name: name,
+                    m_num: num,
+                    m_class: m_class,
+                    m_price: price
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result == "" || result == null) {
+                        alert("？？？？？");
+                    }
+                    else {
+                        if (result.message == "success") {
+                            alert("添加成功");
+                            window.location.href = "begtable.html";
+                        }
+                        else if (result.message == "fail") {
+                            alert("添加失败");
+                        }
+                    }
+                },
+                error: function (result) {
+                    window.location.href = "err.html";
+                }
+            });
+
+        }
+        })
+
+
+</script>
+
+
 </body>
 
 </html>
