@@ -177,7 +177,7 @@
                         "<td>" + item.a_date +"</td>" +
                         "<td>" +
                         "<a href=\"historyCase.jsp?p_id='" + item.p_id + "'\"><button class=\"layui-btn layui-btn-small\">历史病例</button></a>" +
-                        "<a href=\"acceptCase.jsp\"><button class=\"layui-btn layui-btn-small\">受理</button></a>" +
+                        "<a href=\"acceptCase.jsp?p_id=" + item.p_id + "\"><button class=\"layui-btn layui-btn-small\">受理</button></a>" +
                         "</td>" +
                         "</tr>"
 					)

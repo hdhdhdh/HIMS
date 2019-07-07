@@ -15,7 +15,7 @@ public interface IAppointmentDao
     public Appointment getAppointmentById(String pr_id);
     public void updateAppointment(Appointment type);
     public void deleteAppointment(String pr_id);
-    public void updateAppointmentStatus(@Param("d_id") int d_id);//医生更新预约状态
+    public void updateAppointmentStatus(@Param("a_id") int a_id);//医生更新预约状态
     public List<Appointment> getAllUnprocessedAppointment(@Param("dp_id") String dp_id);//得到未处理的预约信息
     public List<Appointment> getProcessedAppointment(@Param("dp_id") String dp_id);//得到已处理的预约信息
     public List<Appointment> getUnprocessedAppointmentBeforTheDay(@Param("dp_id") String dp_id , @Param("day") Date day);//得到已处理的预约信息

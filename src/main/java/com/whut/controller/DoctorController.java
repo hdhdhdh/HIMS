@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.MvcNamespaceHandler;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -119,34 +120,38 @@ public class DoctorController {
         iDoctorService.updateDoctorWithoutId(doctor);
         return "redirect:/doctor/findAppointment.do";//返回预约信息界面
     }
-    @RequestMapping("/addCase.do")//医生增加病例
-    public ModelAndView addCase(HttpSession httpSession,Case newCase,Integer a_id)
+    @RequestMapping( value = "/addCase.do",produces = "application/json; charset=utf-8")
+    public String addCase(HttpSession httpSession, String p_id,  String c_description, String c_fee)
     {
-
-        ModelAndView mv = new ModelAndView();
+        System.out.println("addcase"+p_id+c_description+c_fee);
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
         if (doctor.getD_id() == null)
         {
-            mv.setViewName("../doctor/doctor_login");
+            return  new JSONObject().put("message","please login").toString();
         }
-        else if (newCase.getP_id() == null || newCase.getP_id().equals(""))
+        else if (p_id == null || p_id.equals(""))
         {
-            mv.addObject("err","patient id is empty");
+            return  new JSONObject().put("message","patient id is empty").toString();
         }
-        else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),newCase.getP_id()) == true) //检查是否有权限
+        else if(iAppointmentService.checkDoctorPermissionForDiagnosis(doctor.getDp_id(),p_id) == true && iAppointmentService.updateAppointmentStatus(p_id) == true) //检查是否有权限
         {
-            iAppointmentService.updateAppointmentStatus(a_id);
-            newCase.setPr_description(null);
-            newCase.setC_status(CaseStatusEnum.UNPRESCRIBED.getStatus());
-            iCaseService.addCase(newCase);
-            mv.setViewName("doctor_home");
+            System.out.println("addCasePermissionChecked");
+            Case ncase = new Case();
+            ncase.setP_id(p_id);
+            ncase.setD_id(doctor.getD_id());
+            ncase.setC_description(c_description);
+            ncase.setC_fee(new BigDecimal(c_fee));
+            ncase.setC_status(1);
+            ncase.setC_date(new Date());
+            System.out.println(ncase.toString());
+            iCaseService.addCase(ncase);
+            return new JSONObject().put("message","successed").toString();
         }
         else
         {
-            mv.addObject("err","Permission denied");
-            mv.setViewName("doctor_home");
+            return  new JSONObject().put("message","Permission denied").toString();
         }
-        return mv;
+
     }
 
 

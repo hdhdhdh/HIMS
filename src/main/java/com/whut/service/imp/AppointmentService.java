@@ -75,10 +75,10 @@ public class AppointmentService implements IAppointmentService
     }
 
     @Override
-    public boolean updateAppointmentStatus(int d_id) {
+    public boolean updateAppointmentStatus(String p_id) {
         try
         {
-            iAppointmentDao.updateAppointmentStatus(d_id);
+            iAppointmentDao.updateAppointmentStatus(iAppointmentDao.getUnprocessedAppointmentByUserId(p_id).getA_id());
             return true;
         }catch (Exception e)
         {
