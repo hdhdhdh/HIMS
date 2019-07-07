@@ -148,18 +148,19 @@
 
 
                     $("#first-page").click(function () {	//首页
-                        alert(123);
-                        getDoctorList(1,5)
+                        getDoctorList(1,size)
                     });
                     $("#current-page").text(pageNum);
                     $("#pre-page").click(function () {	//上一页
-                        getDoctorList(pageNum-1,5)
+                        getDoctorList(pageNum-1,size)
                     });
                     $("#next-page").click(function () {
-                        getDoctorList(pageNum+1,5)
+                        if(pageNum<pages) {
+                            getDoctorList(pageNum+1,size)
+						}
                     });
                     $("#last-page").click(function () {
-                        getDoctorList(pages,5)
+                        getDoctorList(pages,size)
                     });
 				}
 			},
