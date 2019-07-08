@@ -324,8 +324,9 @@
                 //处理后端返回的数据
                 success : function(result) {
                     if (result != null && result != "") {
-                        if(result=="success") { //登录成功  跳转到主页面
-                            alert("注册成功，请登录")；
+                        if(result=="success")
+                        { //登录成功  跳转到主页面
+                            alert("注册成功，请登录")
                             toDenglu();
                         }else {
                             $("#zhuce-message").text(result);
