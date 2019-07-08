@@ -26,7 +26,7 @@
 					<div class="admin-login-box">
 						<div style="overflow: hidden; background: #0C0C0C;margin-left: -20px;">
 							<img src="images/logo.png" width="60" height="60">
-							<span style="color: #ffffff;font-size: 18px;">PHARMACY</span>
+							<span style="color: #ffffff;font-size: 18px;"><a href="workerLogin.jsp"></a>PHARMACY</span>
 						</div>
 						<div class="admin-side-toggle">
 							<i class="fa fa-bars" aria-hidden="true"><img src="images/jiantou.png" width="30" height="30"></i></i>
@@ -43,19 +43,19 @@
 									<a href="personalInfo.html"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
 								</dd>
 								<dd>
-									<a href="setPassword.html"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
+									<a href="setPassword.html" style="text-decoration: none;color: #ffffff;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
 								</dd>
 								<dd id="lock">
 								</dd>
 								<dd>
-									<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+									<a href="workerLogin.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 								</dd>
 							</dl>
 						</li>
 					</ul>
 					<ul class="layui-nav admin-header-item-mobile">
 						<li class="layui-nav-item">
-							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+							<a href="workerLogin.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 						</li>
 					</ul>
 				</div>
