@@ -25,7 +25,12 @@ public class DepartmentService implements IDepartmentService
     @Override
     public boolean addDepartment(Department department)
     {
-        return false;
+        try{
+            iDepartmentDao.addDepartment(department);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -40,12 +45,27 @@ public class DepartmentService implements IDepartmentService
         return false;
     }
 
-   @Override
+    /**
+     * 更新科室简介  ---崔佳豪
+     * @param department
+     * @return
+     */
+    @Override
+    public boolean UpdateDepartmentDescription(Department department) {
+        try {
+            iDepartmentDao.updateDepartmentDescription(department);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
     public List<Department> getAllDepartment(int page, int size){
        PageHelper.startPage(page,size);
        return iDepartmentDao.getAllDepartment(page,size);
    }
 
-   }
+}
 
 

@@ -95,8 +95,6 @@ public class AdminController {
         int pages = pageInfo.getPages();        //获取总的页数
 
         JSONArray array = new JSONArray();
-        departmentService.getAllDepartment();
-
 
         List<Doctor> list = pageInfo.getList(); //得到分页的结果
         for (Doctor doctortemp:   list ) {
@@ -176,7 +174,130 @@ public class AdminController {
         return json.toString();
     }
 
+    /**
+     * ajax添加科室信息  ---崔佳豪
+     * @param session
+     * @param department
+     * @return
+     */
+    @RequestMapping( value = "/ajaxAddDepartment.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxAddDepartment(HttpSession session, Department department) {
+//        System.out.println("-----------------------------------");
+//        System.out.println(department);
+//        System.out.println("--------------------------------------------------------");
 
+        JSONObject json = new JSONObject();
+
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        if(departmentService.addDepartment(department)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 编辑科室页面加载时，返回当前id的科室简介---崔佳豪
+     * @param session
+     * @param dp_id     需要查询的科室id
+     * @return
+     */
+    @RequestMapping( value = "/ajaxGetDepartmentById.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxGetDepartmentById(HttpSession session, String dp_id) {
+        JSONObject json = new JSONObject();
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        Department department = departmentService.getDepartmentById(dp_id);
+        if(null==department) {
+            json.put("message","err");
+        }else {
+            json.put("dp_desc",department.getDp_description());
+        }
+        return json.toString();
+    }
+
+
+
+    /**
+     * ajax更新科室简介  ---崔佳豪
+     * @param session
+     * @param department
+     * @return
+     */
+    @RequestMapping( value = "/ajaxUpdateDepartmentDescription.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxUpdateDepartmentDescription(HttpSession session, Department department) {
+        JSONObject json = new JSONObject();
+
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        if(departmentService.UpdateDepartmentDescription(department)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
+
+    /**
+     * 编辑  医生 页面加载时，返回当前id的医生信息---崔佳豪
+     * @param session
+     * @param d_id
+     * @return
+     */
+    @RequestMapping( value = "/ajaxGetDoctorById.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxGetDoctorById(HttpSession session, String d_id) {
+        JSONObject json = new JSONObject();
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {   //没有登录返回空字符串
+            json.put("message","unlogin");
+        }
+        Doctor  doctor = docService.getDoctorById(d_id);
+        if(null==doctor) {
+            json.put("message","err");
+        }else {
+            json.put("d_id",doctor.getD_id());
+            json.put("d_name",doctor.getD_name());
+            json.put("dp_id",doctor.getDp_id());
+            json.put("d_title",doctor.getD_title());
+            json.put("d_desc",doctor.getD_description());
+        }
+        return json.toString();
+    }
+
+
+    /**
+     * 更新医生的title  description信息
+     * @param session
+     * @param doctor
+     * @return
+     */
+    @RequestMapping( value = "/ajaxUpdateDoctorTitleAndDescription.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String  ajaxUpdateDoctorTitleAndDescription(HttpSession session, Doctor doctor) {
+        JSONObject json = new JSONObject();
+        Administrators administrator = (Administrators) session.getAttribute("currentAdministrator");
+        if(administrator==null) {
+            json.put("message","unlogin");
+        }
+        if(docService.updateDoctorTitleAndDescription(doctor)) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
 
     // 删除医生
     @RequestMapping("/deleteDoctor.do")
@@ -185,18 +306,7 @@ public class AdminController {
         return "redirect:getAllDoctor.do";
     }
 
-    // 添加医生
-    @RequestMapping("/toAddDoctor")
-    public String toAddDoctor() {
-        return "addDoctor";
-    }
 
-    // 返回添加医生的页面
-    @RequestMapping("/AddDoctor.do")
-    public String addDoctorPaper(Doctor doctor) {
-        docService.addDoctor(doctor);
-        return "redirect:getAllDoctor.do";
-    }
     /**
      * 注入对象前的初始化方法
      * SSM框架前后端string转date的lang异常及处理方法
@@ -250,7 +360,7 @@ public class AdminController {
             array.put(jsonItem);    //将一个医生信息的json对象加入到array中
         }
         JSONObject json = new JSONObject();
-        json.put("departmentList", array);   //将医生的信息列表加入到json
+        json.put("departmentList", array);   //将department的信息列表加入到json
         json.put("pageNum", pageNum);    //将当前页号传入到json
         json.put("pages", pages);        //将总的页数传入到json
 

@@ -28,4 +28,6 @@ public interface IDoctorService
     public String updateDoctor(Doctor doctor); // 更新医生信息 不明
 
     Doctor queryDoctorById(String id);//根据id获取医生信息
+
+    boolean updateDoctorTitleAndDescription(Doctor doctor); //更新医生的title 和 description
 }

@@ -22,4 +22,9 @@
         from tb_department
         where dp_id=#{dp_id}
     </select>
+    <update id="updateDepartmentDescription">
+        update tb_department
+        set dp_description=#{dp_description}
+        where dp_id=#{dp_id}
+    </update>
 </mapper>

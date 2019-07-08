@@ -15,4 +15,5 @@ public interface IDepartmentService {
     public boolean addDepartment(Department department);
     public boolean updateDepartment(Department department);
     public boolean deleteDepartment(String dp_id);
+    public boolean UpdateDepartmentDescription(Department department);  //更新科室简介  ---崔佳豪
 }

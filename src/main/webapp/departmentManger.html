@@ -39,7 +39,16 @@
     <div class="admin-table-page">
         <div id="paged" class="page">
             <nav aria-label="Page navigation">
-                <ul class="pagination">
+                <div style="height: 32px; line-height: 32px;float: left;margin: 20px;">
+                    <span>每页记录：</span>
+                    <select name="size-select" id="size-select" style="height: 100%;">
+                        <option value="5">5条</option>
+                        <option value="8">8条</option>
+                        <option value="10">10条</option>
+                        <option value="20">20条</option>
+                    </select>
+                </div>
+                <ul class="pagination" style="float: left;">
                     <li><a href="#" id="first-page">首页</a></li>
                     <li>
                         <a href="#" aria-label="Previous" id="pre-page">
@@ -54,6 +63,7 @@
                     </li>
                     <li><a href="#" id="last-page">末页</a></li>
                 </ul>
+                <span style="display: inline-block; height: 32px; line-height: 32px;float: left;margin: 20px;">共<span id="pages">1</span>页</span>
             </nav>
         </div>
     </div>
@@ -66,6 +76,11 @@
     $(document).ready(function () {	//页面加载完毕请求部门列表
         getDepartmentList();
     });
+    $("#size-select").change(function(){
+        var size = $("#size-select option:selected").val();
+        getDepartmentList(1,size);
+    });
+
     /**
      * 分页查询
      * @param page	当前页
@@ -86,9 +101,10 @@
             //处理后端返回的数据
             success: function (result) {
                 var departmentList = result.departmentList;
-                var pageNum = result.pageNumber;
+                var pageNum = result.pageNum;
                 var pages = result.pages;
                 //处理departmentList
+                $("#content").html("");
                 $.each(departmentList, function (index, item) {
                     <!--content 是id-->
                     $("#content").append("<tr>" +
@@ -96,11 +112,12 @@
                         "<td>" + departmentList[index].dp_name + "</td>" +
                         "<td>" + departmentList[index].dp_description + "</td>" +
                         "<td>" +
-                        "<a href=\"editDepartment.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
+                        "<a href=\"editDepartment.html?dp_id="+ item.dp_id +"\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
                         /*"<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +*/
                         "</td>" +
                         "</tr>");
                 });
+                console.log(pageNum + "  " + pages);
                 if(pageNum>0 && pages>0) {
 
                     //***重要：清除之前绑定的，不然绑定多个，就会触发多个
@@ -109,27 +126,30 @@
                     $("#next-page").unbind("click");
                     $("#last-page").unbind("click");
 
+                    $("#pages").text(pages);
+
 
                     $("#first-page").click(function () {	//首页
-                        getDoctorList(1,size)
+                        getDepartmentList(1,size)
                     });
                     $("#current-page").text(pageNum);
                     $("#pre-page").click(function () {	//上一页
-                        getDoctorList(pageNum-1,size)
+                        getDepartmentList(pageNum-1,size)
                     });
                     $("#next-page").click(function () {
                         if(pageNum<pages) {
-                            getDoctorList(pageNum+1,size)
+                            getDepartmentList(pageNum+1,size)
                         }
                     });
                     $("#last-page").click(function () {
-                        getDoctorList(pages,size)
+                        getDepartmentList(pages,size)
                     });
                 }
             },
             //处理失败返回的数据
             error: function (result) {
-                window.location.href = "err.html";
+                // window.location.href = "err.html";
+                alert("发生了错误  "+ result);
             }
         });
     }

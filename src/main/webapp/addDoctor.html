@@ -113,6 +113,17 @@
         });
     });
 
+
+    function isNumber(val){         //判断参数是否是数字
+        var regPos = /^[0-9]*$/;
+        if(regPos.test(val)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     $("#btn-ok").click(function () {        //添加按钮点击提交
         var name = $("input[name='name']").val();
         var id = $("input[name='id']").val();
@@ -131,7 +142,10 @@
             alert("请选择出生日期");
         }else if(title==null || title=="") {
             alert("请填写职称");
-        }else{
+        }else if(id.length!=7 || !isNumber(id)){
+            alert("医生工号应该是7位数字编码")
+        }
+        else{
             $.ajax({
                 url : "/Administrator/ajaxAddDoctor.do",
                 type : "POST",
