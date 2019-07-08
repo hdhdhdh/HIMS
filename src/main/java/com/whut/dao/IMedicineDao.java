@@ -18,7 +18,7 @@ public interface IMedicineDao {
     public boolean addMedicine(Medicine medicine);
 
    // 药品更新
-    public  void updateMedicine(Medicine medicine);
+    public  void updateMedicineNum(@Param("m_id")String m_id,@Param("m_num")int m_num);
     public List<Medicine> getMedicineByName(@Param("m_name")String m_name);
     // 查询药品,根据药品id来查询
    public Medicine getMedicineById(String id);

@@ -62,7 +62,7 @@ public class MedicineService implements IMedicineService {
     {
         try
         {
-            iMedicineDao.updateMedicine(medicine);
+//            iMedicineDao.updateMedicine(medicine);
             return true;
         }catch (Exception e)
         {
@@ -85,23 +85,34 @@ public class MedicineService implements IMedicineService {
         for (Prescription p:prescriptions)
         {
             Medicine medicine = getMedicineById(p.getM_id());
-            if(medicine == null || medicine.getM_num() > 0)
+            if(medicine == null || medicine.getM_num() <= 0)
                 return false;
         }
         return true;
     }
     public boolean checkout(List<Prescription> prescriptions)//出库
     {
-        if(checkInventory(prescriptions) == true)
-        {
-            for (Prescription p:prescriptions)
+        try {
+            if(checkInventory(prescriptions) == true )
             {
-                Medicine medicine = getMedicineById(p.getM_id());
-                medicine.setM_num(medicine.getM_num()-1);
-                iMedicineDao.updateMedicine(medicine);
+                System.out.println("checkout");
+                for (Prescription p:prescriptions)
+                {
+                    Medicine medicine = getMedicineById(p.getM_id());
+                    iMedicineDao.updateMedicineNum(medicine.getM_id(),medicine.getM_num()-1);
+                }
+            }else
+            {
+                return false;
             }
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
         }
-        return false;
+
+
     }
 
 }

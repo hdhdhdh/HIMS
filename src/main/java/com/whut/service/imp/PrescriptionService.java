@@ -22,7 +22,7 @@ public class PrescriptionService implements IPrescriptionService
     public boolean addPrescription(Prescription prescription)
     {
         try {
-            iPrescriptionDao.addPrescription(prescription);
+            iPrescriptionDao.addPrescription(prescription.getC_id(),prescription.getM_id());
             return true;
         }catch (Exception e)
         {
@@ -30,10 +30,15 @@ public class PrescriptionService implements IPrescriptionService
         }
     }
 
-    public boolean deletePrescription(Prescription prescription)
+    @Override
+    public boolean deletePrescription(Prescription prescription) {
+        return false;
+    }
+
+    public boolean deletePrescription(int c_id,String m_id)
     {
         try {
-            iPrescriptionDao.deletePrescription(prescription);
+            iPrescriptionDao.deletePrescription(c_id,m_id);
             return true;
         }catch (Exception e)
         {
@@ -49,10 +54,34 @@ public class PrescriptionService implements IPrescriptionService
         prescription.setM_id(medicine.getM_id());
         prescription.setM_name(medicine.getM_name());
         try {
-            iPrescriptionDao.addPrescription(prescription);
+            iPrescriptionDao.addPrescription(c_id,medicine.getM_id());
             return true;
         }catch (Exception e)
         {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addMedicineList(String c_id, String m_list)
+    {
+        try {
+            int c = Integer.parseInt(c_id);
+            String[] m_array = m_list.split("%");
+            for (String m_id:m_array)
+            {
+                System.out.println(c+" "+m_id);
+                if(m_id.equals("") == false)
+                {
+
+                    iPrescriptionDao.addPrescription(c,m_id);
+                }
+
+            }
+            return true;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
             return false;
         }
     }

@@ -2,17 +2,16 @@ package com.whut.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageInfo;
 import com.whut.bean.*;
 import com.whut.enums.CaseStatusEnum;
 import com.whut.enums.GenderEnum;
 import com.whut.service.*;
+import org.apache.ibatis.annotations.Param;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.MvcNamespaceHandler;
@@ -319,83 +318,52 @@ public class DoctorController {
         }
 
     }
-
-    /** luodi
-     * ajax查询药品的所有信息--带有分页
-     * @param page
-     * @param size
-     * @return */
-    @RequestMapping( value = "/ajaxGetAllMedicine.do",produces = "application/json; charset=utf-8")
+    @RequestMapping( value = "/getCaseById.do",produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String  getAllMedicine(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "8") int size) {
-        List<Medicine> all = iMedicineService.getAllMedicine(page, size);
-        PageInfo pageInfo = new PageInfo(all);
-        int pageNum = pageInfo.getPageNum();    //获取当前分页页号
-        int pages = pageInfo.getPages();        //获取总的页数
-
-        JSONArray array = new JSONArray();
-        iMedicineService.getAllMedicine();
-
-
-        List<Medicine> list = pageInfo.getList(); //得到分页的结果
-        for (Medicine medicineTemp:   list ) {
-            JSONObject jsonItem = new JSONObject();
-            jsonItem.put("m_id",medicineTemp.getM_id());                  //药品的 id
-            jsonItem.put("m_name",medicineTemp.getM_name());              //药品的名称
-            jsonItem.put("m_num",medicineTemp.getM_num());                  //药品的数量
-            jsonItem.put("m_class",medicineTemp.getM_class());            //药品的类型
-            jsonItem.put("m_price",medicineTemp.getM_price());                //药品的价格
-
-            array.put(jsonItem);    //将一个医生信息的json对象加入到array中
-        }
-        JSONObject json = new JSONObject();
-        json.put("medicineList",array);   //将医生的信息列表加入到json
-        json.put("pageNum",pageNum);    //将当前页号传入到json
-        json.put("pages",pages);        //将总的页数传入到json
-        return json.toString();
-    }
-
-    /**
-     *  添加药品  luodi
-     * @param session
-     * @param medicine
-     * @return
-     */
-    @RequestMapping(value = "/ajaxAddMedicine.do", produces = "application/json; charset=utf-8")
-    @ResponseBody
-    public String ajaxAddMedicine(HttpSession session,Medicine medicine) {
-        System.out.println(medicine);
-
-        // Doctor doctorMageMedicine=(Doctor) session.getAttribute("currentMedicine");
-
-        JSONObject json=new JSONObject();
-        if(iMedicineService.addMedicine(medicine)){
-            json.put("message","success");
-        }
-        else {
-            json.put("message","fail");
-        }
-        return json.toString();
-    }
-
-
-
-
-    public ModelAndView searchMedicineByName(HttpSession httpSession ,String m_name)
+    public String getCaseById(HttpSession httpSession,String c_id)
     {
-        ModelAndView mv = new ModelAndView();
-        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-
+        System.out.println("getCaseByIdeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+c_id);
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");;
+        Case myCase = iCaseService.getCaseById(Integer.parseInt(c_id));
+        System.out.println(myCase);
+        Patient patient = iPatientService.getPatientById(myCase.getP_id());
+        int age = new Date().getYear() - patient.getP_birthday().getYear();
         if (doctor == null)
         {
-            mv.setViewName("../doctor/doctor_login"); //未登录
+            return   new JSONObject().put("message","please login").toString();
+        }
+        else if(myCase.getC_status() == CaseStatusEnum.UNPRESCRIBED.getStatus() && myCase.getD_id().equals(doctor.getD_id()))
+        {
+            return  new JSONObject().put("p_description","姓名："+patient.getP_name()+"    性别："+GenderEnum.getGenderEnum(patient.getP_gender()).getValues()+"    年龄："+age+"    症状："+ myCase.getC_description()).toString();
+        }
+        return new JSONObject().put("message","get case failed").toString();
+    }
+    @RequestMapping( value = "/searchMedicineByName.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String searchMedicineByName(HttpSession httpSession ,String m_name)
+    {
+        System.out.println(m_name+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        if (doctor == null)
+        {
+            return   new JSONObject().put("message","please login").toString();
         }else
         {
             List<Medicine> selectedMedicine = iMedicineService.getMedicineByName(m_name);
-            mv.addObject("selectedMedicine",selectedMedicine);
-            mv.setViewName("searchMedicine");
+            JSONArray array = new JSONArray();
+            for(Medicine medicine:selectedMedicine)
+            {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("m_id",medicine.getM_id());
+                jsonObject.put("m_name",medicine.getM_name());
+                jsonObject.put("m_num",medicine.getM_num());
+                jsonObject.put("m_class",medicine.getM_class());
+                jsonObject.put("m_price",medicine.getM_price().toString());
+                array.put(jsonObject);
+            }
+            System.out.println(array);
+            return array.toString();
         }
-        return mv;
     }
     public ModelAndView getProcessedAppointment(HttpSession httpSession)
     {
@@ -412,76 +380,21 @@ public class DoctorController {
         }
         return mv;
     }
-    public ModelAndView addMedicineToPrescription(HttpSession httpSession,Integer c_id,String m_id)
+    @RequestMapping( value = "/confirmPrescription.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String confirmPrescription(HttpSession httpSession,String c_id,String m_list)
     {
-        ModelAndView mv = new ModelAndView();
+        System.out.println(c_id+m_list);
         Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null)
+        if (doctor == null)
         {
-            mv.setViewName("../doctor/doctor_login");
+            return   new JSONObject().put("message","please login").toString();
+        }else if(iCaseService.checkPermissionForPrescrb(c_id,doctor.getD_id()) == true && iPrescriptionService.addMedicineList(c_id,m_list) == true && iCaseService.updateCaseSataus(Integer.parseInt(c_id),CaseStatusEnum.UNPADE.getStatus()) == true)
+        {
+            return new JSONObject().put("message","successed").toString();
         }
-        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),c_id) == false) //检查是否有权限
-        {
+        return new JSONObject().put("message","confirm prescription failed").toString();
+    }
 
-            mv.addObject("err","Permission denied");
-            mv.setViewName("../doctor/doctor_home");
-        }
-        else if(iPrescriptionService.addMedicineToPrescription(c_id,iMedicineService.getMedicineById(m_id)) == false)
-        {
-            mv.addObject("err","add medicine to prescription failed");
-            mv.setViewName("editPrescription");
-        }else
-        {
-            mv.setViewName("editPrescription");
-        }
-        return mv;
-    }
-    public ModelAndView deleteMedicineFromPrescription(HttpSession httpSession,Prescription prescription)
-    {
-        ModelAndView mv = new ModelAndView();
-        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null)
-        {
-            mv.setViewName("../doctor/doctor_login");
-        }
-        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),prescription.getC_id()) == false) //检查是否有权限
-        {
-
-            mv.addObject("err","Permission denied");
-            mv.setViewName("../doctor/doctor_home");
-        }
-        else if(iPrescriptionService.deletePrescription(prescription) == false)
-        {
-            mv.addObject("err","delete medicine from prescription failed");
-            mv.setViewName("editPrescription");
-        }else
-        {
-            mv.setViewName("editPrescription");
-        }
-        return mv;
-    }
-    public ModelAndView confirmPrescription(HttpSession httpSession,Integer c_id)
-    {
-        ModelAndView mv = new ModelAndView();
-        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
-        if (doctor.getD_id() == null)
-        {
-            mv.setViewName("../doctor/doctor_login");
-        }
-        else if(iCaseService.checkDoctorPermissionForPrescribe(doctor.getD_id(),c_id) == false) //检查是否有权限
-        {
-            mv.addObject("err","Permission denied");
-            mv.setViewName("../doctor/doctor_home");
-        }
-        else if(iCaseService.updateCaseSataus(c_id,CaseStatusEnum.UNPADE.getStatus()) == false)
-        {
-            mv.addObject("err","confirm prescription failed");
-            mv.setViewName("editPrescription");
-        }else
-        {
-            mv.setViewName("editPrescription");
-        }
-        return mv;
-    }
 
 }

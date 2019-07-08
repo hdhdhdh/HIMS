@@ -14,6 +14,9 @@
     <select id="getUnpayedCaseByPatientId" resultType="com.whut.bean.Case">
         select* from tb_case where p_id = #{p_id} and c_status = 2;
     </select>
+    <select id="getCaseById" resultType="case">
+        select* from tb_case where c_id = #{c_id};
+    </select>
     <select id="getCaseByPatientId"  resultType="com.whut.bean.Case">
         select* from tb_case where p_id = #{p_id};
     </select>
@@ -24,7 +27,7 @@
     </update>
     <update id="updateCaseSataus">
         update tb_case
-        set dc_status=#{c_status}
+        set c_status=#{c_status}
         where c_id=#{c_id}
     </update>
     <delete id="deleteCase" parameterType="int">

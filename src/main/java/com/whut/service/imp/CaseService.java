@@ -23,7 +23,7 @@ public class CaseService implements ICaseService {
 
     @Override
     public Case getCaseById(int c_id) {
-        return null;
+        return iCaseDao.getCaseById(c_id);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class CaseService implements ICaseService {
     {
         try {
             iCaseDao.addPrescription(c_id,prescription);
-    //        iCaseDao.updateCaseSataus(c_id, CaseStatusEnum..getStatus());
+            //        iCaseDao.updateCaseSataus(c_id, CaseStatusEnum..getStatus());
             return true;
         }catch (Exception e)
         {
@@ -154,16 +154,36 @@ public class CaseService implements ICaseService {
         return uncheckoutPrescriptions;
     }
 
+    @Override
+    public List<Case> getUncheckoutCase(String p_id)
+    {
+        return iCaseDao.getUncheckouCaseByPatientId(p_id);
+    }
+
+    @Override
+    public boolean checkPermissionForPrescrb(String c_id, String d_id)
+    {
+        try {
+            Case mycase = iCaseDao.getCaseById(Integer.parseInt(c_id));
+            if (mycase != null && mycase.getC_status() == CaseStatusEnum.UNPRESCRIBED.getStatus()&& mycase.getD_id().equals(d_id))
+                return true;
+            else
+                return false;
+        }catch (Exception e)
+        {
+            return false;
+        }
+    }
     /**
      *  通过病人id获取未缴费的病历单
      * @param p_id
      * @return
      */
+
     @Override
     public List<Case> getUnpayedCaseByPatientId(String p_id) {
         return iCaseDao.getUnpayedCaseByPatientId(p_id);
     }
-
     /**
      * 通过病人id 获取已经缴费的病历单
      * @param p_id
@@ -173,5 +193,6 @@ public class CaseService implements ICaseService {
     public List<Case> getHaveChechoutCaseByPatientId(String p_id) {
         return iCaseDao.getHaveChechoutCaseByPatientId(p_id);
     }
-
 }
+
+

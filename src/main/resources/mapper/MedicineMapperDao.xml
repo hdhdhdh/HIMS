@@ -3,7 +3,7 @@
 <!--实现的哪个接口呢？ 填入namespace，这个xml是这个接口的实现类-->
 <mapper namespace="com.whut.dao.IMedicineDao">
     <select id="getMedicineById" parameterType="java.lang.String" resultType="medicine">
-        select * from tb_medicine where p_id=#{p_id}
+        select * from tb_medicine where m_id=#{m_id}
     </select>
     <insert id="addMedicine" parameterType="medicine">
         insert into tb_medicine (m_id,m_name,m_num,m_class,m_price) values (#{m_id},#{m_name},#{m_num},#{m_class},#{m_price})
@@ -19,9 +19,9 @@
     <delete id="deleteMedicine">
         delete from tb_medicine where m_id=#{m_id}
     </delete>
-    <update id="updateMedicine" parameterType="medicine">
+    <update id="updateMedicineNum" parameterType="medicine">
         update tb_medicine
-        set m_id=#{m_id}, m_name=#{m_name}, m_num=#{m_name}, m_class=#{m_name}, m_price=#{m_name}
+        set m_num=#{m_num}
         where m_id=#{m_id}
     </update>
 </mapper>

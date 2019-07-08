@@ -17,4 +17,5 @@ public interface IPatientService
     public Patient getPatientById(String p_id);//根据id获取病人
     public boolean updatePatient(Patient patient);//更新病人信息
     public boolean deletePatient(String p_id);//删除病人
+
 }

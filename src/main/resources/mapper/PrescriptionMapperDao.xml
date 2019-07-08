@@ -6,8 +6,8 @@
         delete from tb_prescription where c_id = #{ c_id} and m_id = #{m_id}
     </delete>
     <insert id="addPrescription" parameterType="com.whut.bean.Prescription">
-        insert into tb_prescription(c_id,m_id,m_name)
-        value (#{ c_id},#{m_id},m_name)
+        insert into tb_prescription(c_id,m_id)
+        value (#{c_id},#{m_id})
     </insert>
     <select id="getPrescriptionByCaseId"  resultType="prescription" parameterType="int">
         select * from tb_prescription

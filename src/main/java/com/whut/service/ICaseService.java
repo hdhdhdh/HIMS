@@ -19,6 +19,10 @@ public interface ICaseService
     public List<Case> getUnprescribedCase(String d_id);//获取医生诊治但未开处方的病例
     public List<Case> getUncheckoutCaseByPatientId(String p_id);//获取该病人未出库的病例
     public List<UncheckoutPrescription> getUncheckoutPrescription(String p_id);//获取该病人未出库的病例中的处方信息
+    public List<Case> getUncheckoutCase(String p_id);//获取该病人未出库的病例中的处方信息
     public List<Case> getUnpayedCaseByPatientId(String p_id);/* 通过病人id获取为缴费的病历单 */
-    public List<Case> getHaveChechoutCaseByPatientId(String p_id); /*通过病人id获取已经出库的病历*/
+    public List<Case> getHaveChechoutCaseByPatientId(String p_id); //通过病人id获取已经出库
+    public boolean checkPermissionForPrescrb(String c_id, String d_id);
+    //    public boolean checkDoctorPermissionForPrescribe(String d_id, int c_id);//检查医生开处方的权限
 }
+

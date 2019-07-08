@@ -62,7 +62,7 @@
 						<th>病例编号</th>
 						<th>病人姓名</th>
 						<th>诊断时间</th>
-						<th></th>
+						<th>操作</th>
 					</tr>
 					<%--<tr>--%>
 					<%--<td>1</td>--%>
@@ -108,6 +108,8 @@
                         "<td>" + item.c_id + "</td>\n" +
                         "<td>" + item.p_name + "</td>" +
                         "<td>" + item.c_date + "</td>" +
+						"<td>" +
+                        "<a href=\"writePrescription.jsp?c_id=" + item.c_id + "\"><button class=\"layui-btn layui-btn-small\">开药</button></a>" +
                         "</tr>"
                     )
                 });

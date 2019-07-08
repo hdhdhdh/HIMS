@@ -168,6 +168,7 @@
             success : function(result) {
                 console.log(result);
                 //处理doctorList
+                $("#unprocessedAppointmentTable").html("");
                 $.each(result,function (index, item) {
                     $("#unprocessedAppointmentTable").append("<tr>" +
                         "<td>" + item.p_name+"</td>\n" +

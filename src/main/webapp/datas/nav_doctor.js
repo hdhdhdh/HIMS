@@ -9,7 +9,7 @@ var navs = [{
 	}, {
 		"title": "处方开药",
 		"icon": "fa-table",
-		"href": "getUnprescribedCasePage.jsp"
+		"href": "unprescribedCasePage.jsp"
 	}, {
 		"title": "已处理",
 		"icon": "fa-navicon",
@@ -28,7 +28,7 @@ var navs = [{
 // 	}, {
 // 		"title": "处方确认",
 // 		"icon": "&#xe63c",
-// 		"href": "btable.html"
+// 		"href": "checkOutPrescription.html"
 // 	}, ]
 // }
 // , {

@@ -11,4 +11,5 @@ public interface IPrescriptionService
     public boolean addPrescription(Prescription prescription);//添加药物使用记录
     public boolean deletePrescription(Prescription prescription);//删除药物使用记录
     public boolean addMedicineToPrescription(int c_id, Medicine medicine);//添加药物使用记录
+    public boolean addMedicineList(String c_id,String m_list);
 }
