@@ -26,7 +26,7 @@
 					<div class="admin-login-box">
 						<div style="overflow: hidden; background: #0C0C0C;margin-left: -20px;">
 							<img src="images/logo.png" width="60" height="60">
-							<span style="color: #ffffff;font-size: 18px;"><a href="workerLogin.jsp">PHARMACY</a></span>
+							<span style="color: #ffffff;font-size: 18px;"><a href="index.jsp" style="color:#ffffff;">PHARMACY</a></span>
 						</div>
 						<div class="admin-side-toggle">
 							<i class="fa fa-bars" aria-hidden="true"><img src="images/jiantou.png" width="30" height="30"></i></i>
