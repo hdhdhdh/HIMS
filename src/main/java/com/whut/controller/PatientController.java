@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.deploy.net.HttpRequest;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.whut.bean.*;
+import com.whut.enums.CaseStatusEnum;
 import com.whut.service.IAppointmentService;
 import com.whut.service.ICaseService;
 import com.whut.service.IPatientService;
@@ -332,6 +333,30 @@ public class PatientController
         return mv;
     }
 
+    @RequestMapping( value = "/ajaxToPay.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String ajaxToPay(HttpSession session,Integer c_id){
+
+        System.out.println("---------------------------------------");
+        System.out.println(c_id);
+        System.out.println("---------------------------------------");
+        JSONObject json = new JSONObject();
+        Patient patient = (Patient) session.getAttribute("currentPatient"); //获取当前session中存的patient
+        if(null==patient) {
+            json.put("message","nologin");
+            return json.toString();
+        }
+        if(c_id==null) {
+            json.put("message","fail");
+            return json.toString();
+        }
+        if(iCaseService.updateCaseSataus(c_id, CaseStatusEnum.UNCHECKOUT.getStatus())) {
+            json.put("message","success");
+        }else {
+            json.put("message","fail");
+        }
+        return json.toString();
+    }
 
 
 
@@ -359,21 +384,7 @@ public class PatientController
 //        return mv;
 //    }
 
-    public ModelAndView patientCenter(HttpSession session) {
-        Patient patient = (Patient) session.getAttribute("currentPatient");
-        ModelAndView mv = new ModelAndView();
-        if (patient == null ) {
-            mv.setViewName("../patient/patient_login"); //通过id判断，如果没有登录就跳转到登录页面
-        }
-        else {
-            //根据id查找预约信息 未处理的
-            //根据预约信息的id查找科室
-            //一个人预约一次
 
-            mv.setViewName("../patient/person_center");   //登陆过就可以跳转到个人中心
-        }
-        return mv;
-    }
 
 
 

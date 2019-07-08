@@ -157,7 +157,9 @@
                     <p>性别：<span><%=((Patient)(request.getSession().getAttribute("currentPatient"))).getP_gender()==1? '男':'女'%></span></p>
                     <p>出生日期：<span><%=new SimpleDateFormat("yyyy-MM-dd").format(((Patient)(request.getSession().getAttribute("currentPatient"))).getP_birthday())%></span></p>
                     <p>身份证号：<span><%=((Patient)(request.getSession().getAttribute("currentPatient"))).getP_id()%></span></p>
-                    <p>密码：****** <a style="margin-left: 20px;text-decoration: none; cursor: pointer;display: inline-block;width: 80px;">修改密码</a></p>
+                    <p>密码：******
+                        <%--<a style="margin-left: 20px;text-decoration: none; cursor: pointer;display: inline-block;width: 80px;">修改密码</a>--%>
+                    </p>
                 </div>
             </div>
             <div id="myappointment-box">
@@ -204,7 +206,7 @@
                                 <td><%=((Patient)(request.getSession().getAttribute("currentPatient"))).getP_name()%></td>
                                 <td>${fee.c_date}</td>
                                 <td>${fee.c_fee}</td>
-                                <td><a href="javascript:;">缴费</a></td>
+                                <td><a href="javascript:;" onclick="payfee(${fee.c_id})">缴费</a></td>
                             </tr>
                         </c:forEach>
                             <%--<tr>--%>
@@ -343,5 +345,40 @@
     <div class="wrap">
     </div>
 </footer>
+
+<script src="../js/jquery-2.2.1.min.js"></script>
+<script>
+
+    function payfee(c_id){
+        console.log(c_id);
+        $.ajax({
+            url : "/patient/ajaxToPay.do",
+            type : "POST",
+            data : {
+                c_id:  c_id
+            },
+            dataType : "json",
+            //处理后端返回的数据
+            success : function(result) {
+                if(result=="" || result==null) {
+                    alert("登陆已过期,请重新登录");
+                }else {
+                    if(result.message=="success"){
+                        alert("缴费成功");
+                        window.location.href=window.location.href;
+                        window.location.reload;
+                    }else if(result.message=="fail"){
+                        alert("缴费失败");
+                    }
+                }
+            },
+            //处理失败返回的数据
+            error : function(result) {
+                alert("发生了错误" + result);
+            }
+        });
+    }
+
+</script>
 </body>
 </html>
