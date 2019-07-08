@@ -19,9 +19,14 @@
     <delete id="deleteMedicine">
         delete from tb_medicine where m_id=#{m_id}
     </delete>
-    <update id="updateMedicineNum" parameterType="medicine">
+    <update id="updateMedicineNum" >
         update tb_medicine
         set m_num=#{m_num}
+        where m_id=#{m_id}
+    </update>
+    <update id="updateMedicine" parameterType="medicine">
+        update tb_medicine
+        set m_num=#{m_num},m_price=#{m_price}
         where m_id=#{m_id}
     </update>
 </mapper>

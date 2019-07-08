@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/Linecons.css">
-    <title>Title</title>
+    <title>医院门诊系统</title>
     <style>
         * { margin: 0;padding: 0;}
         body { background: #dddddd; background: url("images/home_bg.jpg") no-repeat; min-height: 1000px; }

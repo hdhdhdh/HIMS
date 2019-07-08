@@ -21,7 +21,7 @@ public interface IMedicineService {
     public boolean addMedicine(Medicine medicine);
 
     // 药品更新
-    public boolean updateMedicine(Medicine medicine);
+    public  boolean updateMedicine(Medicine medicine);
 
     public boolean checkInventory(List<Prescription> prescriptions);//检查库存
 

@@ -13,7 +13,7 @@ public interface IMedicineDao {
 
     // 删除药品
     public void deleteMedicine(String id);
-
+    public  boolean updateMedicine(Medicine medicine);
     // 添加药品
     public boolean addMedicine(Medicine medicine);
 

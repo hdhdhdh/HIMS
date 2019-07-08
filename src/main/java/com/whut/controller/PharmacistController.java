@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertFalse;
 import javax.xml.ws.soap.Addressing;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,30 @@ public class PharmacistController
     @Autowired
     IPatientService iPatientService;
 
+    @RequestMapping( value = "/updateMedicine.do",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String updateMedicine(HttpSession httpSession,String m_id,Integer m_num,BigDecimal m_price)
+    {
+        System.out.println(m_id+m_num+m_num);
+        Doctor doctor = (Doctor) httpSession.getAttribute("currentDoctor");
+        Medicine medicine = iMedicineService.getMedicineById(m_id);
+        if (doctor == null )
+        {
+            return   new JSONObject().put("message","please login").toString();
+        }else if (medicine != null)
+        {
+            if(m_price != null )
+                medicine.setM_price(m_price);
+            if(m_num != null)
+                medicine.setM_num(medicine.getM_num()+m_num);
+            if(iMedicineService.updateMedicine(medicine) == true)
+            {
+                return   new JSONObject().put("message","successed").toString();
+            }
+        }
+
+        return   new JSONObject().put("message","update medicine failed").toString();
+    }
     /** luodi
      * ajax查询药品的所有信息--带有分页
      * @param page

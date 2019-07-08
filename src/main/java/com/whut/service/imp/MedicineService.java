@@ -62,7 +62,7 @@ public class MedicineService implements IMedicineService {
     {
         try
         {
-//            iMedicineDao.updateMedicine(medicine);
+            iMedicineDao.updateMedicine(medicine);
             return true;
         }catch (Exception e)
         {

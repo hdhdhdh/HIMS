@@ -133,7 +133,7 @@
                                 "<td>" + medicineList[index].m_class +"</td>" +
                                 "<td>" + medicineList[index].m_price +"</td>" +
                                 "<td>" +
-                                "<a href=\"danganguanli_bianji.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
+                                "<a href=\"updateMedicine.jsp?m_id=" + item.m_id  +"&m_name="+encodeURI(encodeURI(item.m_name))+"\"><button class=\"layui-btn layui-btn-small\">编辑</a>\n" +
                                 "</td>" +
                                 "</tr>");
                         });

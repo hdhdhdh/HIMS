@@ -186,7 +186,7 @@
         <!-- 缴费 -->
         <div style="width: 100%;height: 500px;position: relative;">
             <div id="fee-box" >
-                <h2>代缴费用</h2>
+                <h2>待缴费用</h2>
                 <span style="display: block;height: 2px;width: 100%;background: #ffffff;margin: 5px 0;"></span>
                 <div id="fee-table-box">
                     <table class="table table-bordered table-hover">
@@ -224,7 +224,7 @@
         <!--历史病例  -->
         <div style="width: 100%;height: 500px;position: relative; ">
             <div id="history-case-box">
-                <h2>历史病例</h2>
+                <h2>历史病历</h2>
                 <span style="display: block;height: 2px;width: 100%;background: #ffffff;margin: 5px 0;"></span>
                 <div id="case-table-box">
                     <table class="table table-bordered table-hover">

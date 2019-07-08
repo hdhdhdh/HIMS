@@ -10,11 +10,13 @@ var navs = [{
 		"title": "处方开药",
 		"icon": "fa-table",
 		"href": "unprescribedCasePage.jsp"
-	}, {
-		"title": "已处理",
-		"icon": "fa-navicon",
-		"href": "icheck.jsp"
-	}]
+	}
+	// , {
+	// 	"title": "已处理",
+	// 	"icon": "fa-navicon",
+	// 	"href": "icheck.jsp"
+	// }
+	]
 }
 // , {
 // 	"title": "药品管理",

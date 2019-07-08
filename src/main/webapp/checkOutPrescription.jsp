@@ -94,7 +94,7 @@
                             "<td>" + item.p_gender + "</td>" +
                             "<td>" + item.m_list + "</td>" +
                             "<td>" +
-                            "<button class=\"layui-btn layui-btn-small\""+"onclick=checkoutPrescription(\""+item.c_id+"\")>添加</button>" +
+                            "<button class=\"layui-btn layui-btn-small\""+"onclick=checkoutPrescription(\""+item.c_id+"\")>确认</button>" +
                             "</tr>"
                         )
                     });

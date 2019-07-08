@@ -219,6 +219,13 @@
 </div>
 <script src="../js/validateIdCard.js"></script>
 <script>
+
+    function toDenglu(){
+        $('#zhuce').addClass("container-hide");
+        $('#denglu').removeClass("container-hide");
+        // alert("denglu");
+        $("#zhuce-message").text("");
+    }
     $(document).ready(function () {
         $('#lab-zhuce').click(function () {
             $('#denglu').addClass("container-hide");
@@ -227,10 +234,7 @@
             $("#denglu-message").text("");
         });
         $('#lab-denglu').click(function () {
-            $('#zhuce').addClass("container-hide");
-            $('#denglu').removeClass("container-hide");
-            // alert("denglu");
-            $("#zhuce-message").text("");
+            toDenglu();
         })
     });
     //登录提交
@@ -269,6 +273,7 @@
                     if (result != null && result != "") {
                         if(result=="success") { //登录成功  跳转到主页面
                             window.location.href="user_home.jsp";
+
                         }else {
                             $("#denglu-message").text(result);
                         }
@@ -320,7 +325,8 @@
                 success : function(result) {
                     if (result != null && result != "") {
                         if(result=="success") { //登录成功  跳转到主页面
-                            window.location.href="#denglu";
+                            alert("注册成功，请登录")；
+                            toDenglu();
                         }else {
                             $("#zhuce-message").text(result);
                         }
