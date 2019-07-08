@@ -28,7 +28,7 @@ var navs = [{
 // 	}, {
 // 		"title": "处方确认",
 // 		"icon": "&#xe63c",
-// 		"href": "checkOutPrescription.html"
+// 		"href": "checkOutPrescription.jsp"
 // 	}, ]
 // }
 // , {

@@ -123,11 +123,11 @@
                     if(result.message != "successed")
                     {
                         alert(result.message);
-                        window.location.href="/checkOutPrescription.html";
+                        window.location.href="${pageContext.request.contextPath}/checkOutPrescription.jsp";
 
                     }else
                     {
-                        window.location.href="/checkOutPrescription.html";
+                        window.location.href="${pageContext.request.contextPath}/checkOutPrescription.jsp";
                     }
 
                 },

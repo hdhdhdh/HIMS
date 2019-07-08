@@ -36,14 +36,14 @@
 									<th>单价</th>
 									<th>信息变更</th>
 								</tr>
-
 								</thead>
 								<tbody id="content">
 								</tbody>
-
 							</table>
 						</div>
-						<div class="beg-table-paged"></div>
+						<div class="beg-table-paged">
+
+						</div>
 					</div>
 				</div>
 			</fieldset>
@@ -57,6 +57,7 @@
 		<script src="js/jquery-2.2.1.min.js"></script>
 		<script>
             $(document).ready(function () {	//页面加载完毕请求医生列表
+                alert("fuck")
                 getMedicineList();
             });
             /*分页查询
@@ -67,7 +68,7 @@
                 page=page||1;
                 size=size||5;	//设置默认第一页，每页5条记录
                 $.ajax({
-                    url : "/doctor/ajaxGetAllMedicine.do",
+                    url : "/pharmacist/ajaxGetAllMedicine.do",
                     type : "POST",
                     data : {
                         page:   page,
@@ -88,15 +89,15 @@
                                 "<td>" + medicineList[index].m_class +"</td>" +
                                 "<td>" + medicineList[index].m_price +"</td>" +
                                 "<td>" +
-                                "<a href=\"javascript:;\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
-                                "<a href=\"javascript:;\" class=\"layui-btn layui-btn-danger layui-btn-mini\">删除</a>\n" +
+                                "<a href=\"danganguanli_bianji.html\" class=\"layui-btn layui-btn-mini\">编辑</a>\n" +
                                 "</td>" +
                                 "</tr>");
                         })
                     },
                     //处理失败返回的数据
                     error : function(result) {
-                        window.location.href="err.html";
+                        // window.location.href="err.html";
+						 alert("发生了错误"+result);
                     }
                 });
             }
